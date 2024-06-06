@@ -140,10 +140,12 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`(
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Presents` (
   `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
   `Title` VARCHAR(30) NOT NULL,
-  `Price` DECIMAL(10, 2) NOT NULL
-)
+  `Price` DECIMAL(10, 2) NOT NULL,
+  `EndDate` TIMESTAMP NOT NULL
+);
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`(
+
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Presents_Events`(
   `id` INT NOT NULL AUTO_INCREMENT,
   `PresentID` INT NOT NULL,
   `EventID` INT NOT NULL,
@@ -158,6 +160,32 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`(
   CONSTRAINT `events_has_presents`
     FOREIGN KEY (`PresentID`)
     REFERENCES `web_eventlab_db`.`Presents` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Money` (
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
+  `Amount` VARCHAR(30) NOT NULL,
+  `IBAN` VARCHAR(34) NOT NULL,
+);
+
+
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Money_Events`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `MoneyID` INT NOT NULL,
+  `EventID` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `events_has_money_idx` (`MoneyID` ASC) VISIBLE,
+  INDEX `events_has_money_events_idx` (`EventID` ASC) VISIBLE,
+  CONSTRAINT `events_has_money_events`
+    FOREIGN KEY (`EventID`)
+    REFERENCES `web_eventlab_db`.`Events` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `events_has_money`
+    FOREIGN KEY (`PresentID`)
+    REFERENCES `web_eventlab_db`.`Money` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
