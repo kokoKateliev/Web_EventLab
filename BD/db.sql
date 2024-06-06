@@ -1,15 +1,16 @@
 CREATE DATABASE IF NOT EXISTS `web_eventlab_db`;
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Users` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `username` VARCHAR(255) NOT NULL,
     `Firstname` VARCHAR(50) NOT NULL,
     `Lastname` VARCHAR(50) NOT NULL,
     `Password` VARCHAR(50) NOT NULL,
     `Email` VARCHAR(100) NOT NULL,
     `RoleID` INT NOT NULL FOREIGN KEY REFERENCES Roles(RoleID),
     UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
-    INDEX `fk_users_roles1_idx` (`roles_id` ASC) VISIBLE,
+    INDEX `fk_users_roles1_idx` (`RoleID` ASC) VISIBLE,
     CONSTRAINT `fk_users_roles1`
-        FOREIGN KEY (`roles_id`)
+        FOREIGN KEY (`RoleID`)
         REFERENCES `web_eventlab_db`.`Roles` (`id`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
@@ -187,7 +188,50 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Music_Events` (
     ON UPDATE NO ACTION
 );
 
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Comments` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `CommentText` VARCHAR(200) NOT NULL,
+    `CommentDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `LikeCount` INT NOT NULL DEFAULT 0,
+);
 
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Comment_Events` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `CommentID` INT NOT NULL,
+  `EventID` INT NOT NULL,
+  `UserID` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_Comments_Events_Comments1_idx` (`CommentID` ASC) VISIBLE,
+  INDEX `fk_Comments_Events_Events1_idx` (`EventID` ASC) VISIBLE,
+  INDEX `fk_Comments_Events_Users1_idx` (`UserID` ASC) VISIBLE,
+  CONSTRAINT `fk_Comments_Events_Comments1`
+    FOREIGN KEY (`ID`)
+    REFERENCES `Comments` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Comments_Events_Events1`
+    FOREIGN KEY (`EventID`)
+    REFERENCES `Events` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+  CONSTRAINT `fk_Comments_Events_Users1`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+INDEX `fk_Comments_Events1_idx` (`EventID` ASC) VISIBLE,
+    INDEX `fk_Comments_Users1_idx` (`UserID` ASC) VISIBLE,
+    CONSTRAINT `fk_Comments_Events1`
+        FOREIGN KEY (`EventID`)
+        REFERENCES `web_eventlab_db`.`Events` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `fk_Comments_Users1`
+        FOREIGN KEY (`UserID`)
+        REFERENCES `web_eventlab_db`.`Users` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
 
 INSERT INTO Univesities (UnivesityName)
 VALUES ('Софийски университет "Св. Климент Охридски"'),
