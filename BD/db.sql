@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS `web_eventlab_db`;
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Users` {
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Users` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `Firstname` VARCHAR(50) NOT NULL,
     `Lastname` VARCHAR(50) NOT NULL,
@@ -13,27 +13,27 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Users` {
         REFERENCES `web_eventlab_db`.`Roles` (`id`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
-};
+);
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Roles` {
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Roles` (
     `id` INT PRIMARY KEY,
     `Rolename` VARCHAR(50) NOT NULL,
     UNIQUE INDEX `name_UNIQUE` (`Rolename` ASC) VISIBLE
-};
+);
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Univesities` {
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Univesities` (
     `UniversityID` INT PRIMARY KEY,
     `UnivesityName` VARCHAR(50),
     UNIQUE INDEX `name_UNIQUE` (`UnivesityName` ASC) VISIBLE
-};
+);
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Faculties` {
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Faculties` (
     `id` INT PRIMARY KEY,
     `Facultyname` VARCHAR(50) NOT NULL,
     UNIQUE INDEX `name_UNIQUE` (`Facultyname` ASC) VISIBLE
-};
+);
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`universities_faculties`{
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`universities_faculties`(
   `id` INT NOT NULL AUTO_INCREMENT,
   `UniID` INT NOT NULL,
   `FacultyID` INT NOT NULL,
@@ -50,23 +50,21 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`universities_faculties`{
     REFERENCES `web_eventlab_db`.`Faculties` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-};
+);
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Events` {
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Events` (
     `id` INT PRIMARY KEY,
-    `EventName` VARCHAR(50),
+    `EventName` VARCHAR(50) NOT NULL,
     `EventDescription` VARCHAR(500),
-    `EventDateSt` DATE,
-    `EventDateEn` DATE,
-    `EventTimeSt` TIME,
+    `EventDateSt` DATE NOT NULL,
+    `EventDateEn` DATE NOT NULL,
+    `EventTimeSt` TIME NOT NULL,
     `Location` VARCHAR(80),
-    `isAnonymous` Boolean,
-    `eventType` Boolean,
-    `isPersonalized` Boolean,
-    `EventAdmin` VARCHAR(50)
-};
+    `isAnonymous` Boolean NOT NULL,
+    `isPersonalized` Boolean NOT NULL,
+);
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`users_events` {
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`users_events` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `usersID` INT NOT NULL,
   `events_id` INT NOT NULL,
@@ -85,9 +83,9 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`users_events` {
     REFERENCES `web_eventlab_db`.`Events` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-};
+);
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` {
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` (
     `id` INT PRIMARY KEY,
     `EventID` INT NOT NULL,
     `isVisible` Boolean NOT NULL,
@@ -104,11 +102,11 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` {
         REFERENCES `web_eventlab_db`.`Users` (`id`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
-};
+);
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards` {
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards` (
   `id` INT PRIMARY KEY,
-  `sender` INT NOT NULL,
+  `sender` VARCHAR(100) NOT NULL,
   `description` VARCHAR(200),
   `imgURL` VARCHAR(50),
   INDEX `fk_Cards_Users1_idx` (`sender` ASC) VISIBLE,
@@ -117,9 +115,9 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards` {
     REFERENCES `web_eventlab_db`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-}
+)
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`{
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`(
   `id` INT NOT NULL AUTO_INCREMENT,
   `CardID` INT NOT NULL,
   `EventID` INT NOT NULL,
@@ -136,15 +134,15 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`{
     REFERENCES `web_eventlab_db`.`Cards` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-};
+);
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Presents` {
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Presents` (
   `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
   `Title` VARCHAR(30) NOT NULL,
   `Price` DECIMAL(10, 2) NOT NULL
-}
+)
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`{
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`(
   `id` INT NOT NULL AUTO_INCREMENT,
   `PresentID` INT NOT NULL,
   `EventID` INT NOT NULL,
@@ -161,9 +159,33 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`{
     REFERENCES `web_eventlab_db`.`Presents` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-};
+);
 
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Music` (
+  `id` INT PRIMARY KEY,
+  `sender` VARCHAR(100) NOT NULL,
+  `title` VARCHAR(50) NOT NULL,
+  `musicURL` VARCHAR(50) NOT NULL
+);
 
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Music_Events` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `MusicID` INT NOT NULL,
+  `EventID` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_Music_Events_Music1_idx` (`MusicID` ASC) VISIBLE,
+  INDEX `fk_Music_Events_Events1_idx` (`EventID` ASC) VISIBLE,
+  CONSTRAINT `fk_Music_Events_Music1`
+    FOREIGN KEY (`MusicID`)
+    REFERENCES `Music` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Music_Events_Events1`
+    FOREIGN KEY (`EventID`)
+    REFERENCES `Events` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
 
 
 
