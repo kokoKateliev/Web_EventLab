@@ -21,18 +21,10 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Roles` {
     UNIQUE INDEX `name_UNIQUE` (`Rolename` ASC) VISIBLE
 };
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`UsersToEvents` {
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `usersID` INT NOT NULL,
-    `subjectsID` INT NOT NULL,,
-    PRIMARY KEY (UserID, EventID),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID),
-    FOREIGN KEY (EventID) REFERENCES Events(EventID)
-};
-
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Univesities` {
-    UniversityID INT PRIMARY KEY,
-    UnivesityName VARCHAR(50),
+    `UniversityID` INT PRIMARY KEY,
+    `UnivesityName` VARCHAR(50),
+    UNIQUE INDEX `name_UNIQUE` (`UnivesityName` ASC) VISIBLE
 };
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Faculties` {
@@ -41,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Faculties` {
     UNIQUE INDEX `name_UNIQUE` (`Facultyname` ASC) VISIBLE
 };
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`users_subjects`{
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`universities_faculties`{
   `id` INT NOT NULL AUTO_INCREMENT,
   `UniID` INT NOT NULL,
   `FacultyID` INT NOT NULL,
@@ -61,19 +53,63 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`users_subjects`{
 };
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Events` {
-    EventID INT PRIMARY KEY,
-    EventName VARCHAR(50),
-    EventDate DATE,
-    EventTime TIME
+    `id` INT PRIMARY KEY,
+    `EventName` VARCHAR(50),
+    `EventDescription` VARCHAR(500),
+    `EventDateSt` DATE,
+    `EventDateEn` DATE,
+    `EventTimeSt` TIME,
+    `Location` VARCHAR(80),
+    `isAnonymous` Boolean,
+    `eventType` Boolean,
+    `isPersonalized` Boolean,
+    `EventAdmin` VARCHAR(50)
+};
+
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`users_events` {
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `usersID` INT NOT NULL,
+  `events_id` INT NOT NULL,
+  `isAdmin` Boolean NOT NULL,
+  `isHelper` Boolean NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_users_has_events_events1_idx` (`events_id` ASC) VISIBLE,
+  INDEX `fk_users_has_events_users1_idx` (`usersID` ASC) VISIBLE,
+  CONSTRAINT `fk_users_has_events_users1`
+    FOREIGN KEY (`usersID`)
+    REFERENCES `web_eventlab_db`.`Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_has_events_events1`
+    FOREIGN KEY (`events_id`)
+    REFERENCES `web_eventlab_db`.`Events` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+};
+
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` {
+    `id` INT PRIMARY KEY,
+    `EventID` INT NOT NULL,
+    `isVisible` Boolean NOT NULL,
+    `celebratorID` INT NOT NULL,
+    INDEX `fk_Personalized_Events1_idx` (`EventID` ASC) VISIBLE,
+    INDEX `fk_user_celebrator1_idx` (`celebratorID` ASC) VISIBLE,
+    CONSTRAINT `fk_Personalized_Events1`
+        FOREIGN KEY (`EventID`)
+        REFERENCES `web_eventlab_db`.`Events` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `fk_user_celebrator1`
+        FOREIGN KEY (`celebratorID`)
+        REFERENCES `web_eventlab_db`.`Users` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
 };
 
 
+
 INSERT INTO Univesities (UnivesityName)
-VALUES ('University of California, Los Angeles'),
-('University of California, Berkeley'),
-('University of California, San Diego'),
-('University of California, Santa Barbara'),
-('University of California, Irvine'),
-('University of California, Riverside'),
-('University of California, San Francisco'),
-('University of California, San Jose');
+VALUES ('Софийски университет "Св. Климент Охридски"'),
+('Технически университет София'),
+('Университет за Национално и Световно стопанство'),
+('Университет по Архитектура, Строителство и Геодезия');
