@@ -33,13 +33,13 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Faculties` (
     UNIQUE INDEX `name_UNIQUE` (`Facultyname` ASC) 
 )ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`universities_faculties`(
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`universities_faculties` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `UniID` INT NOT NULL,
   `FacultyID` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `university_has_faculties1_idx` (`FacultyID` ASC) ,
-  INDEX `university_has_faculties_universities_idx` (`UniID` ASC) ,
+  INDEX `university_has_faculties1_idx` (`FacultyID` ASC),
+  INDEX `university_has_faculties_universities_idx` (`UniID` ASC),
   CONSTRAINT `university_has_faculties_universities`
     FOREIGN KEY (`UniID`)
     REFERENCES `web_eventlab_db`.`Universities` (`id`)
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`universities_faculties`(
     REFERENCES `web_eventlab_db`.`Faculties` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-)ENGINE=INNODB;
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Events` (
     `id` INT PRIMARY KEY,
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Events` (
     `EventTimeSt` TIME NOT NULL,
     `Location` VARCHAR(80),
     `isAnonymous` Boolean NOT NULL,
-    `isPersonalized` Boolean NOT NULL,
+    `isPersonalized` Boolean NOT NULL
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`users_events` (
@@ -114,8 +114,8 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards` (
     FOREIGN KEY (`sender`)
     REFERENCES `web_eventlab_db`.`Users` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-)
+    ON UPDATE NO ACTION
+)ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`(
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Presents_Events`(
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Money` (
   `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
   `Amount` VARCHAR(30) NOT NULL,
-  `IBAN` VARCHAR(34) NOT NULL,
+  `IBAN` VARCHAR(34) NOT NULL
 )ENGINE=INNODB;
 
 
@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Comments` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `CommentText` VARCHAR(200) NOT NULL,
     `CommentDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `LikeCount` INT NOT NULL DEFAULT 0,
+    `LikeCount` INT NOT NULL DEFAULT 0
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Comment_Events` (
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Comment_Events` (
     FOREIGN KEY (`EventID`)
     REFERENCES `Events` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Comments_Events_Users1`
     FOREIGN KEY (`UserID`)
     REFERENCES `Users` (`id`)
