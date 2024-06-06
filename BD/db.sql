@@ -106,6 +106,65 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` {
         ON UPDATE NO ACTION
 };
 
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards` {
+  `id` INT PRIMARY KEY,
+  `sender` INT NOT NULL,
+  `description` VARCHAR(200),
+  `imgURL` VARCHAR(50),
+  INDEX `fk_Cards_Users1_idx` (`sender` ASC) VISIBLE,
+  CONSTRAINT `fk_Cards_Users1`
+    FOREIGN KEY (`sender`)
+    REFERENCES `web_eventlab_db`.`Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+}
+
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`{
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `CardID` INT NOT NULL,
+  `EventID` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `events_has_cards_idx` (`CardID` ASC) VISIBLE,
+  INDEX `events_has_cards_events_idx` (`EventID` ASC) VISIBLE,
+  CONSTRAINT `events_has_cards_events`
+    FOREIGN KEY (`EventID`)
+    REFERENCES `web_eventlab_db`.`Events` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `events_has_cards`
+    FOREIGN KEY (`CardID`)
+    REFERENCES `web_eventlab_db`.`Cards` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+};
+
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Presents` {
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
+  `Title` VARCHAR(30) NOT NULL,
+  `Price` DECIMAL(10, 2) NOT NULL
+}
+
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards_Events`{
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `PresentID` INT NOT NULL,
+  `EventID` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `events_has_presents_idx` (`PresentID` ASC) VISIBLE,
+  INDEX `events_has_presents_events_idx` (`EventID` ASC) VISIBLE,
+  CONSTRAINT `events_has_presents_events`
+    FOREIGN KEY (`EventID`)
+    REFERENCES `web_eventlab_db`.`Events` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `events_has_presents`
+    FOREIGN KEY (`PresentID`)
+    REFERENCES `web_eventlab_db`.`Presents` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+};
+
+
+
 
 
 INSERT INTO Univesities (UnivesityName)
