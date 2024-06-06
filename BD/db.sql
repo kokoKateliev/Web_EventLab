@@ -40,14 +40,14 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`universities_faculties` (
   PRIMARY KEY (`id`),
   INDEX `university_has_faculties1_idx` (`FacultyID` ASC),
   INDEX `university_has_faculties_universities_idx` (`UniID` ASC),
-  CONSTRAINT `university_has_faculties_universities`
-    FOREIGN KEY (`UniID`)
-    REFERENCES `web_eventlab_db`.`Universities` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `university_has_faculties1`
     FOREIGN KEY (`FacultyID`)
     REFERENCES `web_eventlab_db`.`Faculties` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `university_has_faculties_universities`
+    FOREIGN KEY (`UniID`)
+    REFERENCES `web_eventlab_db`.`Universities` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
@@ -106,12 +106,12 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` (
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards` (
   `id` INT PRIMARY KEY,
-  `sender` VARCHAR(100) NOT NULL,
+  `senderID` INT NOT NULL,
   `description` VARCHAR(200),
   `imgURL` VARCHAR(50),
-  INDEX `fk_Cards_Users1_idx` (`sender` ASC) ,
+  INDEX `fk_Cards_Users1_idx` (`senderID` ASC) ,
   CONSTRAINT `fk_Cards_Users1`
-    FOREIGN KEY (`sender`)
+    FOREIGN KEY (`senderID`)
     REFERENCES `web_eventlab_db`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
@@ -183,11 +183,12 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Money_Events`(
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `events_has_money`
-    FOREIGN KEY (`PresentID`)
+    FOREIGN KEY (`MoneyID`)
     REFERENCES `web_eventlab_db`.`Money` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )ENGINE=INNODB;
+
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Music` (
   `id` INT PRIMARY KEY,
   `sender` VARCHAR(100) NOT NULL,
