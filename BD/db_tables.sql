@@ -248,8 +248,3 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Comment_Events` (
     ON UPDATE NO ACTION
 )ENGINE=INNODB;
 
-INSERT INTO Univesities (UnivesityName)
-VALUES ('Софийски университет "Св. Климент Охридски"'),
-('Технически университет София'),
-('Университет за Национално и Световно стопанство'),
-('Университет по Архитектура, Строителство и Геодезия');
