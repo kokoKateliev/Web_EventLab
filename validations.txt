@@ -1,0 +1,14 @@
+Validations ON:
+
+
+User:
+username - string min 2 max 256
+password - string min 2 max 256
+email - string min 2 max 256
+first name - string min 2 max 50
+last name - string min 2 max 50
+Role name - string min 2 max 256
+Birthdate - Timestamp < now
+uniID - INT
+facultyID - INT
+
