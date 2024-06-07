@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Users` (
   `Firstname` VARCHAR(50) NOT NULL,
   `Lastname` VARCHAR(50) NOT NULL,
   `Password` VARCHAR(256) NOT NULL,
-  `Email` VARCHAR(100) NOT NULL,
+  `Email` VARCHAR(256) NOT NULL,
   `RoleID` INT NOT NULL,
   `Birthdate` TIMESTAMP NOT NULL,
   `UniversityID` INT NOT NULL,
