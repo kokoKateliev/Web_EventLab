@@ -2,8 +2,8 @@ Validations ON:
 
 
 User:
-username - string min 2 max 256
-password - string min 2 max 256
+username - string min 2 max 256, only letters Upper/Lower and Numbers - 0-9
+password - string min 2 max 256, must use at lest 2 letters, at least 1 Upper and Lower letter, at least one symbol (_, -, @, !), at least one number - 0-9
 email - string min 2 max 256
 first name - string min 2 max 50
 last name - string min 2 max 50
