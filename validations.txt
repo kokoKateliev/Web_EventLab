@@ -12,4 +12,11 @@ Birthdate - Timestamp < now
 uniID - INT
 facultyID - INT
 
+
+Blue color: #0261FC
+Black color: #171717
+LightBlue/white: #EEF3F9
+Off-white: #FCFCFC
+
+
 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_@!])(?=(?:[^a-zA-Z]*[a-zA-Z]){2,})(?!.*\s).{2,256}$/

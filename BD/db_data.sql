@@ -12,7 +12,7 @@ VALUES (1, 'ФМИ - Софтуерно инженерство'),
 (5, 'ФСФ - Българска филология'),
 (6, 'ФСФ - Английска филология'),
 (7, 'ФСФ - Германска филология'),
-(8, 'ФСФ - Френска филология')
+(8, 'ФСФ - Френска филология'),
 (9, 'ФА - Архитектура'),
 (10, 'ФА - Урбанистика'),
 (20, 'ФА - Ландшафтна архитектура'),
@@ -34,5 +34,23 @@ VALUES (1, 1, 1),
 (17, 4, 17), (18, 4, 18), (19, 4, 19), (20, 3, 20);
 
 INSERT INTO `Roles` (`id`, `Rolename`)
-Values (1, `Студент`), (2, `Учител`);
+Values (1, "Студент"), (2, "Учител");
 
+INSERT INTO `Users`
+Values (1, "test1", "Калоян", "Кателиев", "Tester1-1", "email@gmail.com", 1, "2002-12-20", 1, 1),
+(2, "test2", "Адриана", "Атанасова", "Tester2-2", "email@gmail.com", 1, "2002-01-20", 1, 1);
+
+INSERT INTO `Events`
+VALUES (1, "Event1", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-24", "25-06-2024", "15:00:00", "8mi Blok na SU", False, False ),
+(2, "Event2", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-20", "25-06-2024", "15:00:00", "6A Studentski grad", False, True ),
+(3, "Event3", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-21", "24-06-2024", "15:00:00", "FMI", False, False ),
+(4, "Event4", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-23", "26-06-2024", "15:00:00", "DRUG FACULTET", False, False );
+
+INSERT INTO `events_faculties`
+VALUES (1, 1, 1, False),
+(2, 2, 1, False), 
+(3, 3, 1, False),
+(4, 4, 2, True);
+
+INSERT INTO `personalized`
+VALUES (1, 2, True, 1);

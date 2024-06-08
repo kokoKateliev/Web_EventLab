@@ -4,38 +4,6 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Roles` (
   UNIQUE INDEX `name_UNIQUE` (`Rolename` ASC) 
 )ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Users` (
-  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `username` VARCHAR(256) NOT NULL,
-  `Firstname` VARCHAR(50) NOT NULL,
-  `Lastname` VARCHAR(50) NOT NULL,
-  `Password` VARCHAR(256) NOT NULL,
-  `Email` VARCHAR(256) NOT NULL,
-  `RoleID` INT NOT NULL,
-  `Birthdate` TIMESTAMP NOT NULL,
-  `UniversityID` INT NOT NULL,
-  `FacultyID` INT,
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
-  INDEX `fk_users_roles1_idx` (`RoleID` ASC) ,
-  INDEX `fk_users_faculties1_idx` (`FacultyID` ASC) ,
-  INDEX `fk_users_universities1_idx` (`UniversityID` ASC) ,
-  CONSTRAINT `fk_users_roles1`
-    FOREIGN KEY (`RoleID`)
-    REFERENCES `web_eventlab_db`.`Roles` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_universities1`
-    FOREIGN KEY (`UniversityID`)
-    REFERENCES `web_eventlab_db`.`Universities` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_faculties1`
-      FOREIGN KEY (`FacultyID`)
-      REFERENCES `web_eventlab_db`.`Faculties` (`id`)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-)ENGINE=INNODB;
-
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Universities` (
   `id` INT PRIMARY KEY,
   `UniversityName` VARCHAR(50),
@@ -67,13 +35,46 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`universities_faculties` (
     ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Users` (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `username` VARCHAR(256) NOT NULL,
+  `Firstname` VARCHAR(50) NOT NULL,
+  `Lastname` VARCHAR(50) NOT NULL,
+  `Password` VARCHAR(256) NOT NULL,
+  `Email` VARCHAR(256) NOT NULL,
+  `RoleID` INT NOT NULL,
+  `Birthdate` DATE NOT NULL,
+  `UniversityID` INT NOT NULL,
+  `FacultyID` INT,
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
+  INDEX `fk_users_roles1_idx` (`RoleID` ASC) ,
+  INDEX `fk_users_faculties1_idx` (`FacultyID` ASC) ,
+  INDEX `fk_users_universities1_idx` (`UniversityID` ASC) ,
+  CONSTRAINT `fk_users_roles1`
+    FOREIGN KEY (`RoleID`)
+    REFERENCES `web_eventlab_db`.`Roles` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_universities1`
+    FOREIGN KEY (`UniversityID`)
+    REFERENCES `web_eventlab_db`.`Universities` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_faculties1`
+      FOREIGN KEY (`FacultyID`)
+      REFERENCES `web_eventlab_db`.`Faculties` (`id`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+)ENGINE=INNODB;
+
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Events` (
-  `id` INT PRIMARY KEY,
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
   `EventName` VARCHAR(50) NOT NULL,
   `EventDescription` VARCHAR(500),
   `EventDateSt` DATE NOT NULL,
   `EventDateEn` DATE NOT NULL,
   `EventTimeSt` TIME NOT NULL,
+  `EventTimeEn` TIME NOT NULL,
   `Location` VARCHAR(80),
   `isAnonymous` Boolean NOT NULL,
   `isPersonalized` Boolean NOT NULL
@@ -121,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`events_faculties` (
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` (
-    `id` INT PRIMARY KEY,
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
     `EventID` INT NOT NULL,
     `isVisible` Boolean NOT NULL,
     `celebratorID` INT NOT NULL,
@@ -140,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` (
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards` (
-  `id` INT PRIMARY KEY,
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
   `senderID` INT NOT NULL,
   `description` VARCHAR(200),
   `imgURL` VARCHAR(50),
