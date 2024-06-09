@@ -40,7 +40,7 @@ class User {
             exit();
         }
 
-        $selectStatement = $connection->prepare("SELECT * FROM `Users` WHERE username = :username");
+        $selectStatement = $connection->prepare("SELECT username, password FROM `Users` WHERE username = :username");
         $res = $selectStatement->execute(['username' => $this->username]);
         
         $userDB = $selectStatement->fetch();
