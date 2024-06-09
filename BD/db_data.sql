@@ -41,10 +41,10 @@ Values (1, "test1", "Калоян", "Кателиев", "Tester1-1", "email@gmai
 (2, "test2", "Адриана", "Атанасова", "Tester2-2", "email@gmail.com", 1, "2002-01-20", 1, 1);
 
 INSERT INTO `Events`
-VALUES (1, "Event1", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-24", "25-06-2024", "15:00:00", "8mi Blok na SU", False, False ),
-(2, "Event2", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-20", "2024-06-24", "15:00:00", "6A Studentski grad", False, True ),
-(3, "Event3", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-21", "2024-06-24", "15:00:00", "FMI", False, False ),
-(4, "Event4", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-23", "2024-06-26", "15:00:00", "DRUG FACULTET", False, False );
+VALUES (1, "Event1", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-24", "25-06-2024", "15:00:00", "16:00:00", "8mi Blok na SU", False, False ),
+(2, "Event2", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-20", "2024-06-24", "15:00:00", "16:00:00", "6A Studentski grad", False, True ),
+(3, "Event3", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-21", "2024-06-24", "15:00:00", "16:00:00", "FMI", False, False ),
+(4, "Event4", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-23", "2024-06-26", "15:00:00", "16:00:00", "DRUG FACULTET", False, False );
 
 INSERT INTO `events_faculties`
 VALUES (1, 1, 1, False),
