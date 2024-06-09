@@ -92,9 +92,9 @@ Get
     ]
 }
 
+-------------------------
 
-
-USER:
+USER PROFILE:
 без тяло
 Get
 {
@@ -110,6 +110,8 @@ Get
     }
 }
 
+--------------------------
+
 REGISTER:
 from body: {univesity: universityName}
 Get
@@ -117,7 +119,7 @@ Get
     data: string[] (faculties)
 }
 
-fromBody: {
+from Body: {
     firstname,
     lastname,
     email,
@@ -128,4 +130,14 @@ fromBody: {
     universityId,
     facultyId
 }
-Add
+Add user to DB
+
+---------------------------
+
+LOGIN:
+from body {
+    username,
+    password
+}
+
+--------------------------
