@@ -72,9 +72,25 @@ from body: {faculty : selectedFaculty}
             date,  (EventDateSt)
             location,
             isPersonalized  ( Full name of celebrator or null),
-            description
-
+            description,
+            creator
         }
     ]
 }
 
+
+
+USER:
+{
+    data : {
+        username,
+        Fistname,
+        lastname,
+        email,
+        rolename,
+        birthdate,
+        university,
+        faculty
+    }
+
+}
