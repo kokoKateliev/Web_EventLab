@@ -80,7 +80,7 @@ class User {
             'username' => $this->username,
             'Firstname' => $this->firstName,
             'Lastname' => $this->lastName,
-            'Password' => $this->hashedPass,
+            'Password' => $hashedPass,
             'Email' => $this->email,
             'RoleID' => $this->role,
             'Birthdate' => $this->birthdate,
