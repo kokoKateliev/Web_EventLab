@@ -55,6 +55,58 @@ Get
 
 -------------------------
 
+Create Event:
+from body {
+    EventName,
+    EventDescription,
+    EventDateSt,
+    EventDateEn
+    EventTimeSt,
+    EventTimeEn,
+    location,
+    universityId,
+    facultyId,
+    isAnonnymus,
+    isGlobal,
+    isPersonalized,
+    celebratorEmail, - unikalen email kum celebrator choveka
+    isVisible,
+    presents: [ {
+        title,
+        price
+    }],
+    money: IBAN string
+}
+Add event to DB
+
+-------------------------
+
+Edit Event: 
+from body {
+    EventName,
+    EventDescription,
+    EventDateSt,
+    EventDateEn
+    EventTimeSt,
+    EventTimeEn,
+    location,
+    universityId,
+    facultyId,
+    isAnonnymus,
+    isGlobal,
+    isPersonalized,
+    celebratorEmail, - unikalen email kum celebrator choveka
+    isVisible,
+    presents: [ {
+        title,
+        price
+    }],
+    money: IBAN string
+}
+Edit event to DB
+
+-------------------------
+
 EVENTS:
 без тяло
 Get
@@ -89,7 +141,8 @@ Get
             location,
             isPersonalized  ( Full name of celebrator or null),
             description,
-            creator
+            creator (Full name of creator),
+            isAnonnymus
         }
     ]
 }
@@ -99,6 +152,20 @@ Get
 USER PROFILE:
 без тяло
 Get
+{
+    data : {
+        username,
+        Fistname,
+        lastname,
+        email,
+        rolename,
+        birthdate,
+        university,
+        faculty
+    }
+}
+
+при EDIT:
 {
     data : {
         username,
@@ -143,3 +210,23 @@ from body {
 }
 
 -------------------------
+
+MAIN:
+без тяло, ако съм логнат, ако не isLogged = false
+Get
+{
+    isLogged: bool,
+    globalEvents : [
+        {
+            id,
+            title,
+            date,  (EventDateSt)
+            location,
+            isPersonalized  ( Full name of celebrator or null),
+            description,
+            creator (Full name of creator),
+            isAnonnymus
+        }
+    ]
+}
+
