@@ -122,8 +122,7 @@ class User {
 
     //regex to be changed
     private function validPassword($password): bool {
-		return preg_match('/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{6,256}$/', $password);
-	}
+        return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[_\-@!])(?=.*[a-zA-Z].*[a-zA-Z])[a-zA-Z0-9_\-@!]{6,256}$/', $password);	}
 
     private function validEmail($email): bool {
 		return strlen($email) >= 2 && strlen($email) <= 256 && preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $email);
