@@ -3,8 +3,8 @@
 //
 
 
-let MyUniversity = "";
-let MyFaculty = "";
+let myUniversity = null;
+let myFaculty = null;
 
 let events = null;
 let universities = null;
@@ -82,14 +82,14 @@ function loadEvents() {
 
 function loadEventsFromFilter() {
 
-    if(selectedFaculty === null || selectedFaculty === null) {
+    if(selectedFaculty === null || selectedUni === null) {
         document.getElementById('msg').innerText = 'Моля изберете университет и факултет';
         return;
     }
 
-    fetch('../../backend/endpoints/events-menu.php', {
+    fetch('../../backend/api/events-menu.php', {
         method: 'POST',
-        body: JSON.stringify({ faculty : selectedFaculty}),
+        body: JSON.stringify({ facultyId : parseInt(selectedFaculty)}),
     })
     .then(response=>response.json())
     .then(response => {
@@ -107,11 +107,11 @@ function loadFilterUnviersities() {
         let select = document.getElementById('university');
         universities.forEach((university) => {
             const option = document.createElement('option');
-            option.value = university;
-            option.textContent = university;
-            if(university === myUniversity){
+            option.value = university.id;
+            option.textContent = university.name;
+            if(university.id === myUniversity.id){
                 option.selected = true;
-                selectedUni = myUniversity;
+                selectedUni = myUniversity.id;
             };
 
             select.appendChild(option);
@@ -120,29 +120,27 @@ function loadFilterUnviersities() {
 }
 
 function loadFilterFaculties () {
-    if(faculties !== null){
-        const div = document.getElementById('faculties');
-        const select = document.getElementById('university');
-        if(MyFaculty === ""){
-            const option = document.createElement('option');
-            option.value = "";
-            option.textContent = "-----";
-            option.selected = true;
-            option.disabled = true;
-            select.appendChild(option);
-        }
-
-        faculties[myUniversity].forEach((faculty) => {
-            const option = document.createElement('option');
-            option.value = faculty;
-            option.textContent = faculty;
-            if(faculty === myFaculty){
-                option.selected = true;
-                selectedFaculty = myFaculty;
-            }
-            select.appendChild(option);
-        });
+    const select = document.getElementById('faculties');
+    if(myFaculty){
+        const option = document.createElement('option');
+        option.value = "";
+        option.textContent = "-----";
+        option.selected = true;
+        option.disabled = true;
+        select.appendChild(option);
     }
+
+    const faculties = universities.find(university => university.id === selectedUni).faculties;
+    faculties.forEach((faculty) => {
+        const option = document.createElement('option');
+        option.value = faculty.id;
+        option.textContent = faculty.name;
+        if(faculty.id === myFaculty.id){
+            option.selected = true;
+            selectedFaculty = myFaculty.id;
+        }
+        select.appendChild(option);
+    });
 }
 
 function filterOptions() {
@@ -152,13 +150,12 @@ function filterOptions() {
 
 function loadData(data) {
     universities = data.universities; //arr sus string
-    faculties = data.faculties; //obekt ot uni:faculties arr
     myUniversity = data.myUniversity;
     myFaculty = data.myFaculty;
 }
 
 // iskam loadData elementite
-fetch('../../backend/endpoints/filter-menu.php', {
+fetch('../../backend/api/filter-menu.php', {
     method: 'POST',
     body: JSON.stringify(),
 })

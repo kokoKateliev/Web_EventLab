@@ -116,7 +116,10 @@ Get
             {
                 id:
                 name:
-                faculties: string[]
+                faculties: {
+                    id,
+                    name
+                }
             },
         ]
         myUniversity: {
@@ -130,7 +133,7 @@ Get
     }
 }
 
-from body: {faculty : selectedFaculty}
+from body: {facultyId : selectedFacultyId}
 Get
 {
     events : [
