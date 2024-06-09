@@ -3,7 +3,7 @@
 $input = json_decode(file_get_contents('php://input'), true);
 require_once "../models/User.php";
 
-if ($input['role'] === '1'){
+if ($input['role'] === 1){
     $user = new User(null, $input['username'], $input['firstname'], $input['lastname'], $input['password'], $input['email'], $input['role'],
                  $input['birthdate'], $input['universityId'], $input['facultyId']);
 } else {
