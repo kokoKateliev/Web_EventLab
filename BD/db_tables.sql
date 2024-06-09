@@ -227,9 +227,14 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Money_Events`(
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Music` (
   `id` INT PRIMARY KEY,
-  `sender` VARCHAR(100) NOT NULL,
+  `senderID` INT NOT NULL,
   `title` VARCHAR(50) NOT NULL,
   `musicURL` VARCHAR(50) NOT NULL
+  CONSTRAINT `fk_Music_Users1`
+    FOREIGN KEY (`senderID`)
+    REFERENCES `web_eventlab_db`.`Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Music_Events` (

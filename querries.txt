@@ -1,0 +1,74 @@
+EVENT:
+from body: {id : eventID}
+{
+    eventData: {
+        id,
+        title, 
+        description, 
+        dateStart, 
+        dateEnd, 
+        timeStart, 
+        timeEnd, 
+        location, 
+        comments, 
+        isAnonnymus, 
+        isPersonalized, 
+        isGlobal
+    },
+    personalizedData: {
+        isVisible, 
+        celebrator, (FULL STRING NAME)
+        presents : [
+            {
+                title,
+                price,
+                endDate
+            }
+        ...],
+        cards : [
+             {
+                date,
+                text,
+                likecount
+            }, 
+        ...]
+        money : {
+            amount,
+            IBAN
+        }, 
+        music : [
+            {
+                sender,
+                title,
+                musicURL
+            }    
+        ]
+    }
+}
+
+EVENTS:
+без тяло
+{
+    data: {
+        universities: string[],
+        faculties: string[],
+        myUniversity: string,
+        myFaculty: string
+    }
+}
+
+from body: {faculty : selectedFaculty}
+{
+    events : [
+        {
+            id,
+            title,
+            date,  (EventDateSt)
+            location,
+            isPersonalized  ( Full name of celebrator or null),
+            description
+
+        }
+    ]
+}
+
