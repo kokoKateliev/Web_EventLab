@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventLab</title>
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="validations.js" defer></script>
+
+    </head>
+    <body>
+        <nav>
+            <!-- logo -->
+            <!-- <img src="./images/home-icon-transparent-free-png.webp" alt="logo"/> -->
+            
+            <h3>Лаборатория за събития</h3>
+            <ul>
+                <li>Събития</li>
+                <li>Създаване на събитие</li>
+                <li>Моите събития</li>
+                <li>Профил</li>
+                <li><a href="./login/index.html">Вход</a></li>
+                <li><a href="./register/index.html">Регистрация</a></li>
+                <li>Изход</li>
+            </ul>
+        </nav>
+
+        <main>
+            <div id="container">
+                <form id="login-form">
+                    <h1 id="login-heading">Вход</h1>
+                    
+                    <label for="username">Потребителско име: </label>
+                    <input id="username" type="text" name="username" placeholder="Потребителско име">
+                    
+                    <label for="password">Парола:</label>
+                    <input id="password" type="password" name="password" placeholder="Парола">
+    
+                    <button type="submit">Влез</button>
+                    <p id="user-message"></p>
+    
+                    <p id="register-message">Нямате акаунт?  <a href="../register/index.html">Регистрация</a></p>
+                </form>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+</body>
+</html>

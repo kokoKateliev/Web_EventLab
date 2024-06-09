@@ -154,6 +154,7 @@ USER PROFILE:
 Get
 {
     data : {
+        id,
         username,
         Fistname,
         lastname,
@@ -215,7 +216,6 @@ MAIN:
 без тяло, ако съм логнат, ако не isLogged = false
 Get
 {
-    isLogged: bool,
     globalEvents : [
         {
             id,
@@ -230,3 +230,16 @@ Get
     ]
 }
 
+-------------------------
+
+LoggedUser:
+без тяло
+Get {
+    isLogged: bool,
+}
+
+-------------------------
+
+Logout:
+без тяло
+без Get

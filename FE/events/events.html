@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventLab</title>
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js" defer></script>
+
+    </head>
+    <body>
+        <nav>
+            <!-- logo -->
+            <!-- <img src="./images/home-icon-transparent-free-png.webp" alt="logo"/> -->
+            <ul>
+                <li>Събития</li>
+                <li>Създаване на събитие</li>
+                <li>Моите събития</li>
+                <li>Профил</li>
+                <li><a href="./login/index.html">Вход</a></li>
+                <li><a href="./register/index.html">Регистрация</a></li>
+                <li>Изход</li>
+            </ul>
+        </nav>
+
+        <main>
+            <section>
+                <h1>Предстоящи събития</h1>
+                <!-- filter -->
+                <form id="filter-form">
+                    <label for="universities">Изберете факултет към вашия университет:</label>
+                    <select id="universities" name="universities" required>
+                        <option value="" disabled selected>-----</option>
+                        <option value="su">СУ</option>
+                        <option value="tu">ТУ</option>
+                        <option value="unss">УНСС</option>
+                        <option value="uacg">УАСГ</option>
+                    </select>
+                    
+                    <div id="faculties" class="faculties-options">
+                        <label for="faculty">Изберете факултет:</label>
+                        <select id="faculty" name="faculty">
+                        </select>
+                    </div>
+
+                </form>
+
+                <!-- button за създаване -->
+            </section>
+            <section id="events">
+                <h2 id="msg">Зареждане на елементи...</h3>
+                <div>
+                    <div id="1" class="event-block">
+                        <h3>title</h3>
+                        <p>Date and Time</p>
+                        <button onclick="navigateToEvent(1)">Show more</button>
+                    </div>
+                    <div class="on-hover">
+                        <h3>title or personalized user</h3>
+                        <p>location</p>
+                        <p>Short description</p>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <!-- isGlobal -> True -->
+                <h3>Събития с отворени врати</h3>
+                <div>
+                    
+                </div>
+            </section>
+        </main>
+        <footer>
+
+        </footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventLab</title>
+
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="validations.js" defer></script>
+    <script src="formActions.js" defer></script>
+
+    </head>
+    <body>
+        <nav>
+            <!-- logo -->
+            <!-- <img src="./images/home-icon-transparent-free-png.webp" alt="logo"/> -->
+            
+            <h3>Лаборатория за събития</h3>
+            <ul>
+                <li>Събития</li>
+                <li>Създаване на събитие</li>
+                <li>Моите събития</li>
+                <li>Профил</li>
+                <li><a href="../login/index.html">Вход</a></li>
+                <li>Изход</li>
+            </ul>
+        </nav>
+
+        <main>
+            <div id="container">
+                <form id="register-form">
+                    <h2 id="register-heading">Регистрирация</h2>
+
+                    <label for="email" class="required">E-mail:</label>
+                    <input id="email" type="text" name="email" placeholder="E-mail" required>
+                    <p id="errEmail" class="errorMsg"></p>
+                    
+                    <label for="username" class="required">Потребителско име:</label>
+                    <input id="username" type="text" name="username" placeholder="Потребителско име" required>
+                    <p id="errUsername" class="errorMsg"></p>
+                    
+                    <label for="password" class="required">Парола:</label>
+                    <input id="password" type="password" name="password" placeholder="Парола" required>
+                    <p id="errPassword" class="errorMsg"></p>
+                    
+                    <label for="firstname" class="required">Име:</label>
+                    <input id="firstname" type="text" name="firstname" placeholder="Име" required>
+                    <p id="errFirstname" class="errorMsg"></p>
+                    
+                    <label for="lastname" class="required">Фамилия:</label>
+                    <input id="lastname" type="text" name="lastname" placeholder="Фамилия" required>
+                    <p id="errLastname" class="errorMsg"></p>
+                    
+                    <label for="dateofbirth" class="required" >Рожденна дата:</label>
+                    <input id="dateofbirth" type="date" name="dateofbirth" required>
+
+                    <fieldset id="roles">
+                        <legend class="required">Факутлети</legend>
+
+                        <input type="radio" id="student" name="role" value="1">
+                        <label for="student">Студент</label><br>
+                        
+                        <input type="radio" id="teacher" name="role" value="2">
+                        <label for="teacher">Преподавател</label>
+                        
+                    </fieldset>
+
+                    <!-- OPRAVI DA E SPRQMO ZAQVKA -->
+                    <label for="university">Изберете университет:</label>
+                    <select id="university" name="university" value="--" required>
+                        <option value="" disabled selected>-----</option>
+                        <option value="su">СУ</option>
+                        <option value="tu">ТУ</option>
+                        <option value="unss">УНСС</option>
+                        <option value="uacg">УАСГ</option>
+                    </select>
+                    
+                    <div id="faculties" class="faculties-options">
+                        <label for="faculty">Изберете факултет:</label>
+                        <select id="faculty" name="faculty">
+                        </select>
+                    </div>
+                    
+                    
+                    <p id="information" class="required">Задължителни полета</p>
+                    
+                    <button type="submit">Регистрирай се</button>
+                    <p id="user-message"></p>
+
+                    <p id="login-message">Вече сте член?  <a href="../register/index.html">Влезте в профила си</a></p>
+
+                </form>
+                </div>
+            </div>
+        </main>
+        <footer>
+            
+        </footer>
+</body>
+</html>
