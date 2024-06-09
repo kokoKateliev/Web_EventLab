@@ -54,13 +54,14 @@ const onFormSubmitted = event => {
         password: formElement.querySelector("input[name='password']").value,
     };
     
-    fetch('../../backend/endpoints/login.php', {
+    fetch('../../backend/api/login.php', {
         method: 'POST',
         body: JSON.stringify(formData),
     })
     .then(response=>response.json())
     .then(response => {
         if (response.success) {
+			console.log("USPEH")
             location.replace("../index.html");
         } else {
             document.getElementById('user-message').innerText = response.message;
