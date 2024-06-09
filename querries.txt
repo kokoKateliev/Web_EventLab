@@ -10,7 +10,13 @@ from body: {id : eventID}
         timeStart, 
         timeEnd, 
         location, 
-        comments, 
+        comments : [ 
+            {
+                text,
+                date,
+                likeCount
+            }
+        ], 
         isAnonnymus, 
         isPersonalized, 
         isGlobal
