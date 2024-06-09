@@ -54,3 +54,6 @@ VALUES (1, 1, 1, False),
 
 INSERT INTO `personalized`
 VALUES (1, 2, True, 1);
+
+INSERT INTO `users_events`
+VALUES (1, 2, 1, 1, 0);
