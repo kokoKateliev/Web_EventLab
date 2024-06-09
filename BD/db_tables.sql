@@ -229,7 +229,8 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Music` (
   `id` INT PRIMARY KEY,
   `senderID` INT NOT NULL,
   `title` VARCHAR(50) NOT NULL,
-  `musicURL` VARCHAR(50) NOT NULL
+  `musicURL` VARCHAR(50) NOT NULL,
+  INDEX `fk_Music_Users1_idx` (`senderID` ASC),
   CONSTRAINT `fk_Music_Users1`
     FOREIGN KEY (`senderID`)
     REFERENCES `web_eventlab_db`.`Users` (`id`)
