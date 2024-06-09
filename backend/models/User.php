@@ -114,12 +114,15 @@ class User {
 	}
 
     private function validName($name): bool{
-		return strlen($name) >= 2 && strlen($name) <= 50 && (preg_match('/^[\p{Cyrillic}]+[- \']?[\p{Cyrillic}]+$/u', $name) || preg_match('/^[a-zA-Z]+[- \']?[a-zA-Z]+$/', $name));	
-	}
+        return mb_strlen($name) >= 2 && mb_strlen($name) <= 50 && (
+            preg_match('/^[\p{Cyrillic}]+[- \']?[\p{Cyrillic}]+$/u', $name) ||
+            preg_match('/^[a-zA-Z]+[- \']?[a-zA-Z]+$/', $name)
+        );	
+    }
 
     //regex to be changed
     private function validPassword($password): bool {
-		return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{6,256}$/', $password);
+		return preg_match('/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{6,256}$/', $password);
 	}
 
     private function validEmail($email): bool {
@@ -136,15 +139,15 @@ class User {
     }
 
     private function validUniversity($university): bool {
-        return is_int($university) && $university >= "1" && $university <= "4";
+        return is_int($university) && $university >= 1 && $university <= 4;
     }
 
     private function validFaculty($faculty): bool {
-        return is_int($faculty) && $faculty >= "1" && $faculty <= "20";
+        return is_int($faculty) && $faculty >= 1 && $faculty <= 20;
     }
 
     public function validate(): void {
-        if($this->role === 1){
+        if($this->role === '1'){
             if(!$this->requiredFieldsStudent($this->username, $this->password, $this->email, $this->firstName, $this->lastName, $this->role, $this->birthdate, $this->university, $this->faculty)){
                 throw new Exception("Всички полета са задължителни!");
             }
@@ -154,7 +157,7 @@ class User {
                 }
             }
         }
-        elseif ($this->role === 2){
+        elseif ($this->role === '2'){
             if(!$this->requiredFieldsTeacher($this->username, $this->password, $this->email, $this->firstName, $this->lastName, $this->role, $this->birthdate, $this->university)){
                 throw new Exception("Всички полета са задължителни!");
             }
