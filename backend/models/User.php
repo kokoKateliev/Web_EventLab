@@ -114,7 +114,7 @@ class User {
 	}
 
     private function validName($name): bool{
-		return strlen($name) >= 2 && strlen($name) <= 50 && (preg_match('/^[\p{Cyrillic}]+[- \']?[\p{Cyrillic}]+$/u', $field) || preg_match('/^[a-zA-Z]+[- \']?[a-zA-Z]+$/', $name));	
+		return strlen($name) >= 2 && strlen($name) <= 50 && (preg_match('/^[\p{Cyrillic}]+[- \']?[\p{Cyrillic}]+$/u', $name) || preg_match('/^[a-zA-Z]+[- \']?[a-zA-Z]+$/', $name));	
 	}
 
     //regex to be changed
