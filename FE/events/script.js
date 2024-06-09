@@ -2,6 +2,18 @@
 // fetch get kude uchasvam
 //
 
+// const eventData = [
+//     {
+//         id: 1,
+//         title : "Рожден ден Мария",
+//         date: new Date(),
+//         location: "ФМИ",
+//         isPersonalized: "Мария Петрова",
+//         description: "Нека отпразнуваме заедно рождения ден на Мария Петрова във ФМИ! Ела и се включи в подаръка й!",
+//         creator: "Иван Павлов",
+//         isAnonnymus: false
+//     }
+// ];
 
 let myUniversity = null;
 let myFaculty = null;
@@ -21,11 +33,10 @@ function navigateToEvent(id) {
 
 
 function loadEvents() {
+    const section = document.getElementById('events');
     if(section.innerHTML) {
         section.innerHTML = '';
     }
-    const section = document.getElementById('events');
-
 
     //id, title, date, location, isPersonalized(vurni mi imeto ili null), description
     events.forEach(event => {
