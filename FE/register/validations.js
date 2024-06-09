@@ -146,7 +146,7 @@ const onFormSubmitted = event => {
         birthdate: formElement.querySelector("input[name='dateofbirth']").value,
         universityId: parseInt(formElement.querySelector("select[name='university']").value),
         facultyId: parseInt(formElement.querySelector("select[name='faculty']").value),
-		role: roleID,
+		role: parseInt(roleID),
     };
 	
 	const fields = [
