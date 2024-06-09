@@ -106,7 +106,7 @@ class User {
     }
 
     private function requiredFieldsTeacher($username, $password, $email, $firstName, $lastName, $role, $birthdate, $university): bool {
-        return !empty($username) && !empty($password) && !empty() && !empty($email) && !empty($firstName) && !empty($lastName) && !empty($role) && !empty($birthdate) && !empty($university);
+        return !empty($username) && !empty($password) && !empty($email) && !empty($firstName) && !empty($lastName) && !empty($role) && !empty($birthdate) && !empty($university);
     }
 
     private function validUsername($username): bool{
