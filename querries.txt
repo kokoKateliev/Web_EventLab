@@ -27,6 +27,7 @@ Get
         celebrator, (FULL STRING NAME)
         presents : [
             {
+                id,
                 title,
                 price,
                 endDate
@@ -34,23 +35,45 @@ Get
         ...],
         cards : [
              {
+                id,
                 date,
                 text,
                 likecount
             }, 
         ...]
         money : {
+            id,
             amount,
             IBAN
         }, 
         music : [
             {
+                id,
                 sender,
                 title,
                 musicURL
             }    
         ]
     }
+}
+
+from body {id: eventId}
+Get
+{
+    userParticipants: [
+        {
+            id,
+            name, (full name)
+            isHelper,
+            isAdmin
+        }
+    ]
+}
+
+from body {id: eventId}
+Get
+{
+    isUserAdmin: bool
 }
 
 -------------------------
