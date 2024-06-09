@@ -144,6 +144,8 @@ const onFormSubmitted = event => {
         username: formElement.querySelector("input[name='username']").value,
         password: formElement.querySelector("input[name='password']").value,
         birthdate: formElement.querySelector("input[name='dateofbirth']").value,
+        universityId: parseInt(formElement.querySelector("select[name='university']").value),
+        facultyId: parseInt(formElement.querySelector("select[name='faculty']").value),
 		role: roleID,
     };
 	
@@ -154,6 +156,9 @@ const onFormSubmitted = event => {
 		formData.username,
 		formData.password,	
 		formData.role,
+		formData.birthdate,
+		formData.universityId,
+		formData.facultyId
 	];
 	
 	const errors = [
@@ -165,7 +170,7 @@ const onFormSubmitted = event => {
 		];
 	
 	if (validate(errors, fields)) {		
-		fetch('../../backend/endpoints/register.php', {
+		fetch('../../backend/api/registration.php', {
 			method: 'POST',
 			body: JSON.stringify(formData),
 		})

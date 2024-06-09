@@ -1,42 +1,86 @@
-function showFaculties(data){
-    if(data.length === 0){
-        throw new Error('Грешка в получените данни за факултети');
-    }
-    let div = document.getElementById('faculties');
-    let select = document.getElementById('faculty');
-    const options = [];
+const universitiesData = [
+	{
+		id: 1,
+		name: 'Софийски университет "Св. Климент Охридски"',
+		faculties: [
+			{ id:1, name: 'ФМИ - Софтуерно инженерство'},
+			{ id:2,  name: 'ФМИ - Компютърни науки'},
+			{ id:3,  name: 'ФМИ - Информационни системи'},
+			{ id:4,  name: 'ФМИ - Информатика'},
+			{ id:5,  name: 'ФСФ - Българска филология'},
+			{ id:6,  name: 'ФСФ - Английска филология'},
+			{ id:7,  name: 'ФСФ - Германска филология'},
+			{ id:8,  name: 'ФСФ - Френска филология'}
+		]
+	},
+	{
+		id:2,
+		name: 'Технически университет - София',
+		faculties: [
+			{id:17, name:'ФА - Автомобилно строителство'},
+			{id:18, name:'ЕФ - Електроника'},
+			{id:19, name:'ЕФ - Електротехника'}
+		]
+	},
+	{
+		id: 3,
+		name: 'Университет за Национално и Световно стопанство',
+		faculties: [
+			{id:14, name:'ОФ - Обща икономика'},
+			{id:15, name:'СФ - Финанси'},
+			{id:16, name:'СФ - Счетоводство'},
+		]
+	},
+	{
+		id:4,
+		name: 'Университет по Архитектура, Строителство и Геодезия',
+		faculties: [
+			{id:9, name:'ФА - Архитектура'},
+			{id:10, name:'ФА - Урбанистика'},
+			{id:20, name:'ФА - Ландшафтна архитектура'},
+			{id:11, name:'ФГ - Геодезия'},
+			{id:12, name:'ФГ - Картография'},
+			{id:13, name:'ФГ - География'},
+		]
+	}
+];
 
-    data.forEach(element => {
-        let value = element.replace(/\s+/g, '')
-        options.push({value : element});
-    });
+let isTeacher = false;
 
-    options.forEach(optionData => {
+const loadUniversities = () => {
+    let select = document.getElementById('university');
+
+    universitiesData.forEach(university => {
         const option = document.createElement('option');
-        option.value = optionData.value;
-        option.textContent = optionData.text;
+        option.value = university.id;
+        option.textContent = university.name;
+        select.appendChild(option);
+    });
+}
+
+function showFaculties(faculties){
+    let div = document.getElementById('faculties');
+    if(isTeacher){
+        div.style.visibility = 'hidden';
+
+        return;
+    }
+    let select = document.getElementById('faculty');
+
+    faculties.forEach(faculty => {
+        const option = document.createElement('option');
+        option.value = faculty.id;
+        option.textContent = faculty.name;
         select.appendChild(option);
     });
 
     div.style.visibility = 'visible';
 }
 
-function getFaculties(facultyName) {
-    fetch('../../backend/endpoints/faculties.php', {
-        method: 'POST',
-        body: JSON.stringify({ university: universityName }),
-    })
-    .then(response=>response.json())
-    .then(response => {
-        if (response.success) {
-                showFaculties(response.data);
-        } else {
-            throw new Error('Мрежова грешка');
-        }
-    })
-    .catch(error => {
-        console.error('Грешка: ' + error.message);
-    });
+function getFaculties(universityId) {
+    const id = parseInt(universityId);
+    let faculties = universitiesData.find(university => university.id === id).faculties;
+    showFaculties(faculties);
 }
 
 
@@ -46,5 +90,19 @@ const generateFaculties = event => {
     getFaculties(chosenElement);
 }
 
+
+const selectedRoles = event => {
+    const chosenElement = event.target.value;
+    if(chosenElement === "1"){
+		isTeacher = false;
+        return;
+    }
+    isTeacher = true;	
+    showFaculties();
+}
+
+loadUniversities();
 document.querySelector("select[name='university']").addEventListener('change', generateFaculties);
+document.querySelector("fieldset[id='roles']").addEventListener('change', selectedRoles);
+
 
