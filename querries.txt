@@ -1,5 +1,6 @@
 EVENT:
 from body: {id : eventID}
+Get
 {
     eventData: {
         id,
@@ -54,16 +55,29 @@ from body: {id : eventID}
 
 EVENTS:
 без тяло
+Get
 {
     data: {
-        universities: string[],
-        faculties: string[],
-        myUniversity: string,
-        myFaculty: string
+        universities: [
+            {
+                id:
+                name:
+                faculties: string[]
+            },
+        ]
+        myUniversity: {
+            id,
+            name
+        },
+        myFaculty: {
+            id,
+            name
+        }
     }
 }
 
 from body: {faculty : selectedFaculty}
+Get
 {
     events : [
         {
@@ -81,6 +95,8 @@ from body: {faculty : selectedFaculty}
 
 
 USER:
+без тяло
+Get
 {
     data : {
         username,
@@ -92,5 +108,24 @@ USER:
         university,
         faculty
     }
-
 }
+
+REGISTER:
+from body: {univesity: universityName}
+Get
+{
+    data: string[] (faculties)
+}
+
+fromBody: {
+    firstname,
+    lastname,
+    email,
+    username,
+    password,
+    role,
+    birthdate,
+    universityId,
+    facultyId
+}
+Add
