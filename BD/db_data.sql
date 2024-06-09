@@ -37,8 +37,8 @@ INSERT INTO `Roles` (`id`, `Rolename`)
 Values (1, "Студент"), (2, "Учител");
 
 INSERT INTO `Users`
-Values (1, "test1", "Калоян", "Кателиев", "Tester1-1", "email@gmail.com", 1, "2002-12-20", 1, 1),
-(2, "test2", "Адриана", "Атанасова", "Tester2-2", "email@gmail.com", 1, "2002-01-20", 1, 1);
+Values (1, "test1", "Калоян", "Кателиев", "Tester1-1", "email1@gmail.com", 1, "2002-12-20", 1, 1),
+(2, "test2", "Адриана", "Атанасова", "Tester2-2", "email2@gmail.com", 1, "2002-01-20", 1, 1);
 
 INSERT INTO `Events`
 VALUES (1, "Event1", "LONGLONGLONGlonglong long long short SHORT Description", "2024-06-24", "25-06-2024", "15:00:00", "16:00:00", "8mi Blok na SU", False, False ),
