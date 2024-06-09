@@ -44,7 +44,7 @@ class User {
         $res = $selectStatement->execute(['username' => $this->username]);
         
         $userDB = $selectStatement->fetch();
-        if(!$userDB == false)
+        if($userDB == false)
         {
             throw new Exception("Невалидно потребителско име!");
         }
