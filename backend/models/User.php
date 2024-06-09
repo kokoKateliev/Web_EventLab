@@ -12,17 +12,17 @@ class User {
     public $university; 
     public $faculty; 
 
-    public function __construct($id, $username, $password, $email, $firstName, $lastName, $role, $birthdate, $university, $faculty) {
-        $this->id = $id;
+    public function __construct($id, $username, $firstName, $lastName, $password, $email, $role, $birthdate, $university, $faculty) {
+        $this->id = (int)$id;
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
-        $this->role = $role;
+        $this->role = (int)$role;
         $this->birthdate = $birthdate;
-        $this->university = $university;
-        $this->faculty = $faculty;
+        $this->university = (int)$university;
+        $this->faculty = (int)$faculty;
     }
 
     public function checkLogin(): void {
@@ -128,25 +128,25 @@ class User {
 		return strlen($email) >= 2 && strlen($email) <= 256 && preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $email);
 	}
 
-    private function validBirthdate($date): bool {
-        $format = 'Y-m-d';
-        $d = DateTime::createFromFormat($format, $date); 
-        $year = (int)$d->format('Y');
-        $month = (int)$d->format('m');
-        $date = (int)$d->format('d');
-        return $d && $d->format($format) === $date && $year <= 2024 && $month <= 6 && $date <= 07; 
-    }
+    // private function validBirthdate($date): bool {
+    //     $format = 'Y-m-d';
+    //     $d = DateTime::createFromFormat($format, $date); 
+    //     $year = (int)$d->format('Y');
+    //     $month = (int)$d->format('m');
+    //     $date = (int)$d->format('d');
+    //     return $d && $d->format($format) === $date && $year <= 2024 && $month <= 6 && $date <= 07; 
+    // }
 
     private function validUniversity($university): bool {
-        return is_int($university) && $university >= 1 && $university <= 4;
+        return $university >= 1 && $university <= 4;
     }
 
     private function validFaculty($faculty): bool {
-        return is_int($faculty) && $faculty >= 1 && $faculty <= 20;
+        return $faculty >= 1 && $faculty <= 20;
     }
 
     public function validate(): void {
-        if($this->role === '1'){
+        if($this->role === 1){
             if(!$this->requiredFieldsStudent($this->username, $this->password, $this->email, $this->firstName, $this->lastName, $this->role, $this->birthdate, $this->university, $this->faculty)){
                 throw new Exception("Всички полета са задължителни!");
             }
@@ -156,7 +156,7 @@ class User {
                 }
             }
         }
-        elseif ($this->role === '2'){
+        elseif ($this->role === 2){
             if(!$this->requiredFieldsTeacher($this->username, $this->password, $this->email, $this->firstName, $this->lastName, $this->role, $this->birthdate, $this->university)){
                 throw new Exception("Всички полета са задължителни!");
             }
@@ -185,9 +185,9 @@ class User {
             throw new Exception("Попълнете валиден имейл!");
         }
 
-        if(!$this->validBirthdate($this->birthdate)){
-            throw new Exception("Попълнете валидна дата на раждане!");
-        }
+        // if(!$this->validBirthdate($this->birthdate)){
+        //     throw new Exception("Попълнете валидна дата на раждане!");
+        // }
 
         if(!$this->validUniversity($this->university)){
             throw new Exception("Попълнете валиден университет!");
