@@ -102,11 +102,11 @@ class User {
     }
 
     private function requiredFieldsStudent($username, $password, $email, $firstName, $lastName, $role, $birthdate, $university, $faculty): bool {
-        return !empty($username) && !empty($password) && !empty() && !empty(email) && !empty(firstName) && !empty(lastName) && !empty(role) && !empty(birthdate) && !empty(university) && !empty(faculty);
+        return !empty($username) && !empty($password) && !empty($email) && !empty($firstName) && !empty($lastName) && !empty($role) && !empty($birthdate) && !empty($university) && !empty($faculty);
     }
 
     private function requiredFieldsTeacher($username, $password, $email, $firstName, $lastName, $role, $birthdate, $university): bool {
-        return !empty($username) && !empty($password) && !empty() && !empty(email) && !empty(firstName) && !empty(lastName) && !empty(role) && !empty(birthdate) && !empty(university);
+        return !empty($username) && !empty($password) && !empty() && !empty($email) && !empty($firstName) && !empty($lastName) && !empty($role) && !empty($birthdate) && !empty($university);
     }
 
     private function validUsername($username): bool{
@@ -119,19 +119,15 @@ class User {
 
     //regex to be changed
     private function validPassword($password): bool {
-		return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{6,30}$/', $password);
+		return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{6,256}$/', $password);
 	}
 
     private function validEmail($email): bool {
 		return strlen($email) >= 2 && strlen($email) <= 256 && preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $email);
 	}
 
-    private function validRole($role): bool { 
-		return $role === "1" || $role === "2";
-	}
-
     private function validBirthdate($date): bool {
-        $format = 'd-m-Y';
+        $format = 'Y-m-d';
         $d = DateTime::createFromFormat($format, $date); 
         $year = (int)$d->format('Y');
         $month = (int)$d->format('m');
@@ -147,10 +143,52 @@ class User {
         return is_int($faculty) && $faculty >= "1" && $faculty <= "20";
     }
 
-    // to be added
     public function validate(): void {
-        
+        if($this->role === 1){
+            if(!$this->requiredFieldsStudent($this->username, $this->password, $this->email, $this->firstName, $this->lastName, $this->role, $this->birthdate, $this->university, $this->faculty)){
+                throw new Exception("Всички полета са задължителни!");
+            }
+            else {
+                if(!$this->validFaculty($this->faculty)){
+                    throw new Exception("Попълнете валиден факултет!");
+                }
+            }
+        }
+        elseif ($this->role === 2){
+            if(!$this->requiredFieldsTeacher($this->username, $this->password, $this->email, $this->firstName, $this->lastName, $this->role, $this->birthdate, $this->university)){
+                throw new Exception("Всички полета са задължителни!");
+            }
+        }
+        else{
+            throw new Exception("Попълнете валидна роля!");
+        }
+
+        if(!$this->validUsername($this->username)){
+            throw new Exception("Попълнете валидно потребителско име!");
+        }
+
+        if(!$this->validName($this->firstName)){
+            throw new Exception("Попълнете валидно име!");
+        }
+
+        if(!$this->validName($this->lastName)){
+            throw new Exception("Попълнете валидно фамилия!");
+        }
+
+        if(!$this->validPassword($this->password)){
+            throw new Exception("Попълнете валидна парола!");
+        }
+
+        if(!$this->validEmail($this->email)){
+            throw new Exception("Попълнете валиден имейл!");
+        }
+
+        if(!$this->validBirthdate($this->birthdate)){
+            throw new Exception("Попълнете валидна дата на раждане!");
+        }
+
+        if(!$this->validUniversity($this->university)){
+            throw new Exception("Попълнете валиден университет!");
+        }
     }
 }
-
-
