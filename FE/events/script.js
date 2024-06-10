@@ -98,7 +98,7 @@ function loadEventsFromFilter() {
         return;
     }
 
-    fetch('../../backend/api/events-menu.php', {
+    fetch('../../backend/api/get_Event.php', {
         method: 'POST',
         body: JSON.stringify({ facultyId : parseInt(selectedFaculty)}),
     })
