@@ -41,15 +41,6 @@ Get
                 text
             }
         ],
-        comments : [
-             {
-                id,
-                date,
-                text,
-                likecount,
-                creator - full name
-            }, 
-        ...]
         money, 
         musics : [
             {
