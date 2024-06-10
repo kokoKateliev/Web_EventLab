@@ -2,30 +2,28 @@
 
 require_once "../db/DB.php";
 require_once "../models/Event.php";
-
+// session_start();
+// $email=$_SESSION['email']
 function getEvent($connetction, $FacultyID) {
     $sql = "SELECT 
-        e.id,
-        e.EventName,
-        e.EventDateSt,
-        e.Location,
-        e.isPersonalized,
-        p.Firstname AS celebrator_firstname,
-        p.Lastname AS celebrator_lastname,
-        e.EventDescription AS description,
-        u.Firstname AS creator_firstname,
-        u.Lastname AS creator_lastname,
-        e.isAnonymous
+            e.id,
+            e.EventName,
+            e.EventDateSt,
+            e.Location,
+            e.isAnonymous,
+            e.EventDescription AS description,
+            IF(e.isPersonalized, CONCAT(u.Firstname, ' ', u.Lastname), NULL) AS isPersonalized,
+            CONCAT(c.Firstname, ' ', c.Lastname) AS creator
     FROM 
         Events e
-    JOIN 
+    LEFT JOIN 
+        users_events ue ON e.id = ue.EventID
+    LEFT JOIN 
+        Users u ON ue.usersID = u.id 
+    LEFT JOIN 
+        Users c ON e.id = c.id
+    LEFT JOIN 
         events_faculties ef ON e.id = ef.EventID
-    LEFT JOIN 
-        Personalized pz ON e.id = pz.EventID
-    LEFT JOIN 
-        Users p ON pz.celebratorID = p.id
-    JOIN 
-        Users u ON u.id = (SELECT usersID FROM users_events WHERE EventID = e.id AND isAdmin = 1 LIMIT 1)
     WHERE 
         ef.FacultyID = :FacultyID";
 
@@ -34,10 +32,6 @@ function getEvent($connetction, $FacultyID) {
     $query->execute(['FacultyID' => $FacultyID]);
 
     while($row = $query->fetch()){
-        // $id = $row['id'];
-        // $title = $row['EventName'];
-        // $date = $row['EventDateSt'];
-        // $location = $row['Location'];
         $information[] = array(
             'id' => $row['id'],
             'eventName' => $row['EventName'],
@@ -50,32 +44,38 @@ function getEvent($connetction, $FacultyID) {
         );
     }
     return $information;
-    
-   
 } 
 
-if (isset($_SESSION['FacultyID'])) {
-    $facultyID = $_SESSION['FacultyID'];
-    try{
-        $db = new DB();
-        $connetction = $db->getConnection();
-    } catch (PDOException $e) {
-        echo json_encode([
-            'success' => false,
-            'message' => "Неуспешно свързване с базата данни!",
-            'value' => null,
-        ]);
-        exit();
-    }
-    
+$phpInput = json_decode(file_get_contents('php://input'), true);
+
+$FacultyID = $phpInput['FacultyID'];
+
+try{
+    $db = new DB();
+    $connetction = $db->getConnection();
+} catch (PDOException $e) {
+    echo json_encode([
+        'success' => false,
+        'message' => "Неуспешно свързване с базата данни!",
+        'value' => null,
+    ]);
+    exit();
 }
 
+$information = getEvent($connetction, $FacultyID);
 
-$information = getEvent($connetction, $facultyID);
-echo json_encode([
+if(!$information){
+    echo json_encode([
+        'success' => false,
+        'message' => "Няма намерени данни за събития за избрания факултет.",
+        'value' => $information,
+    ]);
+} else {
+    echo json_encode([
     'success' => true,
-    'message' => "Информация за събитие.",
+    'message' => "Намерени са данни за събития към този факултет.",
     'value' => $information,
-]);
+    ]);
+}
 
 ?>
