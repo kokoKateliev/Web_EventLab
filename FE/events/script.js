@@ -132,7 +132,7 @@ function loadFilterUnviersities() {
 
 function loadFilterFaculties () {
     const select = document.getElementById('faculty');
-    if(myFaculty){
+    if(myFaculty === null){
         const option = document.createElement('option');
         option.value = "";
         option.textContent = "-----";
