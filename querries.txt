@@ -46,7 +46,8 @@ Get
                 id,
                 date,
                 text,
-                likecount
+                likecount,
+                creator - full name
             }, 
         ...]
         money : {
