@@ -69,7 +69,7 @@ function loadEvents() {
         onHoverDiv.className = "on-hover";
 
         var titleOrUserH3 = document.createElement('h3');
-        if(event.isPersonalized){
+        if(event.isPersonalized === "0"){
             titleOrUserH3.textContent = event.title;
         }
         else{
