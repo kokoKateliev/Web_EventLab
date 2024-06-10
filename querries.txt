@@ -234,7 +234,7 @@ from body {
 -------------------------
 
 MAIN:
-без тяло, ако съм логнат, ако не isLogged = false
+без тяло // като EVENTS 
 Get
 {
     globalEvents : [
@@ -250,11 +250,11 @@ Get
         }
     ]
 }
-
+isGlobal = true;
 -------------------------
 
 LoggedUser:
-без тяло
+без тяло, ако съм логнат, ако не isLogged = false
 Get {
     isLogged: bool,
 }
