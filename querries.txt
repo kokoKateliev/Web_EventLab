@@ -50,10 +50,7 @@ Get
                 creator - full name
             }, 
         ...]
-        money : {
-            id,
-            amount,
-        }, 
+        money, 
         musics : [
             {
                 id,
