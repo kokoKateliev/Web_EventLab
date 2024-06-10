@@ -60,3 +60,31 @@ VALUES (1, 2, 1, 1, 0);
 
 INSERT INTO `users_events`
 VALUES (2, 1, 2, 1, 0);
+
+INSERT INTO `users_events`
+VALUES (3, 3, 1, 1, 0);
+
+INSERT INTO `Comments` (`CommentText`, `CommentDate`, `LikeCount`, `EventID`, `UserID`)
+VALUES ('This is a great event!', '2024-06-10 12:00:00', 5, 1, 1),
+       ('Looking forward to it!', '2024-06-10 12:30:00', 3, 2, 2),
+       ('Will there be a livestream?', '2024-06-10 13:00:00', 0, 3, 1),
+       ('Excellent organization!', '2024-06-10 13:30:00', 7, 4, 2);
+
+INSERT INTO `Cards` (`senderID`, `description`, `imgURL`, `EventID`)
+VALUES (1, 'Happy Birthday!', 'http://example.com/image1.jpg', 2),
+       (2, 'Congratulations on your success!', 'http://example.com/image2.jpg', 3),
+       (1, 'Best wishes for the future!', 'http://example.com/image3.jpg', 1),
+       (2, 'Happy Anniversary!', 'http://example.com/image4.jpg', 4);
+
+INSERT INTO `Presents` (`Title`, `Price`, `EndDate`, `EventID`)
+VALUES ('Gift Card', 50.00, '2024-06-30 23:59:59', 1),
+       ('Bouquet of Flowers', 25.00, '2024-06-30 23:59:59', 2),
+       ('Chocolates', 15.00, '2024-06-30 23:59:59', 3),
+       ('Teddy Bear', 30.00, '2024-06-30 23:59:59', 4);
+
+INSERT INTO `Music` (`senderID`, `title`, `musicURL`, `EventID`)
+VALUES (1, 'Happy Birthday Song', 'http://example.com/music1.mp3', 1),
+       (2, 'Congratulations Song', 'http://example.com/music2.mp3', 2),
+       (1, 'Best Wishes Song', 'http://example.com/music3.mp3', 3),
+       (2, 'Anniversary Song', 'http://example.com/music4.mp3', 4);
+
