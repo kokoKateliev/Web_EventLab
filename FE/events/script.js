@@ -166,7 +166,7 @@ function loadData(data) {
 }
 
 // iskam loadData elementite
-fetch('../../backend/api/filter-menu.php', {
+fetch('../../backend/api/get_User_Uni_Faculty.php', {
     method: 'POST',
     body: JSON.stringify(),
 })
