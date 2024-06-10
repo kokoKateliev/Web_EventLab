@@ -19,13 +19,13 @@ function Comments(date, text, likeCount) {
     this.likeCount = likeCount
 }
 
-function Personalized(isVisible, celebrator, presents, cards, money, music ) {
+function Personalized(isVisible, celebrator, presents, cards, money, musics ) {
     this.isVisible = isVisible;
     this.celebrator = celebrator;
     this.presents = presents;
     this.cards = cards;
     this.money = money;
-    this.music = music;
+    this.musics = musics;
 }
 
 let admin = false;
@@ -364,6 +364,7 @@ function showPresents() {
 
     }
     const addMButton = document.createElement('button');
+    addMButton.textContent = 'Добави пари';
     addMButton.onclick = function() {
         addMoney();
     };
@@ -403,6 +404,7 @@ function showPresents() {
             const div3 = document.createElement('div');
             
             const editButton = document.createElement('button');
+            editButton.textContent = "Промени"
             editButton.onclick = function() {
                 editPresent(present.id)
             };
@@ -590,7 +592,7 @@ function showMusic() {
         const section = document.createElement('section');
         section.id = music.id;
 
-        const audio = document.createElement('audio ');
+        const audio = document.createElement('audio');
 
         audio.src = music.musicUrl;
 
@@ -660,7 +662,7 @@ function cardsFormListen() {
         document.querySelector("p[id='errors']").innerText = isValidText(text);
     };
 
-    document.querySelector("input[name='textInput']").addEventListener('keyup', validateText);
+    document.querySelector("textarea[name='textInput']").addEventListener('keyup', validateText);
 
     const validate = () => {
         
@@ -686,7 +688,7 @@ function cardsFormListen() {
         formData.append('eventId', eventID)
         
         if (validate()) {		
-            fetch('../../backend/api/present.php', {
+            fetch('../../backend/api/Card.php', {
                 method: 'POST',
                 body: JSON.stringify(formData),
             })
@@ -721,45 +723,38 @@ function addCard(){
     }
     section.innerHTML = '';
     const form = document.createElement('form');
-            form.setAttribute('id', 'uploadForm');
+        form.setAttribute('id', 'uploadForm');
 
-            // Създаване на поле за качване на снимка
-            const fileLabel = document.createElement('label');
-            fileLabel.setAttribute('for', 'fileInput');
-            fileLabel.textContent = 'Изберете снимка:';
-            const fileInput = document.createElement('input');
-            fileInput.setAttribute('type', 'file');
-            fileInput.setAttribute('id', 'fileInput');
-            fileInput.setAttribute('name', 'fileInput');
+        const fileLabel = document.createElement('label');
+        fileLabel.setAttribute('for', 'fileInput');
+        fileLabel.textContent = 'Изберете снимка:';
+        const fileInput = document.createElement('input');
+        fileInput.setAttribute('type', 'file');
+        fileInput.setAttribute('id', 'fileInput');
+        fileInput.setAttribute('name', 'fileInput');
 
-            // Създаване на текстово поле
-            const textLabel = document.createElement('label');
-            textLabel.setAttribute('for', 'textInput');
-            textLabel.textContent = 'Добавете текст:';
-            const textInput = document.createElement('textarea');
-            textInput.setAttribute('id', 'textInput');
-            textInput.setAttribute('name', 'textInput');
-            textInput.setAttribute('rows', '4'); 
-            textInput.setAttribute('cols', '50');
+        const textLabel = document.createElement('label');
+        textLabel.setAttribute('for', 'textInput');
+        textLabel.textContent = 'Добавете текст:';
+        const textInput = document.createElement('textarea');
+        textInput.setAttribute('id', 'textInput');
+        textInput.setAttribute('name', 'textInput');
+        textInput.setAttribute('rows', '4'); 
+        textInput.setAttribute('cols', '50');
 
-            const pErr = document.createElement('p');
-            pErr.id = 'errors';
-            
-            // Създаване на бутон за изпращане
-            const submitButton = document.createElement('button');
-            submitButton.setAttribute('type', 'submit');
-            submitButton.textContent = 'Качи';
+        const pErr = document.createElement('p');
+        pErr.id = 'errors';
+        
+        const submitButton = document.createElement('button');
+        submitButton.setAttribute('type', 'submit');
+        submitButton.textContent = 'Качи';
 
-            // Добавяне на елементите към формата
-            form.appendChild(fileLabel);
-            form.appendChild(fileInput);
-            form.appendChild(textLabel);
-            form.appendChild(textInput);
-            form.appendChild(pErr);
-            form.appendChild(submitButton);
-
-            // Добавяне на формата към контейнера в HTML
-            document.getElementById('form-container').appendChild(form);
+        form.appendChild(fileLabel);
+        form.appendChild(fileInput);
+        form.appendChild(textLabel);
+        form.appendChild(textInput);
+        form.appendChild(pErr);
+        form.appendChild(submitButton);
 
     section.appendChild(form);
 
@@ -992,7 +987,7 @@ function showParticipants(userParticipants) {
 }
 
 function loadParticipants(){
-    fetch('../../backend/api/get_User_Participants.php', {
+    fetch('../../../backend/api/get_User_Participants.php', {
         method: 'POST',
         body: JSON.stringify({id: eventID}),
     })
@@ -1031,7 +1026,7 @@ function loadEvent() {
 
     loadParticipants();
 
-    if(isPersonalized){
+    if(eventData.isPersonalized){
         let p1 = document.createElement('p');
         let h3 = document.createElement('h3');
         h3.innerHTML = personalizedData.celebrator;
@@ -1079,7 +1074,6 @@ function loadEvent() {
 
 }
 
-
 function getQueryParam() {
     let queryParam = {};
     let queryString = window.location.search.substring(1);
@@ -1089,8 +1083,10 @@ function getQueryParam() {
     return parseInt(queryParam.id);
 }
 
-let eventData = null;
-let personalizedData = null;
+//ako ne sa personalizirani dobavi mnogo if
+
+var eventData = null;
+var personalizedData = null;
 
 fetch('../../../backend/api/get_User_Admin.php', {
     method: 'POST',
@@ -1106,16 +1102,16 @@ fetch('../../../backend/api/get_User_Admin.php', {
     }
 });
 
-fetch('../../backend/api/event.php', {
+fetch('../../../backend/api/get_Event_All_Info.php', {
     method: 'POST',
     body: JSON.stringify({id: eventID}),
 })
 .then(response=>response.json())
 .then(response => {
     if (response.success) {
-        eventData = new Event(response.eventData.id, response.eventData.title, response.eventData.description, response.eventData.dateStart, response.eventData.dateEnd, response.eventData.timeStart, response.eventData.timeEnd, response.eventData.location, response.eventData.comments, response.eventData.isAnonnymus, response.eventData.isPersonalized, response.eventData.isGlobal)
+        eventData = new Event(response.data.id, response.data.title, response.data.description, response.data.dateStart, response.data.dateEnd, response.data.timeStart, response.data.timeEnd, response.data.location, response.data.comments, response.data.isAnonnymus, !!response.data.isPersonalized, response.data.isGlobal)
         if(eventData.isPersonalized) {
-            personalizedData = new Personalized(response.personalizedData.isVisible, response.personalizedData.celebrator, response.personalizedData.presents, response.personalizedData.cards, response.personalizedData.money, response.personalizedData.music );
+            personalizedData = new Personalized(response.data.personalizedData.isVisible, response.data.personalizedData.celebrator, response.data.personalizedData.presents, response.data.personalizedData.cards, response.data.personalizedData.money, response.data.personalizedData.musics );
         }
         loadEvent();
     } else {

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventLab</title>
+
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  
+    </head>
+    <body>
+        <nav>
+            <!-- logo -->
+            <!-- <img src="./images/home-icon-transparent-free-png.webp" alt="logo"/> -->
+            
+            <h3>Лаборатория за събития</h3>
+            <ul>
+                <li>Събития</li>
+                <li>Създаване на събитие</li>
+                <li>Моите събития</li>
+                <li>Профил</li>
+                <li><a href="../login/index.html">Вход</a></li>
+                <li>Изход</li>
+            </ul>
+        </nav>
+
+        <main>
+            <form id="create-form">
+                <h2 id="create-heading">Създаване на събитие:</h2>
+
+                <label for="EventName" class="required">Име:</label>
+                <input id="EventName" type="text" name="EventName" placeholder="Име" required>
+                <p id="errEventName" class="errorMsg"></p>
+                
+                <label for="EventDescription" class="required">Описание</label>
+                <textarea id="EventDescription" name="EventDescription" maxlength="500" required> </textarea>
+                <p id="errEventDescription" class="errorMsg"></p>
+
+                <label for="EventDateSt" class="required" >Започва на:</label>
+                <input id="EventDateSt" type="date" name="EventDateSt" required>
+                <input id="EventTimeSt" type="time" name="EventTimeSt" required>
+                
+                <label for="EventDateEn" class="required" >Приключва на:</label>
+                <input id="EventDateEn" type="date" name="EventDateEn" required>
+                <input id="EventTimeEn" type="time" name="EventTimeEn" required>
+                
+                <label for="location" class="required">Локация:</label>
+                <input id="location" type="text" name="location" placeholder="Локация" required>
+                <p id="errLocation" class="errorMsg"></p>                    
+
+                <label for="university">Изберете университет:</label>
+                <select id="university" name="university" value="--" required>
+                    <option value="" disabled selected>-----</option>
+                    
+                </select>
+                
+                <div id="faculties" class="faculties-options">
+                    <label for="faculty">Изберете факултет:</label>
+                    <select id="faculty" name="faculty">
+                    </select>
+                </div>
+                
+                <input type="radio" id="isAnonnymus" name="isAnonnymus" value="isAnonnymus">
+                <label for="isAnonnymus">Анонимно събитие</label>
+
+                <input type="radio" id="isGlobal" name="isGlobal" value="isGlobal">
+                <label for="isGlobal">Глобално събитие</label>
+                
+                <input type="radio" id="isPersonalized" name="isPersonalized" value="isPersonalized">
+                <label for="isPersonalized">Персонално събитие</label>
+                
+                <section id="personalized-form">
+                    <label for="email" class="required">Въведете имейл на празнуващия:</label>
+                    <input id="email" type="text" name="email" placeholder="E-mail" required>
+                    <p id="errEmail" class="errorMsg"></p>
+
+                    <input type="radio" id="isVisible" name="isVisible" value="isVisible">
+                    <label for="isVisible">Видимо събитие за празнуващия</label>
+
+                </section>
+                
+                <p id="information" class="required">Задължителни полета</p>
+                
+                <button type="submit">Създай събитие</button>
+            </form>
+        </main>
+        <footer>
+            
+        </footer>
+    <script src="validations.js" ></script>
+    <script src="formActions.js" ></script>
+    <!-- <script src="../Consts.js" ></script> -->
+</body>
+</html>
