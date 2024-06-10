@@ -61,7 +61,7 @@ function getUserUniversityAndFaculty($connection) {
             FROM 
                 Universities un
             JOIN 
-                universities_faculties uf ON un.id = uf.id
+                universities_faculties uf ON un.id = uf.Uniid
             JOIN
                 Faculties f ON uf.FacultyID = f.id";
             
