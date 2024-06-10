@@ -115,7 +115,7 @@ function loadEventsFromFilter() {
 
 function loadFilterUnviersities() {
     if(universities !== null){
-        let select = document.getElementById('university');
+        let select = document.getElementById('universities');
         universities.forEach((university) => {
             const option = document.createElement('option');
             option.value = university.id;
@@ -131,7 +131,7 @@ function loadFilterUnviersities() {
 }
 
 function loadFilterFaculties () {
-    const select = document.getElementById('faculties');
+    const select = document.getElementById('faculty');
     if(myFaculty){
         const option = document.createElement('option');
         option.value = "";
