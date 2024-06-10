@@ -15,7 +15,8 @@ Get
             {
                 text,
                 date,
-                likeCount
+                likeCount,
+                creator full name
             }
         ], 
         isAnonnymus, 
