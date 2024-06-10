@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Presents` (
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Music` (
-  `id` INT PRIMARY KEY,
+  `id` INT  NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `senderID` INT NOT NULL,
   `title` VARCHAR(50) NOT NULL,
   `musicURL` VARCHAR(50) NOT NULL,
