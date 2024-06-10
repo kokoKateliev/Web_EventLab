@@ -127,7 +127,6 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` (
     `isVisible` Boolean NOT NULL,
     `celebratorID` INT NOT NULL,
     `Amount` DECIMAL, 
-    `IBAN` VARCHAR(34), 
     INDEX `fk_Personalized_Events1_idx` (`EventID` ASC) ,
     INDEX `fk_user_celebrator1_idx` (`celebratorID` ASC) ,    
     CONSTRAINT `fk_Personalized_Events1`
