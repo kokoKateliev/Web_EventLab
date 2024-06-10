@@ -156,7 +156,6 @@ function presentsFormListen() {
         document.getElementById('presents-form').addEventListener('submit', onFormSubmitted);
     }
 }
-// D-----------------------------------
 
 function addPresent() {
     let section = document.getElementById('form-menu');
@@ -219,8 +218,6 @@ function addPresent() {
 
     presentsFormListen();
 }
-
-// D-------------------------------
 
 function moneyFormListen() {
     let section = document.getElementById('money-menu');
@@ -421,7 +418,7 @@ function showPresents() {
     // 
 }
 
-function MusicFormListen() {
+function musicFormListen() {
     let section = document.getElementById('formCard-menu');
     if(!section){
         return;
@@ -479,12 +476,12 @@ function MusicFormListen() {
                     const section = document.getElementById('formCard-menu');
                     section.innerHTML = '';
                     const successMessage = document.createElement('p');
-                    successMessage.textContent = 'Успeшно добавена картичка!';
+                    successMessage.textContent = 'Успeшно добавен музикален поздрав!';
                     section.appendChild(successMessage);
                     setTimeout(() => {
                         successMessage.style.display = 'none';
-                        showCards();
-                    }, 5000);
+                        showMusic();
+                    }, 2000);
                 } else {
                     document.getElementById('errors').innerText = "Грешка: " + response.message;
                 }
@@ -527,12 +524,10 @@ function addMusic(){
             const pErr = document.createElement('p');
             pErr.id = 'errors';
             
-            // Създаване на бутон за изпращане
             const submitButton = document.createElement('button');
             submitButton.setAttribute('type', 'submit');
             submitButton.textContent = 'Качи';
 
-            // Добавяне на елементите към формата
             form.appendChild(fileLabel);
             form.appendChild(fileInput);
             form.appendChild(textLabel);
@@ -540,12 +535,9 @@ function addMusic(){
             form.appendChild(pErr);
             form.appendChild(submitButton);
 
-            // Добавяне на формата към контейнера в HTML
-            document.getElementById('form-container').appendChild(form);
-
     section.appendChild(form);
 
-    cardsFormListen();
+    musicFormListen();
 }
 
 function removeMusic(musicId) {
@@ -1100,7 +1092,7 @@ function getQueryParam() {
 let eventData = null;
 let personalizedData = null;
 
-fetch('../../backend/api/admin.php', {
+fetch('../../../backend/api/get_User_Admin.php', {
     method: 'POST',
     body: JSON.stringify({id: eventID}),
 })
