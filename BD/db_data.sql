@@ -53,7 +53,10 @@ VALUES (1, 1, 1, False),
 (4, 4, 2, True);
 
 INSERT INTO `personalized`
-VALUES (1, 2, True, 1);
+VALUES (1, 2, True, 1, 20, BGN123);
 
 INSERT INTO `users_events`
 VALUES (1, 2, 1, 1, 0);
+
+INSERT INTO `users_events`
+VALUES (2, 1, 2, 1, 0);
