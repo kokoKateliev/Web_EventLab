@@ -20,6 +20,10 @@ if(!isset($input['username']) || !isset($input['password'])) {
             $user->checkLogin();
 
             $_SESSION['username'] = $input['username'];
+            // $_SESSION['email'] = $input['Email'];
+            // $_SESSION['faculty'] = $input['faculty'];
+            // $_SESSION['university'] = $input['university'];
+
 
             echo json_encode(['success' => true, 'username' => $_SESSION['username']]);
         } catch (Exception $e) {
