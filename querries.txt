@@ -33,7 +33,14 @@ Get
                 endDate
             }
         ...],
-        cards : [
+        cards: [
+            {
+                id,
+                imgUrl,
+                text
+            }
+        ],
+        comments : [
              {
                 id,
                 date,
@@ -44,7 +51,6 @@ Get
         money : {
             id,
             amount,
-            IBAN
         }, 
         music : [
             {
@@ -96,7 +102,8 @@ from body {
     isVisible,
     presents: [ {
         title,
-        price
+        price,
+        endDate
     }],
     money: IBAN string
 }
@@ -134,25 +141,23 @@ EVENTS:
 без тяло
 Get
 {
-    data: {
-        universities: [
-            {
-                id:
-                name:
-                faculties: {
-                    id,
-                    name
-                }
-            },
-        ]
-        myUniversity: {
-            id,
-            name
+    universities: [
+        {
+            id:
+            name:
+            faculties: {
+                id,
+                name
+            }
         },
-        myFaculty: {
-            id,
-            name
-        }
+    ]
+    myUniversity: {
+        id,
+        name
+    },
+    myFaculty: {
+        id,
+        name
     }
 }
 
@@ -269,3 +274,20 @@ Get {
 Logout:
 без тяло
 без Get
+
+
+
+joinEvent
+from body {
+    id: eventId
+}
+без Get
+върни ми Success true/false
+Ползвай Cookie за да вземеш на userID -> User_Events
+
+makeHelper/removeHelper
+from body {
+    id: userId
+}
+
+промени в таблицата User_Events isHelper True/False
