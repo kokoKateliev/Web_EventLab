@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="script.js" defer></script>
+    <script src="actions.js" defer></script>
 
     </head>
     <body>
@@ -19,9 +20,12 @@
                 <li><a href="./events/events.html">Събития</a></li>
                 <li>Създаване на събитие</li>
                 <li>Моите събития</li>
-                <li>Профил</li>
-                <li><a href="./login/login.html">Вход</a></li>
-                <li><a href="./register/register.html">Регистрация</a></li>
+
+                <li id="user">Профил</li>
+                <div id="no-user">
+                    <li><a href="./login/login.html">Вход</a></li>
+                    <li><a href="./register/register.html">Регистрация</a></li>
+                </div>
                 <li>Изход</li>
             </ul>
         </nav>
