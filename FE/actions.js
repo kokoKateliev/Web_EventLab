@@ -13,7 +13,7 @@ const logoff = () => {
     });
 }
 
-fetch('../../backend/api/get_Logged_User.php', {
+fetch('../backend/api/get_Logged_User.php', {
     method: 'POST',
     body: JSON.stringify(),
 })
