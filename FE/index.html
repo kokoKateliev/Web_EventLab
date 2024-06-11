@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="./global.css">
     <link rel="stylesheet" type="text/css" href="./styles.css">
     <script src="actions.js" defer></script>
+    <script src="script.js" defer></script>
 
     </head>
     <body>
@@ -24,30 +25,55 @@
                 <li id="user"><a href="./profile/profile.html">Профил</a></li>
                 <li id="login"><a href="./login/login.html">Вход</a></li>
                 <li id="register"><a href="./register/register.html">Регистрация</a></li>
-                <li id="logout"><button clss="nav-button" onclick="logoff()">Изход</button></li>
+                <li id="logout"><button clss="nav-button" onclick="logoff()"><a>Изход</a></button></li>
             </ul>
         </nav>
         <main>
-            <section>
-                <!-- Welcome -->
-                <h1>Добре дошли в EventLab!</h1>
-                <p>Тук може да откриете и да създадете събития от всякакъв вид!</p>
-                <p>Изготвили</p>
-                <p>Адриана Атанасова - 6MI0600018</p>
-                <p>Калоян Кателиев - 8MI0600049</p>
-                <img/>
-            </section>
-            
-            <section>
-                <!-- isGlobal -> True -->
-                <h3>Събития с отворени врати</h3>
+            <section class="section-first">
                 <div>
-                    
+                    <h1><span class="title-font">EventLab</span> - експлозия от събития</h1>
+                    <p>Тук сме да раздвижим твоето ежедневие - ще откриеш събития, създадени в университетие в София. Създай и твое събитие, в което твоите колеги ще могат да се присъединят.</p>
+                </div>
+                <img src="../files/community.png" alt="picture">
+            </section>
+            <section class="us">
+                <p>Изготвили</p>
+                <div>
+                    <p>Адриана Атанасова - 6MI0600018</p>
+                    <p>Калоян Кателиев - 8MI0600049</p>
                 </div>
             </section>
+            
+            <section class="globals">
+
+                <h1>Събития с отворени врати</h1>
+                <div id="globalEvents">
+                    <div class="event">
+                        <div id="4" class="event-block">
+                            <h3>Event4</h3>
+                            <p>2024-06-23</p>
+                            <button>Още за събитието</button>
+                        </div>
+                        <div class="on-hover">
+                            <h3>Event4</h3>
+                            <p>DRUG FACULTET</p>
+                            <p>LONGLONGLONGlonglong long long short SHORT Description</p>
+                        </div>
+                    </div>
+                </div>
+            
+            </section>
+            
         </main>
         <footer>
-
+            <section>
+                <h3>Източници</h3>
+                <ul>
+                    <li><a href="https://www.w3schools.com/">w3schools</a></li>
+                    <li><a href="https://learn.fmi.uni-sofia.bg/course/view.php?id=10001">Курс по Web технологии</a></li>
+                    <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">CSS flexbox</a></li>
+                </ul>
+            </section>
         </footer>
 </body>
 </html>
