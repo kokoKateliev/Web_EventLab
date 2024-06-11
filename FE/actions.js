@@ -6,7 +6,7 @@ const logoff = () => {
     .then(response=>response.json())
     .then(response => {
         if (response.success) {
-            window.location.href("index.html");
+            window.location.href = "index.html";
         } else {
             // document.getElementById('user-message').innerText = response.message;
         }
