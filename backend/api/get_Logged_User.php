@@ -18,7 +18,7 @@ $phpInput = json_decode(file_get_contents('php://input'), true);
 
 try{
     $db = new DB();
-    $connetction = $db->getConnection();
+    $connection = $db->getConnection();
 } catch (PDOException $e) {
     echo json_encode([
         'success' => false,
@@ -28,7 +28,7 @@ try{
     exit();
 }
 
-$information = getIsLoggedUser($connetction);
+$information = getIsLoggedUser($connection);
 
 if(!$information){
     echo json_encode([
