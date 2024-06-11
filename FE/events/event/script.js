@@ -701,7 +701,7 @@ function cardsFormListen() {
         const formElement = event.target;
 
         const formEl = {
-            name: formElement.querySelector("input[name='textInput']").value,
+            name: formElement.querySelector("textarea[name='textInput']").value,
             photo: fileField.file[0].name,
             eventId: eventID
         };
