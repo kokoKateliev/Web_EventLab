@@ -615,7 +615,7 @@ function showMusic() {
     sectionForm.id = 'formMusic-menu';
     menu.appendChild(sectionForm);  
 
-    personalizedData.music.forEach(music => {
+    personalizedData.musics.forEach(music => {
         const section = document.createElement('section');
         section.id = music.id;
 
