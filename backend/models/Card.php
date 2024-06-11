@@ -1,6 +1,6 @@
 <?php
 
-class Event {
+class Card {
     public $id;
     public $senderID;
     public $description;
@@ -29,7 +29,7 @@ class Event {
             ]);
         }
 
-        $insertStatement = $connection->prepare("INSERT INTO `Cards` (senderID, description, imgURL)
+        $insertStatement = $connection->prepare("INSERT INTO `Cards` (senderID, description, imgURL, EventID)
         VALUES (:senderID, :description, :imgURL, :EventID)");
 
         $resultIns = $insertStatement->execute([
