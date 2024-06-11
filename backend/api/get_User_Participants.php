@@ -21,12 +21,12 @@ function getUserParticipants($connetction, $EventID) {
     $query->execute([$EventID]); 
 
     while($row = $query->fetch(PDO::FETCH_ASSOC)){
-        $information[] =  array( [
+        $information[] =  array( 
             'id' => $row['userID'],
             'name' => $row['name'],
             'isHelper' => $row['isHelper'],
             'isAdmin' => $row['isAdmin']
-        ]);
+        );
     }
     return $information;
 } 
