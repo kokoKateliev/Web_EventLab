@@ -1,5 +1,33 @@
 body{
     background-image: url('../files/bg1.png');
     background-size: cover;
+}
 
+main{
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 1024px) {
+    .left-group{
+        width: 100%;
+    }
+    
+    nav{
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 800px) {
+
+    nav ul {
+        flex-direction: column;
+    }
+    nav ul li {
+        margin-bottom: 3%;
+    }
+    .buttons {
+        width: 40%;
+    }
 }
