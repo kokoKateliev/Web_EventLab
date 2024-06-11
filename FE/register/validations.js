@@ -58,27 +58,65 @@ function isValidPassword(field) {
 
 const validateFirstname = event => {
 	firstname = event.target;
-	document.querySelector("p[id='errFirstname']").innerText = isValidName(firstname);
+
+	let validation = isValidName(firstname);
+	if(validation){
+		document.getElementById("errFirstname").style.visibility = 'visible';
+		document.querySelector("p[id='errFirstname']").innerText = validation;
+	} else {
+		document.getElementById("errFirstname").style.visibility = 'hidden';
+	}
 };
 
 const validateLastname = event => {
 	firstname = event.target;
-	document.querySelector("p[id='errLastname']").innerText = isValidName(lastname);
+	let validation = isValidName(firstname)
+	if(validation){
+		document.getElementById("errLastname").style.visibility = 'visible';
+		document.querySelector("p[id='errLastname']").innerText = isValidName(lastname);
+	}
+	else {
+		document.getElementById("errLastname").style.visibility = 'hidden';
+	}
 };
 
 const validateEmail = event => {
 	email = event.target.value;
-	document.querySelector("p[id='errEmail']").innerText = isValidEmail(email);
+	let validation = isValidEmail(email);	
+	
+	if(validation){
+		document.getElementById("errEmail").style.visibility = 'visible';
+		document.querySelector("p[id='errEmail']").innerText = validation;
+	}
+	else {
+		document.getElementById("errEmail").style.visibility = 'hidden';
+	}
 };
 
 const validateUsername = event => {
 	username = event.target.value;
-	document.querySelector("p[id='errUsername']").innerText = isValidUsername(username);
+	let validation = isValidUsername(username);
+
+	if(validation){
+		document.getElementById("errUsername").style.visibility = 'visible';
+		document.querySelector("p[id='errUsername']").innerText = validation;
+	}
+	else {
+		document.getElementById("errUsername").style.visibility = 'hidden';
+	}
 };
 
 const validatePassword = event => {
 	password = event.target.value;
-	document.querySelector("p[id='errPassword']").innerText = isValidPassword(password);
+	let validation = isValidPassword(password)
+
+	if(validation){
+		document.getElementById("errPassword").style.visibility = 'visible';
+		document.querySelector("p[id='errPassword']").innerText = isValidPassword(password);
+	}
+	else {
+		document.getElementById("errPassword").style.visibility = 'hidden';
+	}
 };
 
 const today = () => {

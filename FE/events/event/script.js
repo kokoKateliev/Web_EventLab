@@ -144,7 +144,7 @@ function presentsFormListen() {
                     setTimeout(() => {
                         successMessage.style.display = 'none';
                         showPresents();
-                    }, 5000);
+                    }, 2000);
                 } else {
                     document.getElementById('error').innerText = "Грешка: " + response.message;
                 }
@@ -286,7 +286,7 @@ function moneyFormListen() {
                     section.appendChild(successMessage);
                     setTimeout(() => {
                         successMessage.style.display='none';
-                    }, 5000);
+                    }, 2000);
                 } else {
                     document.getElementById('error').innerText = "Грешка: " + response.message;
                 }
@@ -421,7 +421,7 @@ function showPresents() {
 }
 
 function musicFormListen() {
-    let section = document.getElementById('formCard-menu');
+    let section = document.getElementById('formMusic-menu');
     if(!section){
         return;
     }
@@ -475,7 +475,7 @@ function musicFormListen() {
             .then(response=>response.json())
             .then(response => {
                 if (response.success) {
-                    const section = document.getElementById('formCard-menu');
+                    const section = document.getElementById('formMusic-menu');
                     section.innerHTML = '';
                     const successMessage = document.createElement('p');
                     successMessage.textContent = 'Успeшно добавен музикален поздрав!';
@@ -710,7 +710,7 @@ function cardsFormListen() {
                     setTimeout(() => {
                         successMessage.style.display = 'none';
                         showCards();
-                    }, 5000);
+                    }, 2000);
                 } else {
                     document.getElementById('errors').innerText = "Грешка: " + response.message;
                 }
@@ -820,7 +820,7 @@ function showCards() {
 
         const img = document.createElement('img');
 
-        img.src=card.imgUrl;
+        img.src= '../../../files/upload_image/' + card.imgUrl;
         img.alt="Card Image";
         
         const p = document.createElement('p');

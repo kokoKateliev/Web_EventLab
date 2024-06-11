@@ -32,12 +32,26 @@ function isValidPassword(field) {
 
 const validateUsername = event => {
 	username = event.target.value;
-	document.getElementById("user-message").innerText = isValidUsername(username);
+	let text = isValidUsername(username);
+	if(text){
+		document.getElementById('user-message').style.visibility = 'visible';
+		document.getElementById("user-message").innerText = text;
+	}
+	else{
+		document.getElementById('user-message').style.visibility = 'hidden';
+	}
 };
 
 const validatePassword = event => {
 	password = event.target.value;
-	document.getElementById("user-message").innerText = isValidPassword(password);
+	let pass = isValidPassword(password);
+	if(pass){
+		document.getElementById('user-message').style.visibility = 'visible';
+		document.getElementById("user-message").innerText = pass;
+	}
+	if(!pass){
+		document.getElementById('user-message').style.visibility = 'hidden';
+	}
 };
 
 document.querySelector("input[name='username']").addEventListener('keyup', validateUsername);
@@ -61,9 +75,9 @@ const onFormSubmitted = event => {
     .then(response=>response.json())
     .then(response => {
         if (response.success) {
-			console.log("USPEH")
             location.replace("../index.html");
         } else {
+			document.getElementById('user-message').style.visibility = 'visible';
             document.getElementById('user-message').innerText = response.message;
         }
     });

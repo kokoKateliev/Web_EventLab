@@ -13,82 +13,85 @@
     </head>
     <body>
         <nav>
-            <!-- logo -->
-            <!-- <img src="./images/home-icon-transparent-free-png.webp" alt="logo"/> -->
-            
-            <h3>Лаборатория за събития</h3>
+            <div class="left-group">
+                <img src="../../files/logo.png" alt="logo" class="logo"/>
+
+                <h3>Лаборатория за събития</h3>
+            </div>
             <ul>
-                <li>Събития</li>
-                <li>Създаване на събитие</li>
-                <li>Моите събития</li>
-                <li>Профил</li>
-                <li><a href="../login/index.html">Вход</a></li>
-                <li>Изход</li>
+                <li><a href='../index.html'>Начало</li>
+                <li id="register"><a href="../login/login.html">Вход</a></li>
             </ul>
         </nav>
 
         <main>
-            <div id="container">
-                <form id="register-form">
-                    <h2 id="register-heading">Регистрирация</h2>
-
+            <form id="register-form">
+                <h2 id="register-heading">Регистрирация</h2>
+                <div>
                     <label for="email" class="required">E-mail:</label>
-                    <input id="email" type="text" name="email" placeholder="E-mail" required>
-                    <p id="errEmail" class="errorMsg"></p>
-                    
+                    <input class='inputs' id="email" type="text" name="email" placeholder="E-mail" required>
+                </div>
+
+                <p id="errEmail" class="user-message">a</p>
+
+                <div>
                     <label for="username" class="required">Потребителско име:</label>
-                    <input id="username" type="text" name="username" placeholder="Потребителско име" required>
-                    <p id="errUsername" class="errorMsg"></p>
-                    
+                    <input class='inputs' id="username" type="text" name="username" placeholder="Потребителско име" required>
+                </div>
+                <p id="errUsername" class="user-message">a</p>
+                
+                <div>
                     <label for="password" class="required">Парола:</label>
-                    <input id="password" type="password" name="password" placeholder="Парола" required>
-                    <p id="errPassword" class="errorMsg"></p>
-                    
+                    <input class='inputs' id="password" type="password" name="password" placeholder="Парола" required>
+                </div>
+                <p id="errPassword" class="user-message">a</p>
+                
+                <div>
                     <label for="firstname" class="required">Име:</label>
-                    <input id="firstname" type="text" name="firstname" placeholder="Име" required>
-                    <p id="errFirstname" class="errorMsg"></p>
-                    
+                    <input class='inputs' id="firstname" type="text" name="firstname" placeholder="Име" required>
+                </div>
+                <p id="errFirstname" class="user-message">a</p>
+                
+                <div>
                     <label for="lastname" class="required">Фамилия:</label>
-                    <input id="lastname" type="text" name="lastname" placeholder="Фамилия" required>
-                    <p id="errLastname" class="errorMsg"></p>
-                    
+                    <input class='inputs' id="lastname" type="text" name="lastname" placeholder="Фамилия" required>
+                </div>
+                <p id="errLastname" class="user-message">a</p>
+                
+                <div>
                     <label for="dateofbirth" class="required" >Рожденна дата:</label>
-                    <input id="dateofbirth" type="date" name="dateofbirth" required>
+                    <input class='inputs' id="dateofbirth" type="date" name="dateofbirth" required>
+                </div>
+                <fieldset id="roles">
+                    <legend class="required">Роли:</legend>
 
-                    <fieldset id="roles">
-                        <legend class="required">Роли:</legend>
+                    <input type="radio" id="student" name="role" value="1">
+                    <label for="student">Студент</label>
+                    
+                    <input type="radio" id="teacher" name="role" value="2">
+                    <label for="teacher">Преподавател</label>
+                    
+                </fieldset>
 
-                        <input type="radio" id="student" name="role" value="1">
-                        <label for="student">Студент</label><br>
-                        
-                        <input type="radio" id="teacher" name="role" value="2">
-                        <label for="teacher">Преподавател</label>
-                        
-                    </fieldset>
-
+                <div class="unis">
                     <label for="university">Изберете университет:</label>
-                    <select id="university" name="university" value="--" required>
+                    <select class='inputs' id="university" name="university" value="--" required>
                         <option value="" disabled selected>-----</option>
                         
                     </select>
-                    
-                    <div id="faculties" class="faculties-options">
-                        <label for="faculty">Изберете факултет:</label>
-                        <select id="faculty" name="faculty">
-                        </select>
-                    </div>
-                    
-                    
-                    <p id="information" class="required">Задължителни полета</p>
-                    
-                    <button type="submit">Регистрирай се</button>
-                    <p id="user-message"></p>
-
-                    <p id="login-message">Вече сте член?  <a href="../login/login.html">Влезте в профила си</a></p>
-
-                </form>
                 </div>
-            </div>
+                <div id="faculties" class="faculties-options">
+                    <label for="faculty">Изберете факултет:</label>
+                    <select class='inputs' id="faculty" name="faculty">
+                    </select>
+                </div>
+                                
+                <button class="buttons" type="submit">Регистрирай се</button>
+                <p id="user-message"></p>
+
+                <p id="login-message">Вече сте член?  <a class="link" href="../login/login.html">Влезте в профила си</a></p>
+
+            </form>
         </main>
         <footer>
             
