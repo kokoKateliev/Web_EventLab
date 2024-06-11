@@ -462,15 +462,29 @@ function musicFormListen() {
 
     const onFormSubmitted = event => {
         event.preventDefault();
-
-        const formData = new FormData(event.target);
-
-        formData.append('eventId', eventID)
+        const formElement = event.target;
         
+        const fileField = document.getElementById('musicInput');
+        let formData = new FormData();
+
+        const formEl = {
+            name: formElement.querySelector("textarea[name='textInput']").value,
+            musicURL: fileField.files[0].name,
+            eventId: eventID
+        };
+
+        if (fileField.files.length > 0) {
+            formData.append("musicURL", fileField.files[0])
+        }
+
+        const text = document.getElementById('textInput').value;
+        formData.append("name", text);
+        formData.append('eventId', eventID)
+
         if (validate()) {		
             fetch('../../../backend/api/upload_music.php', {
                 method: 'POST',
-                body: JSON.stringify(formData),
+                body: formData,
             })
             .then(response=>response.json())
             .then(response => {
@@ -481,10 +495,9 @@ function musicFormListen() {
                 }
             });	
 
-
             fetch('../../../backend/api/save_Music_DB.php', {
                 method: 'POST',
-                body: JSON.stringify(formData),
+                body: JSON.stringify(formEl),
             })
             .then(response=>response.json())
             .then(response => {
@@ -496,7 +509,7 @@ function musicFormListen() {
                     section.appendChild(successMessage);
                     setTimeout(() => {
                         successMessage.style.display = 'none';
-                        window.location.replace('event.html');
+                        window.location.replace('event.html?id=' + eventID);
                     }, 2000);
                 } else {
                     document.getElementById('errors').innerText = "Грешка: " + response.message;
