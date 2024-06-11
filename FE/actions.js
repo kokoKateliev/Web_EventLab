@@ -1,5 +1,5 @@
 const logoff = () => {
-    fetch('../backend/api/logout.php', {
+    fetch('../../backend/api/logout.php', {
         method: 'POST',
         body: JSON.stringify(),
     })
@@ -8,7 +8,7 @@ const logoff = () => {
         if (response.success) {
             location.replace("../index.html");
         } else {
-            document.getElementById('user-message').innerText = response.message;
+            // document.getElementById('user-message').innerText = response.message;
         }
     });
 }
