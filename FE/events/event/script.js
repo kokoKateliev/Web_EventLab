@@ -683,12 +683,21 @@ function cardsFormListen() {
     const onFormSubmitted = event => {
         event.preventDefault();
 
-        const formData = new FormData(event.target);
+        const formData = new FormData();
+        const fileField = document.getElementById('fileInput');
+        if (fileField.files.length > 0) {
+            formData.append("photo", fileField.files[0])
+
+        }
+        
+        const text = document.getElementById('textInput').value;
+        formData.append("name", text)
+
 
         formData.append('eventId', eventID)
         
         if (validate()) {		
-            fetch('../../backend/api/Card.php', {
+            fetch('../../../backend/api/upload_image.php', {
                 method: 'POST',
                 body: JSON.stringify(formData),
             })
