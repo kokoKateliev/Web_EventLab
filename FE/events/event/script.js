@@ -442,7 +442,7 @@ function musicFormListen() {
         document.querySelector("p[id='errors']").innerText = isValidText(text);
     };
 
-    document.querySelector("input[name='textInput']").addEventListener('keyup', validateText);
+    document.querySelector("textarea[name='textInput']").addEventListener('keyup', validateText);
 
     const validate = () => {
         
@@ -615,7 +615,7 @@ function showMusic() {
     sectionForm.id = 'formMusic-menu';
     menu.appendChild(sectionForm);  
 
-    personalizedData.musics.forEach(music => {
+    personalizedData.music.forEach(music => {
         const section = document.createElement('section');
         section.id = music.id;
 
