@@ -15,17 +15,25 @@ if (!is_dir($filesDir)) {
     mkdir($filesDir, 0777, true);
 }
 
-$uploaded_file = $filesDir . basename($_FILES['audio']['name']);
+if (isset($_FILES['musicURL']) && isset($_FILES['musicURL']['tmp_name'])) {
+    $uploaded_file = $filesDir . basename($_FILES['musicURL']['name']);
 
-if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploaded_file)) {
-    echo json_encode([
-        'success' => true,
-        'message' => "Успешно качване на аудио файл!",
-    ]);
-} else {
+    if (move_uploaded_file($_FILES['musicURL']['tmp_name'], $uploaded_file)) {
+        echo json_encode([
+            'success' => true,
+            'message' => "Успешно качване на аудио файл!",
+        ]);
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => "Неуспешно качване на аудио файл!",
+        ]);
+    }
+}
+else {
     echo json_encode([
         'success' => false,
-        'message' => "Неуспешно качване на аудио файл!",
+        'message' => "Файлът не е предоставен или е невалиден!",
     ]);
 }
 ?>
