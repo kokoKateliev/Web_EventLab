@@ -702,7 +702,7 @@ function cardsFormListen() {
 
         const formEl = {
             name: formElement.querySelector("textarea[name='textInput']").value,
-            photo: fileField.file[0].name,
+            photo: fileField.files[0].name,
             eventId: eventID
         };
 
@@ -732,7 +732,7 @@ function cardsFormListen() {
 
             fetch('../../../backend/api/save_Card_DB.php', {
                 method: 'POST',
-                body: formEl,
+                body: JSON.stringify(formEl),
             })
             .then(response=>response.json())
             .then(response => {
