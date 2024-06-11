@@ -462,17 +462,17 @@ function musicFormListen() {
 
     const onFormSubmitted = event => {
         event.preventDefault();
+        const fileField = document.getElementById('musicInput');
+        
         const formElement = event.target;
         
-        const fileField = document.getElementById('musicInput');
-        let formData = new FormData();
-
         const formEl = {
             name: formElement.querySelector("textarea[name='textInput']").value,
             musicURL: fileField.files[0].name,
             eventId: eventID
         };
-
+            
+        let formData = new FormData();
         if (fileField.files.length > 0) {
             formData.append("musicURL", fileField.files[0])
         }
@@ -621,7 +621,7 @@ function showMusic() {
 
         const audio = document.createElement('audio');
 
-        audio.src = music.musicUrl;
+        audio.src = '../../../files/upload_audio/' + music.musicUrl;
 
         audio.controls = true;
         audio.autoplay = false;
