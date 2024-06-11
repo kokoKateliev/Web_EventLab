@@ -73,3 +73,12 @@ body {
 .logo {
     width: 15%;
 }
+
+
+#no-user{
+    /* display: none; */
+}
+
+#user{
+    display: none;
+}
