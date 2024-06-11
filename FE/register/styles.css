@@ -1,3 +1,9 @@
+body{
+    background-image: url('../../files/bg.png');
+    background-size: cover;
+
+}
+
 .faculties-options {
     visibility: hidden;
     margin-bottom: 4%;
