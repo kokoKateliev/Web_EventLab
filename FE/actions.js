@@ -20,12 +20,22 @@ const isLogged = () => {
     .then(response=>response.json())
     .then(response => {
         if (response.success) {
-            let button = document.getElementById('user');
-            let buttonL = document.getElementById('logout');
-            button.style.display = 'block';
-            buttonL.style.display = 'block';
-            let buttons = document.getElementById('no-user');
-            buttons.style.display = 'none';
+            if(response.isLogged){
+                let button = document.getElementById('user');
+                let buttonL = document.getElementById('logout');
+                button.style.display = 'block';
+                buttonL.style.display = 'block';
+                let buttons = document.getElementById('no-user');
+                buttons.style.display = 'none';
+            }   
+            else {
+                let button = document.getElementById('user');
+                let buttonL = document.getElementById('logout');
+                button.style.display = 'none';
+                buttonL.style.display = 'none';
+                let buttons = document.getElementById('no-user');
+                buttons.style.display = 'block';
+            }
         } else {
             // document.getElementById('user-message').innerText = response.message;
         }
