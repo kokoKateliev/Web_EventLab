@@ -744,7 +744,7 @@ function cardsFormListen() {
                     section.appendChild(successMessage);
                     setTimeout(() => {
                         successMessage.style.display = 'none';
-                        window.location.replace('event.html');
+                        window.location.replace('event.html?id=' + eventID);
                     }, 2000);
                 } else {
                     document.getElementById('errors').innerText = "Грешка: " + response.message;
