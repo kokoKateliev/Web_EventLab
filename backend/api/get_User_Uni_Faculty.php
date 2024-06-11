@@ -4,7 +4,6 @@ session_start();
 
 require_once "../db/DB.php";
 
-
 function getUserUniversityAndFaculty($connection) {
     $username = $_SESSION['username'];
 
@@ -25,19 +24,6 @@ function getUserUniversityAndFaculty($connection) {
     $query = $connection->prepare($sqlMyUniFac);
     $query->execute([$username]);
 
-    // $infoMyUniFac = [];
-    // while($row = $query->fetch(PDO::FETCH_ASSOC)){ 
-    //     $infoMyUniFac[] = [
-    //         'myUniversity' => [
-    //             'id' => $row['university_id'], 
-    //             'name' => $row['university_name']
-    //         ],
-    //         'myFaculty' => [
-    //             'id' => $row['faculty_id'], 
-    //             'name' => $row['faculty_name']
-    //         ]
-    //     ];
-    // } 
     $infoMyUniFac = [];
     $myUniversity = null;
     $myFaculty = null;
@@ -73,7 +59,6 @@ function getUserUniversityAndFaculty($connection) {
     while($row1 = $queryAllUniFac->fetch(PDO::FETCH_ASSOC)){ 
         $university_id = $row1['university_id'];
     
-        // If the university is not already in the array, add it
         if (!isset($universities[$university_id])) {
             $universities[$university_id] = [
                 'id' => $university_id,
@@ -82,8 +67,7 @@ function getUserUniversityAndFaculty($connection) {
             ];
         }
     
-        // Add the faculty to the university's faculties array
-        if ($row1['faculty_id']) { // Ensure faculty_id is not null
+        if ($row1['faculty_id']) { 
             $universities[$university_id]['faculties'][] = [
                 'id' => $row1['faculty_id'],
                 'name' => $row1['faculty_name']
@@ -91,17 +75,12 @@ function getUserUniversityAndFaculty($connection) {
         }
     } 
 
-    $universities = array_values($universities); //reindex
+    $universities = array_values($universities); 
 
-
-    // $information = [
-    //     'universities' => $universities,
-    //     $infoMyUniFac
-    // ];
     $information = [
-        'universities' => $universities, // Reindexed array of all universities and their faculties
-        'myUniversity' => $myUniversity, // User's university
-        'myFaculty' => $myFaculty // User's faculty
+        'universities' => $universities, 
+        'myUniversity' => $myUniversity, 
+        'myFaculty' => $myFaculty 
     ];
     return $information;
 }
