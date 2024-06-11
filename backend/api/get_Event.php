@@ -66,18 +66,18 @@ try{
 
 $information = getEvent($connetction, $FacultyID);
 
-if(!$information){
-    echo json_encode([
-        'success' => false,
-        'message' => "Няма намерени данни за събития за избрания факултет.",
-        'events' => $information,
-    ]);
-} else {
+// if(!$information){
+//     echo json_encode([
+//         'success' => false,
+//         'message' => "Няма намерени данни за събития за избрания факултет.",
+//         'events' => $information,
+//     ]);
+// } else {
     echo json_encode([
     'success' => true,
     'message' => "Намерени са данни за събития към този факултет.",
     'events' => $information,
     ]);
-}
+//}
 
 ?>
