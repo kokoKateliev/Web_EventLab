@@ -622,7 +622,7 @@ function showMusic() {
 
         const audio = document.createElement('audio');
 
-        audio.src = '../../../files/upload_audio/' + music.musicUrl;
+        audio.src = '../../../files/upload_audio/' + music.musicURL;
 
         audio.controls = true;
         audio.autoplay = false;
