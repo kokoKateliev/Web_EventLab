@@ -530,6 +530,7 @@ function addMusic(){
     }
     section.innerHTML = '';
     const form = document.createElement('form');
+    form.enctype= 'multipart/form-data';
             form.setAttribute('id', 'uploadMusicForm');
 
             const fileLabel = document.createElement('label');
