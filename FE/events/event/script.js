@@ -692,14 +692,12 @@ function cardsFormListen() {
         
         const text = document.getElementById('textInput').value;
         formData.append("name", text)
-
-
         formData.append('eventId', eventID)
         
         if (validate()) {		
             fetch('../../../backend/api/upload_image.php', {
                 method: 'POST',
-                body: JSON.stringify(formData),
+                body: formData,
             })
             .then(response=>response.json())
             .then(response => {
