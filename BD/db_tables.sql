@@ -48,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Users` (
   `FacultyID` INT,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
   INDEX `fk_users_roles1_idx` (`RoleID` ASC) ,
-  -- INDEX `fk_users_faculties1_idx` (`FacultyID` ASC) ,
   INDEX `fk_users_universities1_idx` (`UniversityID` ASC) ,
   CONSTRAINT `fk_users_roles1`
     FOREIGN KEY (`RoleID`)
@@ -59,12 +58,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Users` (
     FOREIGN KEY (`UniversityID`)
     REFERENCES `web_eventlab_db`.`Universities` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION --,
-  -- CONSTRAINT `fk_users_faculties1`
-  --     FOREIGN KEY (`FacultyID`)
-  --     REFERENCES `web_eventlab_db`.`Faculties` (`id`)
-  --     ON DELETE NO ACTION
-  --     ON UPDATE NO ACTION
+    ON UPDATE NO ACTION
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Events` (

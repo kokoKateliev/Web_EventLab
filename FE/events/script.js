@@ -93,7 +93,7 @@ function loadEvents() {
 
 function loadEventsFromFilter() {
 
-    if(selectedFaculty === null || selectedUni === null) {
+    if(selectedFaculty === null) {
         document.getElementById('msg').innerText = 'Моля изберете университет и факултет';
         return;
     }
@@ -116,6 +116,7 @@ function loadEventsFromFilter() {
 function loadFilterUnviersities() {
     if(universities !== null){
         let select = document.getElementById('universities');
+        select.innerHTML = '';
         universities.forEach((university) => {
             const option = document.createElement('option');
             option.value = university.id;
@@ -132,7 +133,8 @@ function loadFilterUnviersities() {
 
 function loadFilterFaculties () {
     const select = document.getElementById('faculty');
-    if(myFaculty === null){
+    select.innerHTML = '';
+    if(myFaculty.id === null){
         const option = document.createElement('option');
         option.value = "";
         option.textContent = "-----";
@@ -181,4 +183,37 @@ fetch('../../backend/api/get_User_Uni_Faculty.php', {
     }
 });
 
+
+
+const loadFilter = (event) => {
+    selectedUni = event.target.value;
+    const selectedChoise = event.target.value;
+    const select = document.getElementById('faculty');
+    select.innerHTML = '';
+    if(myFaculty.id === null){
+        const option = document.createElement('option');
+        option.value = "";
+        option.textContent = "-----";
+        option.selected = true;
+        option.disabled = true;
+        select.appendChild(option);
+    }
+
+    const faculties = universities.find(university => university.id === selectedChoise).faculties;
+    faculties.forEach((faculty) => {
+        const option = document.createElement('option');
+        option.value = faculty.id;
+        option.textContent = faculty.name;
+        select.appendChild(option);
+    });
+}
+
+
+const filterOnFaculties = (event) => {
+    selectedFaculty = event.target.value;
+    loadEventsFromFilter();
+}
+
+document.querySelector("select[name='universities']").addEventListener('change', loadFilter);
+document.querySelector("select[name='faculty']").addEventListener('change', filterOnFaculties);
 
