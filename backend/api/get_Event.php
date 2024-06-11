@@ -2,8 +2,7 @@
 
 require_once "../db/DB.php";
 require_once "../models/Event.php";
-// session_start();
-// $email=$_SESSION['email']
+
 function getEvent($connetction, $FacultyID) {
     $sql = "SELECT 
             e.id,
@@ -31,15 +30,15 @@ function getEvent($connetction, $FacultyID) {
 
         
     $query = $connetction->prepare($sql);
-    $query->execute([$FacultyID]); //'facultyId' => 
+    $query->execute([$FacultyID]); 
 
     while($row = $query->fetch(PDO::FETCH_ASSOC)){
         $information[] = array(
             'id' => $row['id'],
-            'eventName' => $row['EventName'],
-            'eventDateSt' => $row['EventDateSt'],
+            'title' => $row['EventName'],
+            'date' => $row['EventDateSt'],
             'location' => $row['Location'],
-            'isPersonalized' => $row['isPersonalized'], //$row['isPersonalized'] ? $row['celebrator_firstname'] . ' ' . $row['celebrator_lastname'] : null,
+            'isPersonalized' => $row['isPersonalized'], 
             'description' => $row['description'],
             'creator' => $row['creator'],
             'isAnonymous' => $row['isAnonymous']
