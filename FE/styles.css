@@ -1,6 +1,7 @@
 body{
     background-image: url('../files/bg1.png');
     background-size: cover;
+    
 }
 
 main{
@@ -81,7 +82,7 @@ margin-bottom: 5%;
     color: white;
 }
 
-.event:first-child{
+.event{
     background-color: #27272E;
     border-radius: 20px;
 }
