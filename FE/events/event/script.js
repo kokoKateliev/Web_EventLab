@@ -929,7 +929,7 @@ function formatDate(date) {
 }
 
 function joinEvent() {
-    fetch('../../backend/api/join-event.php', {
+    fetch('../../../backend/api/save_User_Event.php', {
         method: 'POST',
         body: JSON.stringify({id: eventID}),
     })
