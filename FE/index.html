@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventLab</title>
 
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="../global.css">
     <script src="actions.js" defer></script>
 
     </head>
     <body>
         <nav>
             <!-- logo -->
-            <img src="./images/home-icon-transparent-free-png.webp" alt="logo"/>
+            <!-- <img src="./images/home-icon-transparent-free-png.webp" alt="logo"/> -->
             
             <h3>Лаборатория за събития</h3>
             <ul>
@@ -26,7 +25,7 @@
                     <li><a href="./login/login.html">Вход</a></li>
                     <li><a href="./register/register.html">Регистрация</a></li>
                 </div>
-                <li>Изход</li>
+                <li id="logout"><button onclick="logoff()">Изход</button></li>
             </ul>
         </nav>
 

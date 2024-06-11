@@ -82,3 +82,7 @@ body {
 #user{
     display: none;
 }
+
+#logout {
+    display: none;
+}
