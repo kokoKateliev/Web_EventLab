@@ -128,8 +128,8 @@ function presentsFormListen() {
             formData.endDate
         ];
         
-        if (validate(fields)) {		
-            fetch('../../backend/api/present.php', {
+        if (validate(fields)) {
+            fetch('../../../backend/api/save_Present_DB.php', {
                 method: 'POST',
                 body: JSON.stringify(formData),
             })
@@ -468,7 +468,21 @@ function musicFormListen() {
         formData.append('eventId', eventID)
         
         if (validate()) {		
-            fetch('../../backend/api/present.php', {
+            fetch('../../../backend/api/upload_music.php', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+            })
+            .then(response=>response.json())
+            .then(response => {
+                if (response.success) {
+                    //
+                } else {
+                    document.getElementById('errors').innerText = "Грешка: " + response.message;
+                }
+            });	
+
+
+            fetch('../../../backend/api/save_Music_DB.php', {
                 method: 'POST',
                 body: JSON.stringify(formData),
             })
@@ -482,7 +496,7 @@ function musicFormListen() {
                     section.appendChild(successMessage);
                     setTimeout(() => {
                         successMessage.style.display = 'none';
-                        showMusic();
+                        window.location.replace('event.html');
                     }, 2000);
                 } else {
                     document.getElementById('errors').innerText = "Грешка: " + response.message;
@@ -543,7 +557,7 @@ function addMusic(){
 }
 
 function removeMusic(musicId) {
-    fetch('../../backend/api/present.php', {
+    fetch('../../../backend/api/present.php', {
         method: 'POST',
         body: JSON.stringify({id: musicId}),
     })
@@ -557,7 +571,7 @@ function removeMusic(musicId) {
 
             setTimeout(() => {
                 section.innerHTML= '';
-                showMusic();
+                window.location.replace('main.html');
             }, 2000);
         } else {
             document.getElementById('errors').innerText = "Грешка: " + response.message;
@@ -702,6 +716,19 @@ function cardsFormListen() {
             .then(response=>response.json())
             .then(response => {
                 if (response.success) {
+                    //
+                } else {
+                    document.getElementById('errors').innerText = "Грешка: " + response.message;
+                }
+            });	
+
+            fetch('../../../backend/api/save_Card_DB.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response=>response.json())
+            .then(response => {
+                if (response.success) {
                     const section = document.getElementById('formCard-menu');
                     section.innerHTML = '';
                     const successMessage = document.createElement('p');
@@ -709,7 +736,7 @@ function cardsFormListen() {
                     section.appendChild(successMessage);
                     setTimeout(() => {
                         successMessage.style.display = 'none';
-                        showCards();
+                        window.location.replace('event.html');
                     }, 2000);
                 } else {
                     document.getElementById('errors').innerText = "Грешка: " + response.message;

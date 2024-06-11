@@ -38,6 +38,12 @@ function loadEvents() {
         section.innerHTML = '';
     }
 
+    if(!events.length){
+        let h2 = document.createElement('h2');
+        h2.textContent = 'Няма събития в момента';
+        section.appendChild(h2);
+        return;
+    }
     //id, title, date, location, isPersonalized(vurni mi imeto ili null), description
     events.forEach(event => {
         const mainDiv = document.createElement('div');
