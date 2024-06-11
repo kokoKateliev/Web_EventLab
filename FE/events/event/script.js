@@ -694,29 +694,50 @@ function cardsFormListen() {
         return true;
     }
 
-    const onFormSubmitted = async event => {
+    const onFormSubmitted = event => {
         event.preventDefault();
-
-        let form = document.getElementById('uploadForm');
-        const submitter = document.querySelector("button[value=submited]");
-        let formData = new FormData(form,submitter);
         const fileField = document.getElementById('fileInput');
+
+        const formElement = event.target;
+
+        const formEl = {
+            name: formElement.querySelector("input[name='textInput']").value,
+            photo: fileField.file[0].name,
+            eventId: eventID
+        };
+
+        let formData = new FormData();
         if (fileField.files.length > 0) {
             formData.append("photo", fileField.files[0])
 
         }
         
-        formData.append('eventId', eventID)
+        const text = document.getElementById('textInput').value;
+        formData.append("name", text);
+        formData.append('eventId', eventID);
         
         if (validate()) {		
-
             fetch('../../../backend/api/upload_image.php', {
                 method: 'POST',
-                body: formData
+                body: formData,
             })
-            .then(response => response.json())
+            .then(response=>response.json())
             .then(response => {
-                if (saveResult.success) {
+                if (response.success) {
+                    //
+                } else {
+                    document.getElementById('errors').innerText = "Грешка: " + response.message;
+                }
+            });	
+
+            fetch('../../../backend/api/save_Card_DB.php', {
+                method: 'POST',
+                body: formEl,
+            })
+            .then(response=>response.json())
+            .then(response => {
+                if (response.success) {
+                    const section = document.getElementById('formCard-menu');
                     section.innerHTML = '';
                     const successMessage = document.createElement('p');
                     successMessage.textContent = 'Успeшно добавена картичка!';
@@ -726,46 +747,11 @@ function cardsFormListen() {
                         window.location.replace('event.html');
                     }, 2000);
                 } else {
-                    document.getElementById('errors').innerText = "Грешка: " + saveResult.message;
+                    document.getElementById('errors').innerText = "Грешка: " + response.message;
                 }
-            }
-            )
+            });	
         }
-
-
-            // try {
-            //     const upload = await fetch('../../../backend/api/upload_image.php', {
-            //         method: 'POST',
-            //         body: formData,
-            //     });
-
-            //     const uploadResult = await upload.json();
-            //     if (!uploadResult.success) {
-            //         document.getElementById('errors').innerText = "Грешка: " + uploadResult.message;
-            //         return;
-            //     }
-
-            //     const save = await fetch('../../../backend/api/save_Card_DB.php', {
-            //         method: 'POST',
-            //         body: formData,
-            //     })
-            //     const saveResult = await save.json();
-            //     if (saveResult.success) {
-            //         section.innerHTML = '';
-            //         const successMessage = document.createElement('p');
-            //         successMessage.textContent = 'Успeшно добавена картичка!';
-            //         section.appendChild(successMessage);
-            //         setTimeout(() => {
-            //             successMessage.style.display = 'none';
-            //             window.location.replace('event.html');
-            //         }, 2000);
-            //     } else {
-            //         document.getElementById('errors').innerText = "Грешка: " + saveResult.message;
-            //     }
-            // } catch (error) {
-            //     document.getElementById('errors').innerText = "Грешка: " + error.message;
-            // }
-        }
+    };
 
     if(document.getElementById('uploadForm')){
         document.getElementById('uploadForm').addEventListener('submit', onFormSubmitted);
@@ -803,7 +789,6 @@ function addCard(){
         
         const submitButton = document.createElement('button');
         submitButton.setAttribute('type', 'submit');
-        submitButton.setAttribute('name', 'submited')
         submitButton.textContent = 'Качи';
 
         form.appendChild(fileLabel);
