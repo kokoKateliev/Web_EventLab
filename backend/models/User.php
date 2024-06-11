@@ -128,14 +128,19 @@ class User {
 		return strlen($email) >= 2 && strlen($email) <= 256 && preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $email);
 	}
 
-    // private function validBirthdate($date): bool {
-    //     $format = 'Y-m-d';
-    //     $d = DateTime::createFromFormat($format, $date); 
-    //     $year = (int)$d->format('Y');
-    //     $month = (int)$d->format('m');
-    //     $date = (int)$d->format('d');
-    //     return $d && $d->format($format) === $date && $year <= 2024 && $month <= 6 && $date <= 07; 
-    // }
+    private function validBirthdate($dateTime): bool {
+        $format = 'Y-m-d';
+        $d = DateTime::createFromFormat($format, $dateTime); 
+        //$givenDate = new DateTime($d);
+        // $year = (int)$d->format('Y');
+        // $month = (int)$d->format('m');
+        // $date = (int)$d->format('d');
+        // $givenDate = new DateTime($dateTime);
+        $currentDate = new DateTime();
+        return $d && $d < $currentDate; //$year <= 2024 && $month <= 6 && $date <= 7; 
+
+        //return $d && $d->format($format) === $dateTime && $givenDate < $currentDate; //$year <= 2024 && $month <= 6 && $date <= 7; 
+    }
 
     private function validUniversity($university): bool {
         return $university >= 1 && $university <= 4;
@@ -185,9 +190,9 @@ class User {
             throw new Exception("Попълнете валиден имейл!");
         }
 
-        // if(!$this->validBirthdate($this->birthdate)){
-        //     throw new Exception("Попълнете валидна дата на раждане!");
-        // }
+        if(!$this->validBirthdate($this->birthdate)){
+            throw new Exception("Попълнете валидна дата на раждане!");
+        }
 
         if(!$this->validUniversity($this->university)){
             throw new Exception("Попълнете валиден университет!");
