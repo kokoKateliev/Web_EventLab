@@ -5,12 +5,16 @@ session_start();
 require_once "../db/DB.php";
 
 function getIsLoggedUser($connection) {
-    $username = $_SESSION['username'];
+    if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+    } else {
+        $username = null; 
+    }
 
-    if(empty($username)){
+    if($username == null) {
         return false;
     }
-  
+
     return true;
 }
 
