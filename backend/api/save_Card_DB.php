@@ -22,7 +22,7 @@ function saveCard($connection, $eventId, $name, $photo) {
         $loggedUserID = $row['id'];
     } 
 
-    $card = new Card(null, $loggedUserID, $name, $photo, $eventId)
+    $card = new Card(null, $loggedUserID, $name, $photo, $eventId);
 }
 
 $phpInput = json_decode(file_get_contents('php://input'), true);
