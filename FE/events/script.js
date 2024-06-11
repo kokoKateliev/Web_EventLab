@@ -48,6 +48,7 @@ function loadEvents() {
     events.forEach(event => {
         const mainDiv = document.createElement('div');
 
+        mainDiv.className = 'event'; 
         const eventBlockDiv = document.createElement('div');
         eventBlockDiv.id = event.id;
         eventBlockDiv.className = "event-block";
@@ -61,6 +62,7 @@ function loadEvents() {
         eventBlockDiv.appendChild(dateTimeP); 
 
         const button = document.createElement('button');
+        button.className = 'buttons';
         button.textContent = "Още за събитието";
         button.onclick = function() {
             navigateToEvent(event.id); 
