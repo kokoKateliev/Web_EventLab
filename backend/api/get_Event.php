@@ -32,7 +32,7 @@ function getEvent($connetction, $FacultyID) {
     $query = $connetction->prepare($sql);
     $query->execute([$FacultyID]); 
 
-    $information = null;
+    $information = [];
     while($row = $query->fetch(PDO::FETCH_ASSOC)){
         $information[] = array(
             'id' => $row['id'],
