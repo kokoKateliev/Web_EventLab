@@ -43,6 +43,52 @@ class Card {
             throw new Exception("Грешка при записването на информацията.");
         }
     }
+
+    public function deleteCardInDB(): void {
+        require_once "../db/DB.php";
+
+        try{
+            $db = new DB();
+            $connection = $db->getConnection();
+        }
+        catch(PDOException $e){
+            echo json_encode([
+                'success' => false,
+                'message' => "Неуспешно свързване с базата данни",
+            ]);
+        }
+  
+        $imgURL = $this->getImgURL($connection, $this->id);
+
+        $deleteStatement = $connection->prepare("DELETE FROM `Cards` WHERE `id` = :cardID");
+
+        $resultDel = $deleteStatement->execute([
+            'id' => $this->id;
+        ]);
+
+        if (!$resultDel) {
+            throw new Exception("Грешка при записването на информацията.");
+        }
+
+        if (file_exists($imgURL)) {
+            if (!unlink($imgURL)) {
+                throw new Exception("Грешка при изтриването на изображението.");
+            }
+        }
+    }
+
+    private function getImgURL($connection, $cardID) {
+        $query = $connection->prepare("SELECT imgURL FROM `Cards` WHERE `id` = :id");
+        $query->execute(['id' => $cardID]);
+    
+        $row = $query->fetch(PDO::FETCH_ASSOC);
+    
+        if ($row === false) {
+            throw new Exception("Грешка при намирането на пътя на изображението.");
+        }
+    
+        return $row['imgURL'];
+    }
 }
 
 ?>
