@@ -69,10 +69,7 @@ try {
 
     try {
         $db = new DB();
-        $connection = $db->getConnection();
-
-        // Start a transaction
-       
+        $connection = $db->getConnection();       
 
         $creatorID = getCreatorID($connection);
         
@@ -119,22 +116,18 @@ try {
         $event_faculty = new Event_Faculty(null, $eventIDNew, (int)$phpInput['facultyId'], (bool)$phpInput['isGlobal']);
         $event_faculty->storeInDB();
 
-        // If all operations succeeded, commit the transaction
         $connection->commit();
 
         echo json_encode(['success' => true]);
     } catch (PDOException $e) {
-        // Rollback the transaction on database error
         $connection->rollBack();
         echo json_encode([
             'success' => false,
             'message' => "Неуспешно свързване с базата данни",
         ]);
     } catch (Exception $e) {
-        // Rollback the transaction on any other exception
         $connection->rollBack();
         echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-        // eventually will delete data
     }
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
