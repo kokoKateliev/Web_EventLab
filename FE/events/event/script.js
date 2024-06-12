@@ -290,6 +290,7 @@ function moneyFormListen() {
                     section.appendChild(successMessage);
                     setTimeout(() => {
                         successMessage.style.display='none';
+                        window.location.replace('event.html?id=' + eventID);
                     }, 2000);
                 } else {
                     document.getElementById('error').innerText = "Грешка: " + response.message;
@@ -603,19 +604,15 @@ function showMusic() {
     menu.innerHTML = '';
     menu.style.display = 'flex';
 
-    const div = document.createElement('div');
-    div.className = 'music-buttons';
     
     const addButton = document.createElement('button');
     addButton.textContent = 'Добави музика';
+    addButton.className = 'buttons medium';
     addButton.onclick = function() {
         addMusic();
     };
 
-    div.appendChild(addButton);
-    
-    menu.appendChild(div);
-    
+    menu.appendChild(addButton);
     
     let sectionForm = document.createElement('section');
     sectionForm.id = 'formMusic-menu';
