@@ -73,6 +73,16 @@ try {
         $connection = $db->getConnection();       
 
         $creatorID = getCreatorID($connection);
+
+        try{
+            $celebratorID = getCelebratorID($connection, $phpInput['celebratorEmail']);
+        }
+        catch(PDOException $e){
+            echo json_encode(['success' => false,
+                              'message' => "Имейлът на празнуващия не е намерен."]);
+            exit();
+        }
+
         
         $event = new Event(null, $phpInput['EventName'], $phpInput['EventDescription'], $phpInput['EventDateSt'], 
                 $phpInput['EventDateEn'], $phpInput['EventTimeSt'], $phpInput['EventTimeEn'], $phpInput['location'], 
@@ -103,7 +113,7 @@ try {
         $eventIDNew = $row2['id'];
 
         if($isPersonalized){
-            $celebratorID = getCelebratorID($connection, $phpInput['celebratorEmail']);
+            //$celebratorID = getCelebratorID($connection, $phpInput['celebratorEmail']);
             $personalized = new Personalized(null, $eventIDNew, (int)$phpInput['isVisible'],  $celebratorID, 0);
             $personalized->storeInDB();
 
