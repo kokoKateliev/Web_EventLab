@@ -7,7 +7,7 @@ class Personalized {
     public $celebratorID;
     public $Amount;
    
-    function __construct($id, $EventID, $isVisible, $celebratorID, $Amount) {
+    function __construct($id = null, $EventID = null, $isVisible = null, $celebratorID = null, $Amount = null) {
         $this->id = $id;
         $this->EventID = $EventID;
         $this->isVisible = $isVisible;
