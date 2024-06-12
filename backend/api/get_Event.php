@@ -1,9 +1,36 @@
 <?php
 
+session_start();
+
 require_once "../db/DB.php";
 require_once "../models/Event.php";
 
-function getEvent($connetction, $FacultyID) {
+function getEvent($connection, $FacultyID) {
+    if (!isset($_SESSION['username'])) {
+        return [
+            'success' => false,
+            'message' => "Потребителят не е влязъл в системата.",
+            'events' => []
+        ];
+    }
+
+    $username = $_SESSION['username'];
+
+    $sqlForID = "SELECT 
+                        u.id
+                    FROM 
+                        Users u
+                    WHERE 
+                        u.username = ?";
+
+    $queryID = $connection->prepare($sqlForID);
+    $queryID->execute([$username]);
+
+    $row1 = $queryID->fetch(PDO::FETCH_ASSOC);
+    $loggedUserID = $row1['id'];
+
+    //echo json_encode(['idLogged' => $loggedUserID]);
+
     $sql = "SELECT DISTINCT
             e.id,
             e.EventName,
@@ -12,38 +39,76 @@ function getEvent($connetction, $FacultyID) {
             e.isAnonymous,
             e.EventDescription AS description,
             IF(e.isPersonalized, CONCAT(u.Firstname, ' ', u.Lastname), e.isPersonalized) AS isPersonalized,
-            CONCAT(c.Firstname, ' ', c.Lastname) AS creator
-    FROM 
-        Events e
-    LEFT JOIN 
-        users_events ue ON e.id = ue.EventID
+            CONCAT(c.Firstname, ' ', c.Lastname) AS creator,
+            p.isVisible,
+            p.celebratorID
+        FROM 
+            Events e
+        LEFT JOIN 
+            users_events ue ON e.id = ue.EventID
         LEFT JOIN
-        personalized p ON p.EventID = e.id
-    LEFT JOIN 
-        Users u ON p.celebratorID = u.id 
-    LEFT JOIN 
-        Users c ON e.id = c.id
-    LEFT JOIN 
-        events_faculties ef ON e.id = ef.EventID
-    WHERE 
-        ef.FacultyID = ?";
+            Personalized p ON p.EventID = e.id
+        LEFT JOIN 
+            Users u ON p.celebratorID = u.id 
+        LEFT JOIN 
+            Users c ON ue.usersID = c.id
+        LEFT JOIN 
+            events_faculties ef ON e.id = ef.EventID
+        WHERE 
+            ef.FacultyID = ?";
 
         
-    $query = $connetction->prepare($sql);
+    $query = $connection->prepare($sql);
     $query->execute([$FacultyID]); 
+
 
     $information = [];
     while($row = $query->fetch(PDO::FETCH_ASSOC)){
-        $information[] = array(
-            'id' => $row['id'],
-            'title' => $row['EventName'],
-            'date' => $row['EventDateSt'],
-            'location' => $row['Location'],
-            'isPersonalized' => $row['isPersonalized'], 
-            'description' => $row['description'],
-            'creator' => $row['creator'],
-            'isAnonymous' => $row['isAnonymous']
-        );
+        if($row['isPersonalized'] === '0'){
+            $information[] = array(
+                'id' => $row['id'],
+                'title' => $row['EventName'],
+                'date' => $row['EventDateSt'],
+                'location' => $row['Location'],
+                'isPersonalized' => $row['isPersonalized'], 
+                'description' => $row['description'],
+                'creator' => $row['creator'],
+                'isAnonymous' => $row['isAnonymous'],
+                'isVisible' => $row['isVisible'],
+                'isCelebrator' => false 
+            );
+        }
+        else {
+            if($row['celebratorID'] === $loggedUserID){
+                $information[] = array(
+                            'id' => $row['id'],
+                            'title' => $row['EventName'],
+                            'date' => $row['EventDateSt'],
+                            'location' => $row['Location'],
+                            'isPersonalized' => $row['isPersonalized'], 
+                            'description' => $row['description'],
+                            'creator' => $row['creator'],
+                            'isAnonymous' => $row['isAnonymous'],
+                            'isVisible' => $row['isVisible'],
+                            'isCelebrator' => true 
+                        );
+            }
+            else{
+                $information[] = array(
+                    'id' => $row['id'],
+                    'title' => $row['EventName'],
+                    'date' => $row['EventDateSt'],
+                    'location' => $row['Location'],
+                    'isPersonalized' => $row['isPersonalized'], 
+                    'description' => $row['description'],
+                    'creator' => $row['creator'],
+                    'isAnonymous' => $row['isAnonymous'],
+                    'isVisible' => $row['isVisible'],
+                    'isCelebrator' => false 
+                );
+            }
+        }
+        
     }
     return $information;
 } 
@@ -54,7 +119,7 @@ $FacultyID = $phpInput['facultyId'];
 
 try{
     $db = new DB();
-    $connetction = $db->getConnection();
+    $connection = $db->getConnection();
 } catch (PDOException $e) {
     echo json_encode([
         'success' => false,
@@ -64,7 +129,7 @@ try{
     exit();
 }
 
-$information = getEvent($connetction, $FacultyID);
+$information = getEvent($connection, $FacultyID);
 
 // if(!$information){
 //     echo json_encode([
