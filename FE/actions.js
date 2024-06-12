@@ -101,13 +101,11 @@ const isLogged = () => {
     .then(response => {
         if (response.success) {
             if(response.isLogged){
-                let button = document.getElementById('user');
                 let buttonL = document.getElementById('logout');
                 let ev = document.getElementById('ev');
                 let crEv = document.getElementById('crEv');
                 ev.style.display = 'flex';
                 crEv.style.display = 'flex';
-                button.style.display = 'flex';
                 buttonL.style.display = 'flex';
                 let login = document.getElementById('login');
                 let register = document.getElementById('register');
