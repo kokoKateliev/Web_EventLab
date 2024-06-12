@@ -122,9 +122,12 @@ aside section {
 }
 
 .smaller {
-    width: 50%;
+    width: 20%;
     font-size: 12px;
     align-self: center;
+    padding: 1%;
+    margin-top: 2%;
+    /* background-color: ; */
 }
 
 .medium{
@@ -195,7 +198,6 @@ aside section {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 350px;
     justify-content: space-evenly;
 }
 
@@ -245,14 +247,26 @@ aside section {
     padding: 5%;
     background-color: rgba(0, 98, 159, 0.29);
     border-radius: 20px;
-}
-
-.comments {
     margin-top: 5%;
 }
 
+.commentss {
+    margin-top: 5%;
+    background-color: rgba(0, 29, 159, 0.861);
+    color: white;
+    padding: 5%;
+    border-radius: 20px;
+}
+
+.commentss h2 {
+    font-size: 35px;    
+}
+
 #commments-menu{
-    width: 89%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 #comment {
@@ -267,6 +281,46 @@ aside section {
 
 #comments-form {
     margin-bottom: 5%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.comment-section {
+    background-color: rgba(255, 255, 255, 0.087);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 80%;
+    padding: 2% 5%;
+    border-radius: 20px;
+}
+
+.group-comment {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: baseline;
+}
+
+.comment-section p {
+
+    padding: 2% 4%;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.155);
+    margin-top: 2%;
+}
+
+.comment-section h5 {
+    margin: 0;
+}
+
+.sect{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sect button {
+    margin: 0
 }

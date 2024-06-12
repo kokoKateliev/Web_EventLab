@@ -45,15 +45,7 @@
 
                     </ul>
                 </section>
-                <section id="comments" class="comments">
-                    <h3>Коментари към събитието</h3>
-                    <section id="commments-menu">
-                        <form id="comments-form">
-                            <label for="comment">Напишете коментар:</label>
-                            <textarea name="comment" type="text" id="comment" rows="5" maxlength="200" placeholder="Въведете коментар"></textarea>
-                            <button id="send-comment" class="buttons smaller">Изпрати</button>
-                        </form>
-                    </section>
+                
                 </section>
             </aside>
             <main>
@@ -64,6 +56,22 @@
                         <button class="buttons small" onclick="showCards()">Картички</button>
                         <button class="buttons small" onclick="showMusic()">Музика</button>
                     </div>
+                    <section id="comments" class="commentss">
+                        <div class="sect">
+                            <h2>Коментари към събитието</h2>
+                            <button onclick="changeVision()" class="buttons smaller" id="bttn-hide">Скриий коментари</button>
+                        </div>
+                        <section id="commments-menu">
+                            <form id="comments-form">
+                                <label for="comment">Напишете коментар:</label>
+                                <textarea name="comment" type="text" id="comment" rows="5" maxlength="200" placeholder="Въведете коментар"></textarea>
+                                <p id="errComment" class="user-message"></p>
+
+                                <button id="send-comment" class="buttons smaller">Изпрати</button>
+                            </form>
+                            <section id='comment-section' class="comment-section">Няма коментари все още.</section>
+                        </section>
+                    </section>
                     <article id="event-menu">
                         
                         <section id="form-menu">

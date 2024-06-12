@@ -147,7 +147,7 @@ function presentsFormListen() {
                 } else {
                     document.getElementById('error').innerText = "Грешка: " + response.message;
                 }
-            });	
+            }).catch(err => console.err('Грешка: '+ err.message));	
         }
     };
 
@@ -295,7 +295,7 @@ function moneyFormListen() {
                 } else {
                     document.getElementById('error').innerText = "Грешка: " + response.message;
                 }
-            });	
+            }).catch(err => console.err('Грешка: '+ err.message));	
         }
     };
 
@@ -499,7 +499,7 @@ function musicFormListen() {
                 } else {
                     document.getElementById('errors').innerText = "Грешка: " + response.message;
                 }
-            });	
+            }).catch(err => console.err('Грешка: '+ err.message));	
 
             fetch('../../../backend/api/save_Music_DB.php', {
                 method: 'POST',
@@ -520,7 +520,7 @@ function musicFormListen() {
                 } else {
                     document.getElementById('errors').innerText = "Грешка: " + response.message;
                 }
-            });	
+            }).catch(err => console.err('Грешка: '+ err.message));	
         }
     };
 
@@ -596,7 +596,7 @@ function removeMusic(musicId) {
         } else {
             document.getElementById('errors').innerText = "Грешка: " + response.message;
         }
-    });	
+    }).catch(err => console.err('Грешка: '+ err.message));	
 }
 
 function showMusic() {
@@ -745,7 +745,7 @@ function cardsFormListen() {
                 } else {
                     document.getElementById('errors').innerText = "Грешка: " + response.message;
                 }
-            });	
+            }).catch(err => console.err('Грешка: '+ err.message));	
 
             fetch('../../../backend/api/save_Card_DB.php', {
                 method: 'POST',
@@ -766,7 +766,7 @@ function cardsFormListen() {
                 } else {
                     document.getElementById('errors').innerText = "Грешка: " + response.message;
                 }
-            });	
+            }).catch(err => console.err('Грешка: '+ err.message));	
         }
     };
 
@@ -845,7 +845,7 @@ function removeCard(cardId) {
         } else {
             document.getElementById('errors').innerText = "Грешка: " + response.message;
         }
-    });	
+    }).catch(err => console.err('Грешка: '+ err.message));	
 }
 
 function showCards() {
@@ -967,7 +967,7 @@ function makeHelper(userId){
             // error
             // document.getElementById('msg').innerText = 'Грешка' + response.message;
         }
-    });
+    }).catch(err => console.err('Грешка: '+ err.message));
 }
 
 function removeHelper(userId){
@@ -982,7 +982,7 @@ function removeHelper(userId){
         } else {
             document.getElementById('joinbutton').style.visibility = 'hidden';
         }
-    });
+    }).catch(err => console.err('Грешка: '+ err.message));
 }
 
 function showParticipants(userParticipants) {
@@ -1129,11 +1129,50 @@ function loadParticipants(){
             li.innerHTML = 'Грешка: Не можгат да се зарадят участниците към събитието';
             document.getElementById('participants-list').appendChild(li);
         }
-    });
+    }).catch(err => console.err('Грешка: '+ err.message));
+}
+
+function formatDate(dateTimeString) {
+    const date = new Date(dateTimeString);
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() returns 0-11
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${day}.${month}.${year} в ${hours}:${minutes}`;
+
 }
 
 function loadComments() {
+    const commentSection = document.getElementById('comment-section');
+    if(eventData.comments.length){
+        commentSection.innerHTML = '';
+    }
+    eventData.comments.reverse();
+    eventData.comments.forEach(comment => {
+        const creatorFullName = document.createElement('h3');
+        const div = document.createElement('div');
+        div.className='group-comment';
+        const date = document.createElement('p');
+        const text = document.createElement('p');
 
+        const commented = document.createElement('h5');
+        commented.textContent="Коментира: ";
+        creatorFullName.textContent = comment.creatorFullName;
+        date.textContent = formatDate(comment.date);
+        text.textContent = comment.text;
+        
+        div.appendChild(creatorFullName);
+        div.appendChild(date);
+        commentSection.appendChild(div);
+        commentSection.appendChild(commented);
+        commentSection.appendChild(text);
+
+    });
+    
+        
 }
 
 function loadEvent() {
@@ -1277,3 +1316,103 @@ const isLogged = () => {
 
 
 isLogged();
+
+
+function validate(errors, fields) {
+	
+	for (const field of fields) {
+		if(field == "") {
+			document.getElementById('user-message').innerText = "Моля, попълнени всички задължителни полета.";
+			return false;
+		}
+	}
+	
+	for (const err of errors) {
+		if (err != "") {
+			document.getElementById('user-message').innerText = "Mоля, въведете валидни данни.";
+			return false;
+		}
+	}
+	
+	document.getElementById('user-message').innerText = "";
+	return true;
+}
+
+function selectedRole(roles) {
+	id = "";
+	for(i = 0; i < roles.length; i++) { 
+        if(roles[i].checked) {
+			id = roles[i].value;
+		}
+    } 
+	return id; 
+}
+
+
+function currentDateTime() {
+    const date = new Date();
+
+    // Extract parts
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() returns 0-11
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    // Format and return
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+const commentForm = event => {
+    event.preventDefault();
+
+    const formElement = event.target;
+	
+    const formData = {
+		date: currentDateTime(),
+		text: formElement.querySelector("textarea[name='comment']").value,
+		eventId: eventID,
+    };
+	
+
+	
+	if(formData.text === "") {
+        document.getElementById('errComment').textContent = "Въведете коментар";
+        return;
+    }
+    else{
+        document.getElementById('errComment').textContent = "";
+    }
+
+    fetch('../../../backend/api/save_Comment_DB.php', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+    })
+    .then(response=>response.json())
+    .then(response => {
+        if (response.success) {
+            window.location.replace('event.html?id=' + eventID)
+        } else {
+            document.getElementById('errComment').innerText = response.message;
+        }
+    }).catch(err => console.err('Грешка: '+ err.message));	
+	
+};
+
+
+let isVisiblee = false;
+function changeVision(){
+    const button = document.getElementById('bttn-hide')
+    const commentmenu = document.getElementById('commments-menu');
+    isVisiblee = !isVisiblee;
+    if(isVisiblee){
+        commentmenu.style.display = 'flex';
+        button.innerHTML = "Скрий коментари";
+    }
+    else{
+        commentmenu.style.display = 'none';
+        button.innerHTML = "Покажи коментари";
+    }
+}
+
+document.getElementById('comments-form').addEventListener('submit', commentForm);
