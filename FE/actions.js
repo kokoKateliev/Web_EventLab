@@ -79,13 +79,11 @@ const logoff = () => {
 }
 
 const hideElements = () => {
-    let button = document.getElementById('user');
     let buttonL = document.getElementById('logout');
     let ev = document.getElementById('ev');
     let crEv = document.getElementById('crEv');
     ev.style.display = 'none';
     crEv.style.display = 'none';
-    button.style.display = 'none';
     buttonL.style.display = 'none';
     let login = document.getElementById('login');
     let register = document.getElementById('register');
