@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Events` (
   `EventTimeSt` TIME NOT NULL,
   `EventTimeEn` TIME NOT NULL,
   `Location` VARCHAR(80),
-  `isAnonymous` Boolean NOT NULL,
-  `isPersonalized` Boolean NOT NULL
+  `isAnonymous` Boolean NOT NULL DEFAULT FALSE,
+  `isPersonalized` Boolean NOT NULL DEFAULT FALSE
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`users_events` (
@@ -118,9 +118,9 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`events_faculties` (
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `EventID` INT NOT NULL,
-    `isVisible` Boolean NOT NULL,
+    `isVisible` Boolean NOT NULL DEFAULT FALSE,
     `celebratorID` INT NOT NULL,
-    `Amount` DECIMAL, 
+    `Amount` DECIMAL DEFAULT 0, 
     INDEX `fk_Personalized_Events1_idx` (`EventID` ASC) ,
     INDEX `fk_user_celebrator1_idx` (`celebratorID` ASC) ,    
     CONSTRAINT `fk_Personalized_Events1`
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Music` (
   `id` INT  NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `senderID` INT NOT NULL,
   `title` VARCHAR(50) NOT NULL,
-  `musicURL` VARCHAR(50) NOT NULL,
+  `musicURL` VARCHAR(256) NOT NULL,
   `EventID` INT NOT NULL, 
   INDEX `fk_Music_Users1_idx` (`senderID` ASC),
   INDEX `fk_Music_Events_Events1_idx` (`EventID` ASC), 
