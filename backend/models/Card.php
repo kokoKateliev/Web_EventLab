@@ -7,7 +7,7 @@ class Card {
     public $imgURL;
     public $EventID;
    
-    function __construct($id, $senderID, $description, $imgURL, $EventID) {
+    function __construct($id = null, $senderID = null, $description = null, $imgURL = null, $EventID = null) {
         $this->id = $id;
         $this->senderID = $senderID;
         $this->description = $description;
@@ -63,15 +63,17 @@ class Card {
         $deleteStatement = $connection->prepare("DELETE FROM `Cards` WHERE `id` = :cardID");
 
         $resultDel = $deleteStatement->execute([
-            'id' => $this->id;
+            'cardID' => $this->id
         ]);
 
         if (!$resultDel) {
             throw new Exception("Грешка при записването на информацията.");
         }
 
-        if (file_exists($imgURL)) {
-            if (!unlink($imgURL)) {
+        $imagePath = realpath(__DIR__ . '/../../files/upload_image/' . $imgURL);
+        
+        if (file_exists($imagePath)) {
+            if (!unlink($imagePath)) {
                 throw new Exception("Грешка при изтриването на изображението.");
             }
         }
