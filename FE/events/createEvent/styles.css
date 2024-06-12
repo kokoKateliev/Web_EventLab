@@ -102,6 +102,10 @@ fieldset{
     font-size: 0.8em;
 }
 
+.final-messagee {
+    visibility: visible;
+}
+
 .dates {
     width: 100%;
     display: flex;
