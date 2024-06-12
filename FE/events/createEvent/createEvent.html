@@ -37,7 +37,7 @@
                 <p id="errEventName" class="errorMsg"></p>
                 
                 <label for="EventDescription" class="required">Описание</label>
-                <textarea class="inputs" id="EventDescription" name="EventDescription" cols="20" rows="4" required> </textarea>
+                <textarea class="inputs" id="EventDescription" name="EventDescription" cols="20" rows="4" placeholder="Описание" required> </textarea>
                 <p id="errEventDescription" class="errorMsg"></p>
 
                 <div class="dates">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <label for="location" class="required">Локация:</label>
-                <input class="inputs" id="location" type="text" name="location" placeholder="Адрес, " required>
+                <input class="inputs" id="location" type="text" name="location" placeholder="Адрес, улица, номер" required>
                 <p id="errLocation" class="errorMsg"></p>                    
 
                 <label for="university">Изберете университет:</label>
@@ -91,7 +91,8 @@
                     <label for="isVisible">Видимо събитие за празнуващия</label>
                 </div>
                 </section>
-                                
+                
+                <p id="user-message" class="user-message"></p>
                 <button class="buttons" type="submit">Създай събитие</button>
                 </div>
             </form>

@@ -8,9 +8,21 @@ function isValidName(field) {
 	if (field.value.length > 50) {
 		return "Полетo \"" + field.placeholder + "\" трябва да съдържа не повече от 50 символа."
 	}
-	if (field.value.match(/^[а-яА-Я]+[а-яА-Я]+$/) == null && field.value.match(/^[a-zA-Z]+[a-zA-Z]+$/) == null) {
-		return "Полетo \"" + field.placeholder + "\" трябва да съдържа само текст на латиница или кирилица.";
+
+	return "";
+}
+
+function isValidDescription(field) {
+	if (field.value == "") {
+		return "Полетo \"" + field.placeholder + "\" е задължително."
 	}
+	if (field.value.length < 1) {
+		return "Полетo \"" + field.placeholder + "\" трябва да съдържа поне 2 символа."
+	}
+	if (field.value.length > 500) {
+		return "Полетo \"" + field.placeholder + "\" трябва да съдържа не повече от 50 символа."
+	}
+	
 	return "";
 }
 
@@ -56,29 +68,30 @@ function isValidPassword(field) {
 	return "";
 }
 
-const validateFirstname = event => {
-	firstname = event.target;
-	document.querySelector("p[id='errFirstname']").innerText = isValidName(firstname);
+const validateTitle = event => {
+	const name = event.target;
+	document.querySelector("p[id='errEventName']").innerText = isValidName(name);
 };
 
-const validateLastname = event => {
-	firstname = event.target;
-	document.querySelector("p[id='errLastname']").innerText = isValidName(lastname);
+const validateLocation = event => {
+	const name = event.target;
+	document.querySelector("p[id='errLocation']").innerText = isValidName(name);
+};
+
+const validateDescr = event => {
+	const desc = event.target;
+	document.querySelector("p[id='errEventDescription']").innerText = isValidName(desc);
 };
 
 const validateEmail = event => {
-	email = event.target.value;
+	const email = event.target.value;
 	document.querySelector("p[id='errEmail']").innerText = isValidEmail(email);
 };
 
-const validateUsername = event => {
-	username = event.target.value;
-	document.querySelector("p[id='errUsername']").innerText = isValidUsername(username);
-};
-
-const validatePassword = event => {
-	password = event.target.value;
-	document.querySelector("p[id='errPassword']").innerText = isValidPassword(password);
+const validateDate = event => {
+	const username = event.target.value;
+	const start = document.querySelector("input[name='EventDateSt']").value;
+	document.querySelector("input[name='EventDateEn']").setAttribute('min', start);
 };
 
 const today = () => {
@@ -91,14 +104,15 @@ const today = () => {
 };
 
 
-// document.querySelector("input[name='firstname']").addEventListener('keyup', validateFirstname);
-// document.querySelector("input[name='lastname']").addEventListener('keyup', validateLastname);
-// document.querySelector("input[name='email']").addEventListener('keyup', validateEmail);
-// document.querySelector("input[name='username']").addEventListener('keyup', validateUsername);
-// document.querySelector("input[name='password']").addEventListener('keyup', validatePassword);
-// document.getElementById('dateofbirth').setAttribute('max', today());
 
-
+document.querySelector("input[name='EventName']").addEventListener('keyup', validateTitle);
+document.querySelector("textarea[name='EventDescription']").addEventListener('keyup', validateDescr);
+document.querySelector("input[name='EventDateSt']").setAttribute('min', today());
+document.querySelector("input[name='EventDateSt']").addEventListener('change', validateDate);
+document.querySelector("input[name='EventDateEn']").setAttribute('min', today());
+document.querySelector("input[name='EventDateEn']").addEventListener('change', validateDate);
+document.querySelector("input[name='location']").addEventListener('keyup', validateLocation);
+document.querySelector("input[name='celebratorEmail']").addEventListener('keyup', validateEmail);
 
 function validate(errors, fields) {
 	
@@ -155,26 +169,23 @@ const onFormSubmitted = event => {
     };
 	
 	const fields = [
-		formData.firstname,
-		formData.lastname,
-		formData.email, 
-		formData.username,
-		formData.password,	
-		formData.role,
-		formData.birthdate,
-		formData.universityId,
-		formData.facultyId
+		formData.EventName,
+		formData.EventDescription,
+		formData.location,
+		formData.EventDateSt,
+		formData.EventDateEn,
+		formData.EventTimeSt,
+		formData.EventTimeEn,
+		formData.location
 	];
 	
-	// const errors = [
-	// 	formElement.querySelector("p[id='errFirstname']").innerText,
-	// 	formElement.querySelector("p[id='errLastname']").innerText,
-	// 	formElement.querySelector("p[id='errUsername']").innerText, 
-	// 	formElement.querySelector("p[id='errEmail']").innerText,
-	// 	formElement.querySelector("p[id='errPassword']").innerText,		
-	// ];
+	const errors = [
+		formElement.querySelector("p[id='errEventName']").innerText,
+		formElement.querySelector("p[id='errEventDescription']").innerText,
+		formElement.querySelector("p[id='errLocation']").innerText 	
+	];
 	
-	// if (validate(errors, fields)) {		
+	if (validate(errors, fields)) {		
 		fetch('../../../backend/api/save_Event_DB.php', {
 			method: 'POST',
 			body: JSON.stringify(formData),
@@ -182,12 +193,15 @@ const onFormSubmitted = event => {
 		.then(response=>response.json())
 		.then(response => {
 			if (response.success) {
-				window.location.replace("../login/login.html");
+				window.location.replace("../event/event.html");
 			} else {
 				document.getElementById('user-message').innerText = response.message;
 			}
-		});	
-	// }
+		})
+		.catch(err => {
+			console.error(err);
+		})
+	}
 };
 console.log(document.getElementById('create-form'));
 document.getElementById('create-form').addEventListener('submit', onFormSubmitted);

@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Events` (
   `EventDateEn` DATE NOT NULL,
   `EventTimeSt` TIME NOT NULL,
   `EventTimeEn` TIME NOT NULL,
-  `Location` VARCHAR(80),
+  `Location` VARCHAR(50),
   `isAnonymous` Boolean NOT NULL DEFAULT FALSE,
   `isPersonalized` Boolean NOT NULL DEFAULT FALSE
 )ENGINE=INNODB;

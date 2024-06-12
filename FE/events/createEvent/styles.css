@@ -39,6 +39,11 @@ form div {
     width: 70%;
 }
 
+.errorMsg{
+    font-size: 12px;
+    color: red;
+}
+
 .inputs{
     width: auto;
     padding: 2%;
