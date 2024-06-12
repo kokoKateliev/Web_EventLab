@@ -68,6 +68,12 @@ class Event {
       return strlen($name) >= 2 && strlen($name) <= 50 && (preg_match('/^[\p{Cyrillic}]+[- \']?[\p{Cyrillic}]+$/u', $field) || preg_match('/^[a-zA-Z]+[- \']?[a-zA-Z]+$/', $name));	
     }
 
+    public function validate(): void {
+        if(!$this->requiredFields($this->eventName, $this->eventDescription, $this->eventDateStart, $this->eventDateEnd, $this->eventTimeStart, $this->eventTimeEnd, $this->location, $this->isAnonymous, $this->isPersonalized )){
+            throw new Exception("Всички полета са задължителни!");
+        }
+    }
+
     // to be added validation
 }
 
