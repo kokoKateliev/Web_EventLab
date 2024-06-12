@@ -52,6 +52,7 @@ function getCelebratorID($connection, $email) {
 
     if ($row === false) {
         throw new Exception("Имейлът на празнуващия не е намерен.");
+        exit();
     }
 
     $userID = $row['id'];
