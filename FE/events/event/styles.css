@@ -156,7 +156,7 @@ aside section {
     
 }
 
-#uploadForm {
+#uploadForm, #formMusic-menu {
     background-color: #27272E;
     display: flex;
     justify-content: space-evenly;
@@ -195,6 +195,9 @@ aside section {
 
 .inputs-wi{
     width: 100%;
+    padding: 5% 4%;
+    margin-bottom: 5%;
+    margin-top: 5%;
 }
 
 .present-templ{
@@ -227,3 +230,4 @@ aside section {
     width: 70%;
     padding: 5% 3%;
 }
+
