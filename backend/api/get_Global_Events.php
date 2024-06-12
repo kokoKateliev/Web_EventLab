@@ -4,7 +4,7 @@ require_once "../db/DB.php";
 require_once "../models/Event.php";
 
 function getIsGlobal($connection) {
-    $sql = "SELECT 
+    $sql = "SELECT DISTINCT
             e.id,
             e.EventName,
             e.EventDateSt,
