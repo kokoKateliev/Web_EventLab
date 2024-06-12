@@ -27,19 +27,6 @@ function getUser($connection) {
     $query = $connetction->prepare($sql);
     $query->execute([]);
 
-    // while($row = $query->fetch(PDO::FETCH_ASSOC)){ 
-    //     $information[] = array(
-    //                     'id' => $row['id'],
-    //                     'username' => $row['username'],
-    //                     'firstname' => $row['Firstname'],
-    //                     'lastname' => $row['Lastname'],
-    //                     'email' => $row['Email'],
-    //                     'rolename' => $row['rolename'],
-    //                     'birthdate' => $row['Birthdate'],
-    //                     'university' => $row['university'],
-    //                     'faculty' => $row['faculty']
-    //     );
-    // }
     $information = $query->fetch(PDO::FETCH_ASSOC);
     
     return $information;

@@ -73,8 +73,6 @@ class Event {
             throw new Exception("Всички полета са задължителни!");
         }
     }
-
-    // to be added validation
 }
 
 ?>

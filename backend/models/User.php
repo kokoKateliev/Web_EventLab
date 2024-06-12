@@ -120,7 +120,6 @@ class User {
         );	
     }
 
-    //regex to be changed
     private function validPassword($password): bool {
         return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[_\-@!])(?=.*[a-zA-Z].*[a-zA-Z])[a-zA-Z0-9_\-@!]{6,256}$/', $password);	}
 
@@ -131,15 +130,8 @@ class User {
     private function validBirthdate($dateTime): bool {
         $format = 'Y-m-d';
         $d = DateTime::createFromFormat($format, $dateTime); 
-        //$givenDate = new DateTime($d);
-        // $year = (int)$d->format('Y');
-        // $month = (int)$d->format('m');
-        // $date = (int)$d->format('d');
-        // $givenDate = new DateTime($dateTime);
         $currentDate = new DateTime();
-        return $d && $d < $currentDate; //$year <= 2024 && $month <= 6 && $date <= 7; 
-
-        //return $d && $d->format($format) === $dateTime && $givenDate < $currentDate; //$year <= 2024 && $month <= 6 && $date <= 7; 
+        return $d && $d < $currentDate; 
     }
 
     private function validUniversity($university): bool {

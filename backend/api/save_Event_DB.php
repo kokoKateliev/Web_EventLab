@@ -113,7 +113,6 @@ try {
         $eventIDNew = $row2['id'];
 
         if($isPersonalized){
-            //$celebratorID = getCelebratorID($connection, $phpInput['celebratorEmail']);
             $personalized = new Personalized(null, $eventIDNew, (int)$phpInput['isVisible'],  $celebratorID, 0);
             $personalized->storeInDB();
 
