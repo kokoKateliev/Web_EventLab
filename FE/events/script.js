@@ -31,6 +31,29 @@ function navigateToEvent(id) {
     window.location.replace("./event/event.html" + params);
 }
 
+function getDate() {
+    const date = new Date();
+
+    // Extract parts
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() returns 0-11
+    const day = String(date.getDate()).padStart(2, '0');
+
+    // Format and return
+    return `${year}-${month}-${day}`;
+}
+
+function formatDate(date) {
+    const date = new Date(date);
+
+    // Extract parts
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() returns 0-11
+    const day = String(date.getDate()).padStart(2, '0');
+
+    // Format and return
+    return `${day}.${month}.${year}`;
+}
 
 function loadEvents() {
     const section = document.getElementById('events');
@@ -46,6 +69,16 @@ function loadEvents() {
     }
     //id, title, date, location, isPersonalized(vurni mi imeto ili null), description
     events.forEach(event => {
+        if(event.isVisible){
+            if(event.isVisible === '0'){
+                if(event.isCelebrator){
+                    if(event.date < getDate()){
+                        return;
+                    }
+                }
+            }
+        }
+
         const mainDiv = document.createElement('div');
 
         mainDiv.className = 'event'; 
