@@ -195,6 +195,9 @@ const onFormSubmitted = event => {
 			if (response.success) {
 				window.location.replace("../events.html");
 			} else {
+				if(response.message == "There is no active transaction"){
+					document.getElementById('user-message').innerText = "Имейлът на празнуващия не е намерен.";
+				}
 				document.getElementById('user-message').innerText = response.message;
 			}
 		})
