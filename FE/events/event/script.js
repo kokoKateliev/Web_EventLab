@@ -267,7 +267,7 @@ function moneyFormListen() {
         
         const formData = {
             eventId: eventID,
-            money: personalizedData.money + parseFloat(formElement.querySelector("input[name='price'").value),
+            money: parseFloat(personalizedData.money) + parseFloat(formElement.querySelector("input[name='price'").value),
         };
         
         const fields = [

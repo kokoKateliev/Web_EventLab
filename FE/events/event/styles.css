@@ -156,7 +156,7 @@ aside section {
     
 }
 
-#uploadForm, #formMusic-menu {
+#uploadForm, #uploadMusicForm {
     background-color: #27272E;
     display: flex;
     justify-content: space-evenly;
