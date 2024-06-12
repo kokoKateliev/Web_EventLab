@@ -25,14 +25,10 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`universities_faculties` (
   INDEX `university_has_faculties1_idx` (`FacultyID` ASC),
   CONSTRAINT `university_has_faculties1`
     FOREIGN KEY (`FacultyID`)
-    REFERENCES `web_eventlab_db`.`Faculties` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `web_eventlab_db`.`Faculties` (`id`),
   CONSTRAINT `university_has_faculties_universities`
     FOREIGN KEY (`UniID`)
     REFERENCES `web_eventlab_db`.`Universities` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Users` (
@@ -51,14 +47,10 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Users` (
   INDEX `fk_users_universities1_idx` (`UniversityID` ASC) ,
   CONSTRAINT `fk_users_roles1`
     FOREIGN KEY (`RoleID`)
-    REFERENCES `web_eventlab_db`.`Roles` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `web_eventlab_db`.`Roles` (`id`),
   CONSTRAINT `fk_users_universities1`
     FOREIGN KEY (`UniversityID`)
     REFERENCES `web_eventlab_db`.`Universities` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Events` (
@@ -85,14 +77,10 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`users_events` (
   INDEX `fk_users_has_events_users1_idx` (`usersID` ASC) ,
   CONSTRAINT `fk_users_has_events_users1`
     FOREIGN KEY (`usersID`)
-    REFERENCES `web_eventlab_db`.`Users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `web_eventlab_db`.`Users` (`id`),
   CONSTRAINT `fk_users_has_events_events1`
     FOREIGN KEY (`EventID`)
     REFERENCES `web_eventlab_db`.`Events` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`events_faculties` (
@@ -105,14 +93,10 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`events_faculties` (
   INDEX `faculties_has_events1_events_idx` (`EventID` ASC) ,
   CONSTRAINT `faculties_has_events1`
     FOREIGN KEY (`FacultyID`)
-    REFERENCES `web_eventlab_db`.`Faculties` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `web_eventlab_db`.`Faculties` (`id`),
   CONSTRAINT `faculties_has_events1_events`
     FOREIGN KEY (`EventID`)
     REFERENCES `web_eventlab_db`.`Events` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` (
@@ -125,14 +109,10 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Personalized` (
     INDEX `fk_user_celebrator1_idx` (`celebratorID` ASC) ,    
     CONSTRAINT `fk_Personalized_Events1`
         FOREIGN KEY (`EventID`)
-        REFERENCES `web_eventlab_db`.`Events` (`id`)
-        ON DELETE NO ACTION
-        ON UPDATE NO ACTION,
+        REFERENCES `web_eventlab_db`.`Events` (`id`),
     CONSTRAINT `fk_user_celebrator1`
         FOREIGN KEY (`celebratorID`)
         REFERENCES `web_eventlab_db`.`Users` (`id`)
-        ON DELETE NO ACTION
-        ON UPDATE NO ACTION
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards` (
@@ -145,14 +125,10 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Cards` (
   INDEX `events_has_cards_events_idx` (`EventID` ASC),
   CONSTRAINT `events_has_cards_events`
     FOREIGN KEY (`EventID`)
-    REFERENCES `web_eventlab_db`.`Events` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION, 
+    REFERENCES `web_eventlab_db`.`Events` (`id`), 
   CONSTRAINT `fk_Cards_Users1`
     FOREIGN KEY (`senderID`)
     REFERENCES `web_eventlab_db`.`Users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 )ENGINE=INNODB;
 
 
@@ -166,8 +142,6 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Presents` (
   CONSTRAINT `events_has_presents_events`
     FOREIGN KEY (`EventID`)
     REFERENCES `web_eventlab_db`.`Events` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Music` (
@@ -180,14 +154,10 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Music` (
   INDEX `fk_Music_Events_Events1_idx` (`EventID` ASC), 
   CONSTRAINT `fk_Music_Events_Events1` 
     FOREIGN KEY (`EventID`)
-    REFERENCES `Events` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION, 
+    REFERENCES `Events` (`id`), 
   CONSTRAINT `fk_Music_Users1`
     FOREIGN KEY (`senderID`)
     REFERENCES `web_eventlab_db`.`Users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 )ENGINE=INNODB;
 
 
@@ -195,19 +165,14 @@ CREATE TABLE IF NOT EXISTS `web_eventlab_db`.`Comments` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `CommentText` VARCHAR(200) NOT NULL,
     `CommentDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `LikeCount` INT NOT NULL DEFAULT 0,
     `EventID` INT NOT NULL, 
     `UserID` INT NOT NULL,
     INDEX `fk_Comments_Events_Events1_idx` (`EventID` ASC),
     INDEX `fk_Comments_Events_Users1_idx` (`UserID` ASC),
     CONSTRAINT `fk_Comments_Events_Events1`
       FOREIGN KEY (`EventID`)
-      REFERENCES `Events` (`id`)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
+      REFERENCES `Events` (`id`),
     CONSTRAINT `fk_Comments_Events_Users1`
       FOREIGN KEY (`UserID`)
-      REFERENCES `Users` (`id`)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION  
+      REFERENCES `Users` (`id`) 
 )ENGINE=INNODB;
