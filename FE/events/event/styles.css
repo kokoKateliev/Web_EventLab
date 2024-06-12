@@ -121,6 +121,12 @@ aside section {
     width: 20%;
 }
 
+.smaller {
+    width: 50%;
+    font-size: 12px;
+    align-self: center;
+}
+
 .medium{
     padding: 1% 2%;
     width: 40%;
@@ -231,3 +237,36 @@ aside section {
     padding: 5% 3%;
 }
 
+.music-templ {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5%;
+    background-color: rgba(0, 98, 159, 0.29);
+    border-radius: 20px;
+}
+
+.comments {
+    margin-top: 5%;
+}
+
+#commments-menu{
+    width: 89%;
+}
+
+#comment {
+    border-radius: 10px;
+    background-color: white;
+    padding: 2%;
+    height: 50px;
+    width: 97%;
+    margin-top: 3%;
+}
+
+
+#comments-form {
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: column;
+}

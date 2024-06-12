@@ -578,9 +578,9 @@ function addMusic(){
 }
 
 function removeMusic(musicId) {
-    fetch('../../../backend/api/present.php', {
+    fetch('../../../backend/api/delete_Music.php', {
         method: 'POST',
-        body: JSON.stringify({id: musicId}),
+        body: JSON.stringify({musicId: musicId}),
     })
     .then(response=>response.json())
     .then(response => {
@@ -591,8 +591,7 @@ function removeMusic(musicId) {
             successMessage.textContent = 'Успeшно премахнат музикален проздрав!';
 
             setTimeout(() => {
-                section.innerHTML= '';
-                window.location.replace('main.html');
+                window.location.replace('event.html?id=' + eventID);
             }, 2000);
         } else {
             document.getElementById('errors').innerText = "Грешка: " + response.message;
@@ -622,6 +621,7 @@ function showMusic() {
     personalizedData.musics.forEach(music => {
         const section = document.createElement('section');
         section.id = music.id;
+        section.className = 'music-templ';
 
         const audio = document.createElement('audio');
 
@@ -631,7 +631,7 @@ function showMusic() {
         audio.autoplay = false;
 
         const p = document.createElement('p');
-        p.textContent = music.text;
+        p.textContent = music.title;
 
         section.appendChild(audio);
         section.appendChild(p);
@@ -1132,6 +1132,10 @@ function loadParticipants(){
     });
 }
 
+function loadComments() {
+
+}
+
 function loadEvent() {
     let title = document.getElementById('title');
     let stDate = document.getElementById('stDate');
@@ -1149,6 +1153,7 @@ function loadEvent() {
     location.innerHTML = "Локация: <span class='boldered'>" + eventData.location + '</span>';
 
     loadParticipants();
+    loadComments();
 
     if(eventData.isPersonalized === "1"){
         let p1 = document.createElement('p');
@@ -1195,6 +1200,8 @@ function loadEvent() {
         personalPresents.style.display = 'none';
     }
 
+
+    
 
 
 }
