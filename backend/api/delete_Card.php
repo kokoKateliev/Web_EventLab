@@ -5,7 +5,7 @@ require_once "../models/Card.php";
 
 try{
     $phpInput = json_decode(file_get_contents('php://input'), true);
-    $id = $phpInput['cardID']; 
+    $id = $phpInput['cardId']; 
 
     $card = new Card();
 
