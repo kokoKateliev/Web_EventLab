@@ -197,6 +197,7 @@ const onFormSubmitted = event => {
 			} else {
 				if(response.message == "There is no active transaction"){
 					document.getElementById('user-message').innerText = "Имейлът на празнуващия не е намерен.";
+					return;
 				}
 				document.getElementById('user-message').innerText = response.message;
 			}
