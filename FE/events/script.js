@@ -43,8 +43,8 @@ function getDate() {
     return `${year}-${month}-${day}`;
 }
 
-function formatDate(date) {
-    const date = new Date(date);
+function formatDate(dats) {
+    const date = new Date(dats);
 
     // Extract parts
     const year = date.getFullYear();
