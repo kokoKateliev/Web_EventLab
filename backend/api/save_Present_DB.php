@@ -9,7 +9,7 @@ $title = $phpInput['title'];
 $price = $phpInput['price'];
 $endDate = $phpInput['endDate'];  
 
-$present = new Present(null, $title, $price, $endDate, $EventId)
+$present = new Present(null, $title, $price, $endDate, $EventID);
 
 try{
     $present->validate();
