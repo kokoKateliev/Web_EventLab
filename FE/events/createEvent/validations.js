@@ -91,12 +91,12 @@ const today = () => {
 };
 
 
-document.querySelector("input[name='firstname']").addEventListener('keyup', validateFirstname);
-document.querySelector("input[name='lastname']").addEventListener('keyup', validateLastname);
-document.querySelector("input[name='email']").addEventListener('keyup', validateEmail);
-document.querySelector("input[name='username']").addEventListener('keyup', validateUsername);
-document.querySelector("input[name='password']").addEventListener('keyup', validatePassword);
-document.getElementById('dateofbirth').setAttribute('max', today());
+// document.querySelector("input[name='firstname']").addEventListener('keyup', validateFirstname);
+// document.querySelector("input[name='lastname']").addEventListener('keyup', validateLastname);
+// document.querySelector("input[name='email']").addEventListener('keyup', validateEmail);
+// document.querySelector("input[name='username']").addEventListener('keyup', validateUsername);
+// document.querySelector("input[name='password']").addEventListener('keyup', validatePassword);
+// document.getElementById('dateofbirth').setAttribute('max', today());
 
 
 
@@ -138,15 +138,20 @@ const onFormSubmitted = event => {
 	roleID = selectedRole(formElement.querySelectorAll("input[name='role']"));
 	
     const formData = {
-		firstname: formElement.querySelector("input[name='firstname']").value,
-		lastname: formElement.querySelector("input[name='lastname']").value,
-		email: formElement.querySelector("input[name='email']").value,
-        username: formElement.querySelector("input[name='username']").value,
-        password: formElement.querySelector("input[name='password']").value,
-        birthdate: formElement.querySelector("input[name='dateofbirth']").value,
+		EventName: formElement.querySelector("input[name='EventName']").value,
+		EventDescription: formElement.querySelector("textarea[name='EventDescription']").value,
+		EventDateSt: formElement.querySelector("input[name='EventDateSt']").value,
+        EventDateEn: formElement.querySelector("input[name='EventDateEn']").value,
+        EventTimeSt: formElement.querySelector("input[name='EventTimeSt']").value,
+        EventTimeEn: formElement.querySelector("input[name='EventTimeEn']").value,
+        location: formElement.querySelector("input[name='location']").value,
         universityId: parseInt(formElement.querySelector("select[name='university']").value),
-        facultyId: parseInt(formElement.querySelector("select[name='faculty']").value),
-		role: parseInt(roleID),
+		facultyId: parseInt(formElement.querySelector("select[name='faculty']").value),
+		isAnonnymus: !!formElement.querySelector("input[name='isAnonnymus']").checked,
+		isGlobal: !!formElement.querySelector("input[name='isGlobal']").checked,
+		isPersonalized: !!formElement.querySelector("input[name='isPersonalized']").checked,
+		celebratorEmail: formElement.querySelector("input[name='celebratorEmail']").value,
+		isVisible: !!formElement.querySelector("input[name='isVisible']").checked,
     };
 	
 	const fields = [
@@ -161,16 +166,16 @@ const onFormSubmitted = event => {
 		formData.facultyId
 	];
 	
-	const errors = [
-		formElement.querySelector("p[id='errFirstname']").innerText,
-		formElement.querySelector("p[id='errLastname']").innerText,
-		formElement.querySelector("p[id='errUsername']").innerText, 
-		formElement.querySelector("p[id='errEmail']").innerText,
-		formElement.querySelector("p[id='errPassword']").innerText,		
-		];
+	// const errors = [
+	// 	formElement.querySelector("p[id='errFirstname']").innerText,
+	// 	formElement.querySelector("p[id='errLastname']").innerText,
+	// 	formElement.querySelector("p[id='errUsername']").innerText, 
+	// 	formElement.querySelector("p[id='errEmail']").innerText,
+	// 	formElement.querySelector("p[id='errPassword']").innerText,		
+	// ];
 	
-	if (validate(errors, fields)) {		
-		fetch('../../backend/api/registration.php', {
+	// if (validate(errors, fields)) {		
+		fetch('../../backend/api/safe_Event_DB.php', {
 			method: 'POST',
 			body: JSON.stringify(formData),
 		})
@@ -182,7 +187,7 @@ const onFormSubmitted = event => {
 				document.getElementById('user-message').innerText = response.message;
 			}
 		});	
-	}
+	// }
 };
-
-document.getElementById('register-form').addEventListener('submit', onFormSubmitted);
+console.log(document.getElementById('create-form'));
+document.getElementById('create-form').addEventListener('submit', onFormSubmitted);

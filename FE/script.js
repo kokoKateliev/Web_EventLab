@@ -38,6 +38,7 @@ function loadEvents() {
 
         const dateTimeP = document.createElement('p');
         dateTimeP.textContent = event.date;
+        dateTimeP.className = 'after-hover';
         eventBlockDiv.appendChild(dateTimeP); 
 
         const button = document.createElement('button');

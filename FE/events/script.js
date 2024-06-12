@@ -60,6 +60,8 @@ function loadEvents() {
 
         const dateTimeP = document.createElement('p');
         dateTimeP.textContent = event.date;
+        dateTimeP.className = 'after-hover';
+        
         eventBlockDiv.appendChild(dateTimeP); 
 
         const button = document.createElement('button');
@@ -199,7 +201,7 @@ const loadFilter = (event) => {
     const selectedChoise = event.target.value;
     const select = document.getElementById('faculty');
     select.innerHTML = '';
-    if(myFaculty.id === null){
+    if(myFaculty.id === null || selectedFaculty === null){
         const option = document.createElement('option');
         option.value = "";
         option.textContent = "-----";
@@ -207,6 +209,9 @@ const loadFilter = (event) => {
         option.disabled = true;
         select.appendChild(option);
     }
+    // else {
+    //     loadEventsFromFilter();
+    // }
 
     const faculties = universities.find(university => university.id === selectedChoise).faculties;
     faculties.forEach((faculty) => {
@@ -214,7 +219,11 @@ const loadFilter = (event) => {
         option.value = faculty.id;
         option.textContent = faculty.name;
         select.appendChild(option);
-    });
+        });
+    selectedFaculty = select.options[select.selectedIndex].value;
+    if(selectedFaculty !== null){
+        loadEventsFromFilter();
+    }
 }
 
 

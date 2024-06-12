@@ -69,26 +69,27 @@
                 </div>
                 
                 <div class="radios">
-                    <input type="radio" id="isAnonnymus" name="isAnonnymus" value="isAnonnymus">
+                    <input class="checkboxes" type="checkbox" id="isAnonnymus" name="isAnonnymus" value="isAnonnymus"  >
                     <label for="isAnonnymus">Анонимно събитие</label>
                 </div>
                 <div class="radios">
-                    <input type="radio" id="isGlobal" name="isGlobal" value="isGlobal">
+                    <input class="checkboxes" type="checkbox" id="isGlobal" name="isGlobal" value="isGlobal">
                     <label for="isGlobal">Глобално събитие</label>
                 </div>
                 <div class="radios">
                     
-                    <input type="radio" id="isPersonalized" name="isPersonalized" value="isPersonalized">
+                    <input class="checkboxes" type="checkbox" id="isPersonalized" name="isPersonalized" value="isPersonalized" >
                     <label for="isPersonalized">Персонално събитие</label>
                 </div>
                 <section id="personalized-form">
-                    <label for="email" class="required">Въведете имейл на празнуващия:</label>
-                    <input class="inputs" id="email" type="text" name="email" placeholder="E-mail" required>
+                    <label for="celebratorEmail" class="required">Въведете имейл на празнуващия:</label>
+                    <input class="inputs" id="celebratorEmail" type="text" name="celebratorEmail" placeholder="E-mail">
                     <p id="errEmail" class="errorMsg"></p>
 
-                    <input type="radio" id="isVisible" name="isVisible" value="isVisible">
+                    <div class="radios">
+                    <input class="checkboxes" type="checkbox" id="isVisible" name="isVisible" value="isVisible">
                     <label for="isVisible">Видимо събитие за празнуващия</label>
-
+                </div>
                 </section>
                                 
                 <button class="buttons" type="submit">Създай събитие</button>
@@ -100,6 +101,5 @@
         </footer>
     <script src="validations.js" ></script>
     <script src="formActions.js" ></script>
-    <!-- <script src="../Consts.js" ></script> -->
 </body>
 </html>

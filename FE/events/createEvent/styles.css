@@ -48,7 +48,7 @@ form div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 70%;
+    width: 80%;
     flex-direction: row;
     border-bottom: 1px  dashed #040922;
     margin: 3% 5%;
@@ -85,6 +85,9 @@ fieldset{
     margin: 2%;
 }
 
+.checkboxes {
+    height: 20px;
+}
 
 .user-message {
     visibility: hidden;
@@ -115,6 +118,11 @@ fieldset{
 
 #personalized-form {
     margin-top: 5%;
+    visibility: hidden;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
 }
 
 #personalized-form .inputs {

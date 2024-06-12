@@ -58,13 +58,9 @@ const loadUniversities = () => {
 
 function showFaculties(faculties){
     let div = document.getElementById('faculties');
-    if(isTeacher){
-        div.style.visibility = 'hidden';
-
-        return;
-    }
+	
     let select = document.getElementById('faculty');
-
+	select.innerHTML = '';
     faculties.forEach(faculty => {
         const option = document.createElement('option');
         option.value = faculty.id;
@@ -88,7 +84,21 @@ const generateFaculties = event => {
     getFaculties(chosenElement);
 }
 
+const loadPersonalizedForm = (event) => {
+	const isChecked = event.target.checked;
+	const section = document.getElementById('personalized-form');
+	if(isChecked) {
+		section.style.visibility = 'visible'; 
+	}
+	else{
+		section.style.visibility = 'hidden'; 
+
+	}
+}
+
+
 loadUniversities();
 document.querySelector("select[name='university']").addEventListener('change', generateFaculties);
+document.querySelector("input[name='isPersonalized']").addEventListener('change', loadPersonalizedForm);
 
 

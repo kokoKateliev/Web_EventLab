@@ -90,12 +90,6 @@ from body {
     isPersonalized,
     celebratorEmail, - unikalen email kum celebrator choveka
     isVisible,
-    presents: [ {
-        title,
-        price,
-        endDate
-    }],
-    money: IBAN string
 }
 Add event to DB
 

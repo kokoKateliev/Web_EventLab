@@ -62,7 +62,7 @@ INSERT INTO `users_events`
 VALUES (2, 1, 2, 1, 0);
 
 INSERT INTO `users_events`
-VALUES (3, 3, 1, 1, 0);
+VALUES (3, 3, 3, 1, 0);
 
 INSERT INTO `Comments` (`CommentText`, `CommentDate`, `LikeCount`, `EventID`, `UserID`)
 VALUES ('This is a great event!', '2024-06-10 12:00:00', 5, 1, 1),
