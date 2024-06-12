@@ -29,7 +29,6 @@ function getEventComments($connection, $EventID) {
     $sql = "SELECT
         c.CommentText AS text,
         c.CommentDate AS date,
-        c.LikeCount AS likeCount,
         CONCAT(u.Firstname, ' ', u.Lastname) AS creatorFullName
     FROM Comments c
     INNER JOIN Users u ON c.UserID = u.id
