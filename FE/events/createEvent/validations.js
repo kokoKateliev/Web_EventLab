@@ -203,5 +203,4 @@ const onFormSubmitted = event => {
 		})
 	}
 };
-console.log(document.getElementById('create-form'));
 document.getElementById('create-form').addEventListener('submit', onFormSubmitted);
