@@ -3,7 +3,7 @@
 require_once "../db/DB.php";
 require_once "../models/Event.php";
 
-function getIsGlobal($connetction) {
+function getIsGlobal($connection) {
     $sql = "SELECT 
             e.id,
             e.EventName,
@@ -29,9 +29,10 @@ function getIsGlobal($connetction) {
         ef.isGlobal = true";
 
         
-    $query = $connetction->prepare($sql);
+    $query = $connection->prepare($sql);
     $query->execute([]); 
 
+    $information = [];
     while($row = $query->fetch(PDO::FETCH_ASSOC)){
         $information[] = array(
             'id' => $row['id'],
@@ -51,7 +52,7 @@ $phpInput = json_decode(file_get_contents('php://input'), true);
 
 try{
     $db = new DB();
-    $connetction = $db->getConnection();
+    $connection = $db->getConnection();
 } catch (PDOException $e) {
     echo json_encode([
         'success' => false,
@@ -61,20 +62,12 @@ try{
     exit();
 }
 
-$information = getIsGlobal($connetction);
+$information = getIsGlobal($connection);
 
-if(!$information){
-    echo json_encode([
-        'success' => false,
-        'message' => "Няма намерени данни за глобални събития.",
-        'globalEvents' => $information,
-    ]);
-} else {
-    echo json_encode([
-        'success' => true,
-        'message' => "Намерени са данни за глобални събития.",
-        'globalEvents' => $information,
-    ]);
-}
+echo json_encode([
+    'success' => true,
+    'message' => "Намерени са данни за глобални събития.",
+    'globalEvents' => $information,
+]);
 
 ?>
