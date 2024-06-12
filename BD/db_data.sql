@@ -65,10 +65,10 @@ INSERT INTO `users_events`
 VALUES (3, 3, 3, 1, 0);
 
 INSERT INTO `Comments` (`CommentText`, `CommentDate`, `LikeCount`, `EventID`, `UserID`)
-VALUES ('This is a great event!', '2024-06-10 12:00:00', 5, 1, 1),
-       ('Looking forward to it!', '2024-06-10 12:30:00', 3, 2, 2),
-       ('Will there be a livestream?', '2024-06-10 13:00:00', 0, 3, 1),
-       ('Excellent organization!', '2024-06-10 13:30:00', 7, 4, 2);
+VALUES ('This is a great event!', '2024-06-10 12:00:00', 1, 1),
+       ('Looking forward to it!', '2024-06-10 12:30:00', 2, 2),
+       ('Will there be a livestream?', '2024-06-10 13:00:00', 3, 1),
+       ('Excellent organization!', '2024-06-10 13:30:00', 4, 2);
 
 INSERT INTO `Cards` (`senderID`, `description`, `imgURL`, `EventID`)
 VALUES (1, 'Happy Birthday!', 'http://example.com/image1.jpg', 2),
