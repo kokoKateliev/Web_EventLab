@@ -21,6 +21,7 @@ function loadEvents() {
         section.appendChild(h2);
         return;
     }
+    if(events.l)
     //id, title, date, location, isPersonalized(vurni mi imeto ili null), description
     events.forEach(event => {
         const mainDiv = document.createElement('div');
@@ -44,7 +45,7 @@ function loadEvents() {
         button.className = 'buttons';
         button.onclick = function() {
             navigateToEvent(event.id); 
-        };
+        }; 
 
         eventBlockDiv.appendChild(button); 
 
@@ -89,9 +90,26 @@ const loadGlobalEvents = () => {
             events = response.globalEvents;
             loadEvents()
         } else {
+            const h3 = document.createElement('h3');
+            h3.style.width = '100%';
+            h3.style.textAlign = 'center';
+            h3.textContent = 'Към този момент няма събития с отворени врати.';
+            const div = document.getElementById('globalEvents');
+            div.appendChild(h3);
             document.getElementById('msg').innerText = 'Грешка' + response.message;
         }
-    });
+    })
+    .catch( err => {
+        const h3 = document.createElement('h3');
+            h3.textContent = 'Към този момент няма събития с отворени врати.';
+            h3.style.width = '100%';
+            h3.style.textAlign = 'center';
+            const div = document.getElementById('globalEvents');
+            div.appendChild(h3);
+        console.log(err);
+    }
+    );
+
 }
 
 loadGlobalEvents();

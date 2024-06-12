@@ -81,12 +81,17 @@ const logoff = () => {
 const hideElements = () => {
     let button = document.getElementById('user');
     let buttonL = document.getElementById('logout');
+    let ev = document.getElementById('ev');
+    let crEv = document.getElementById('crEv');
+    ev.style.display = 'none';
+    crEv.style.display = 'none';
     button.style.display = 'none';
     buttonL.style.display = 'none';
     let login = document.getElementById('login');
     let register = document.getElementById('register');
     login.style.display = 'flex';
-    register.style.display = 'flex';}
+    register.style.display = 'flex';
+}
 const isLogged = () => {
     fetch('../backend/api/get_Logged_User.php', {
         method: 'POST',
@@ -98,6 +103,10 @@ const isLogged = () => {
             if(response.isLogged){
                 let button = document.getElementById('user');
                 let buttonL = document.getElementById('logout');
+                let ev = document.getElementById('ev');
+                let crEv = document.getElementById('crEv');
+                ev.style.display = 'flex';
+                crEv.style.display = 'flex';
                 button.style.display = 'flex';
                 buttonL.style.display = 'flex';
                 let login = document.getElementById('login');
