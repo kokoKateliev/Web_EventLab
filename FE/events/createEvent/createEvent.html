@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventLab</title>
 
-    </style>
+
+
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
 
     <link rel="stylesheet" type="text/css" href="../../global.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
@@ -20,8 +22,8 @@
             </div>
             <ul>
                 
-                <li id="ev"><a href="./events/events.html">Събития</a></li>
-                <li><a href='../../index.html'>Начало</li>
+                <li id="ev"><a href="../events.html">Събития</a></li>
+                <li><a href='../../index.html'>Начало</a></li>
             </ul>
         </nav>
 
@@ -29,60 +31,68 @@
             <form id="create-form">
                 <h2 id="create-heading">Създаване на събитие:</h2>
 
+                <div>
                 <label for="EventName" class="required">Име:</label>
-                <input id="EventName" type="text" name="EventName" placeholder="Име" required>
+                <input class="inputs" id="EventName" type="text" name="EventName" placeholder="Име" required>
                 <p id="errEventName" class="errorMsg"></p>
                 
                 <label for="EventDescription" class="required">Описание</label>
-                <textarea id="EventDescription" name="EventDescription" maxlength="500" required> </textarea>
+                <textarea class="inputs" id="EventDescription" name="EventDescription" cols="20" rows="4" required> </textarea>
                 <p id="errEventDescription" class="errorMsg"></p>
 
-                <label for="EventDateSt" class="required" >Започва на:</label>
-                <input id="EventDateSt" type="date" name="EventDateSt" required>
-                <input id="EventTimeSt" type="time" name="EventTimeSt" required>
-                
-                <label for="EventDateEn" class="required" >Приключва на:</label>
-                <input id="EventDateEn" type="date" name="EventDateEn" required>
-                <input id="EventTimeEn" type="time" name="EventTimeEn" required>
-                
+                <div class="dates">
+                    <div>
+                        <label for="EventDateSt" class="required" >Започва на:</label>
+                        <input class="inputs" id="EventDateSt" type="date" name="EventDateSt" required>
+                        <input class="inputs" id="EventTimeSt" type="time" name="EventTimeSt" required>
+                    </div>
+                    <div>
+                        <label for="EventDateEn" class="required" >Приключва на:</label>
+                        <input class="inputs" id="EventDateEn" type="date" name="EventDateEn" required>
+                        <input class="inputs" id="EventTimeEn" type="time" name="EventTimeEn" required>
+                    </div>
+                </div>
                 <label for="location" class="required">Локация:</label>
-                <input id="location" type="text" name="location" placeholder="Локация" required>
+                <input class="inputs" id="location" type="text" name="location" placeholder="Адрес, " required>
                 <p id="errLocation" class="errorMsg"></p>                    
 
                 <label for="university">Изберете университет:</label>
-                <select id="university" name="university" value="--" required>
+                <select class="inputs" id="university" name="university" value="--" required>
                     <option value="" disabled selected>-----</option>
                     
                 </select>
                 
                 <div id="faculties" class="faculties-options">
                     <label for="faculty">Изберете факултет:</label>
-                    <select id="faculty" name="faculty">
+                    <select class="inputs" id="faculty" name="faculty">
                     </select>
                 </div>
                 
-                <input type="radio" id="isAnonnymus" name="isAnonnymus" value="isAnonnymus">
-                <label for="isAnonnymus">Анонимно събитие</label>
-
-                <input type="radio" id="isGlobal" name="isGlobal" value="isGlobal">
-                <label for="isGlobal">Глобално събитие</label>
-                
-                <input type="radio" id="isPersonalized" name="isPersonalized" value="isPersonalized">
-                <label for="isPersonalized">Персонално събитие</label>
-                
+                <div class="radios">
+                    <input type="radio" id="isAnonnymus" name="isAnonnymus" value="isAnonnymus">
+                    <label for="isAnonnymus">Анонимно събитие</label>
+                </div>
+                <div class="radios">
+                    <input type="radio" id="isGlobal" name="isGlobal" value="isGlobal">
+                    <label for="isGlobal">Глобално събитие</label>
+                </div>
+                <div class="radios">
+                    
+                    <input type="radio" id="isPersonalized" name="isPersonalized" value="isPersonalized">
+                    <label for="isPersonalized">Персонално събитие</label>
+                </div>
                 <section id="personalized-form">
                     <label for="email" class="required">Въведете имейл на празнуващия:</label>
-                    <input id="email" type="text" name="email" placeholder="E-mail" required>
+                    <input class="inputs" id="email" type="text" name="email" placeholder="E-mail" required>
                     <p id="errEmail" class="errorMsg"></p>
 
                     <input type="radio" id="isVisible" name="isVisible" value="isVisible">
                     <label for="isVisible">Видимо събитие за празнуващия</label>
 
                 </section>
-                
-                <p id="information" class="required">Задължителни полета</p>
-                
-                <button type="submit">Създай събитие</button>
+                                
+                <button class="buttons" type="submit">Създай събитие</button>
+                </div>
             </form>
         </main>
         <footer>

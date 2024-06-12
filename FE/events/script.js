@@ -54,6 +54,7 @@ function loadEvents() {
         eventBlockDiv.className = "event-block";
         
         const titleH3 = document.createElement('h3');
+        titleH3.className = 'after-hover';
         titleH3.textContent = event.title;
         eventBlockDiv.appendChild(titleH3); 
 

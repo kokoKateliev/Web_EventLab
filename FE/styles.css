@@ -68,10 +68,12 @@ margin-bottom: 5%;
     width: 100%;
     height: 100%;
     padding: 5%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .event{
-    width: 15%;
+    width: 200px;
     padding: 2%;
     height: 300px;
     display: flex;
@@ -80,11 +82,21 @@ margin-bottom: 5%;
     justify-content: center;
     transition: 0.5s ease;
     color: white;
+    margin-bottom: 4%;
+
 }
 
 .event{
     background-color: #27272E;
     border-radius: 20px;
+    background-image: url('../files/dots.png');
+    background-size: cover;
+}
+
+.event:hover{
+    background-color: #27272E;
+    background-image: none;
+
 }
 
 .on-hover {
@@ -107,23 +119,31 @@ margin-bottom: 5%;
     overflow: hidden; /* Скрива текста, който излиза извън контейнера */
     text-overflow: ellipsis;
     white-space: nowrap; /* Предотвратява пренасяне на текста на нов ред */
-
-
 }
+
+
 
 .event:hover .on-hover{
     justify-content: space-between;
     transition: 0.5s ease-in;
     display: flex;
+}
 
+
+.event:hover .event-block .after-hover {
+    display: none;
 }
 
 .event-block{
-    display: block;
+    display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 100%;
+    padding: 4%;
+    
+   
 }
 
 .event-block h3 {
@@ -133,9 +153,9 @@ margin-bottom: 5%;
 
 .event .buttons {
     font-size: 15px;
-    width: 100%;
+    width: 80%;
     font-weight: normal;
-    padding: 3% 0;
+    padding: 3% 1%;
 }
 
 @media (max-width: 1200px) {

@@ -1,3 +1,154 @@
 .faculties-options {
     visibility: hidden;
 }
+
+body{
+    background-image: url('../../../files/bg.png');
+    background-size: cover;
+
+}
+
+.faculties-options {
+    visibility: hidden;
+    margin-bottom: 4%;
+}
+
+form {
+    background-color: rgba(255, 255, 255, 0.833);
+    border: 4px solid #ff6e3093;
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: 100%;
+    margin:  2% 0 ;
+    padding: 5%;
+    /* height: 65vh; */
+    width: 60%;
+
+    font-size: 1.6rem;
+}
+
+form div {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 70%;
+}
+
+.inputs{
+    width: auto;
+    padding: 2%;
+}
+
+.radios {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    flex-direction: row;
+    border-bottom: 1px  dashed #040922;
+    margin: 3% 5%;
+    padding: 2% 0;
+
+    align-self: center;
+}
+
+
+.unis {
+    margin-bottom: 2%;
+}
+
+.buttons {
+    width: 60%;
+    align-self: center;
+
+    margin-top: 5%;
+}
+
+.link{
+    font-weight: bolder;
+}
+
+.link:hover {
+    font-weight: lighter;
+    color: var(--purple)
+}
+.link:active {
+    color: var(--blue);
+}
+
+fieldset{
+    margin: 2%;
+}
+
+
+.user-message {
+    visibility: hidden;
+
+    color: rgb(154, 0, 0);
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.dates {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 150px;
+    margin-bottom: 10%;
+}
+
+.dates div .inputs {
+    width: 80%;
+    /* padding: 3% 1%; */
+}
+
+.dates div:nth-child(2) {
+    /* width: 50%; */
+    align-items: end;
+}
+
+#personalized-form {
+    margin-top: 5%;
+}
+
+#personalized-form .inputs {
+    width: 100%
+}
+
+@media (max-width: 1024px) {
+    .left-group{
+        width: 100%;
+    }
+    h1 {
+        font-size: 40px;
+    }
+    p,label {
+        font-size: 20px;
+    }
+
+    .buttons {
+        font-size: 16px;
+        width: 50%;
+    }
+}
+
+@media (max-width: 800px) {
+
+    form div {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .inputs {
+        width: 60%;
+    }
+    .buttons {
+        width: 40%;
+    }
+}

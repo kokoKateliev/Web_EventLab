@@ -21,7 +21,6 @@ function loadEvents() {
         section.appendChild(h2);
         return;
     }
-    if(events.l)
     //id, title, date, location, isPersonalized(vurni mi imeto ili null), description
     events.forEach(event => {
         const mainDiv = document.createElement('div');
@@ -33,6 +32,7 @@ function loadEvents() {
         eventBlockDiv.className = "event-block";
         
         const titleH3 = document.createElement('h3');
+        titleH3.className = 'after-hover';
         titleH3.textContent = event.title;
         eventBlockDiv.appendChild(titleH3); 
 
