@@ -72,7 +72,8 @@ function loadEvents() {
         if(event.isVisible){
             if(event.isVisible === '0'){
                 if(event.isCelebrator){
-                    if(event.date < getDate()){
+                    const tday= getDate();
+                    if(event.date < tday){
                         return;
                     }
                 }
