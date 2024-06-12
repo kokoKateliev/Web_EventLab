@@ -4,7 +4,7 @@ require_once "../db/DB.php";
 require_once "../models/Event.php";
 
 function getEvent($connetction, $FacultyID) {
-    $sql = "SELECT 
+    $sql = "SELECT DISTINCT
             e.id,
             e.EventName,
             e.EventDateSt,
