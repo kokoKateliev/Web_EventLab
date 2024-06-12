@@ -175,7 +175,7 @@ const onFormSubmitted = event => {
 	// ];
 	
 	// if (validate(errors, fields)) {		
-		fetch('../../backend/api/save_Event_DB.php', {
+		fetch('../../../backend/api/save_Event_DB.php', {
 			method: 'POST',
 			body: JSON.stringify(formData),
 		})
