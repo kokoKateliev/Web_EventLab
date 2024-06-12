@@ -31,7 +31,6 @@ function Personalized(isVisible, celebrator, presents, cards, money, musics ) {
 let admin = false;
 let eventID = getQueryParam();
 
-// D------------------------------------------
 
 function presentsFormListen() {
 
@@ -143,7 +142,7 @@ function presentsFormListen() {
                     section.appendChild(successMessage);
                     setTimeout(() => {
                         successMessage.style.display = 'none';
-                        showPresents();
+                        window.location.replace('event.html?id=' + eventID)
                     }, 2000);
                 } else {
                     document.getElementById('error').innerText = "Грешка: " + response.message;
@@ -169,11 +168,12 @@ function addPresent() {
     const titleLabel = document.createElement('label');
     titleLabel.setAttribute('for', 'title');
     titleLabel.textContent = 'Подарък:';
+    titleLabel.textContent = 'Подарък:';
     const titleInput = document.createElement('input');
     titleInput.setAttribute('type', 'text');
     titleInput.setAttribute('name', 'title');
     titleInput.placeholder = 'Подарък';
-
+    titleInput.className = 'inputs inputs-wi';
     const priceLabel = document.createElement('label');
     priceLabel.setAttribute('for', 'price');
     priceLabel.textContent = 'Цена:';
@@ -185,12 +185,14 @@ function addPresent() {
     priceInput.setAttribute('step', '0.01');
     priceInput.setAttribute('placeholder', '0.00');
     priceInput.placeholder = 'Цена';
+    priceInput.className = 'inputs inputs-wi';
 
     const endDateLabel = document.createElement('label');
     endDateLabel.setAttribute('for', 'endDate');
     endDateLabel.textContent = 'Крайна дата:';
     const endDateInput = document.createElement('input');
     endDateInput.setAttribute('type', 'date');
+    endDateInput.className = 'inputs inputs-wi';
     endDateInput.setAttribute('id', 'endDate');
     endDateInput.setAttribute('name', 'endDate');
 
@@ -210,6 +212,8 @@ function addPresent() {
 
     const button = document.createElement('button');
     button.textContent = 'Добави подарък';
+    button.className = 'buttons ';
+    button.style.alignSelf = 'center';
     button.type = 'submit';
 
     form.appendChild(button);
@@ -220,7 +224,7 @@ function addPresent() {
 }
 
 function moneyFormListen() {
-    let section = document.getElementById('money-menu');
+    let section = document.getElementById('money-form');
     if(!section){
         return;
     }
@@ -263,16 +267,16 @@ function moneyFormListen() {
         
         const formData = {
             eventId: eventID,
-            price: formElement.querySelector("input[name='price'").value,
+            money: personalizedData.money + parseFloat(formElement.querySelector("input[name='price'").value),
         };
         
         const fields = [
             formData.eventId,
-            formData.price, 
+            formData.money, 
         ];
         
         if (validate(fields)) {		
-            fetch('../../backend/api/present.php', {
+            fetch('../../../backend/api/save_Money_DB.php', {
                 method: 'POST',
                 body: JSON.stringify(formData),
             })
@@ -318,6 +322,7 @@ function addMoney() {
     priceInput.setAttribute('step', '0.01');
     priceInput.setAttribute('placeholder', '0.00');
     priceInput.placeholder = 'Цена';
+    priceInput.className = 'inputs bigger'
 
     form.appendChild(priceLabel);
     form.appendChild(priceInput);
@@ -328,6 +333,7 @@ function addMoney() {
 
     const button = document.createElement('button');
     button.textContent = 'Изпрати пари';
+    button.className = 'buttons';
     button.type = 'submit';
 
     form.appendChild(button);
@@ -348,6 +354,7 @@ function showPresents() {
     if(admin){
         const addButton = document.createElement('button');
         addButton.textContent = 'Добави';
+        addButton.className = 'buttons small'
         addButton.onclick = function() {
             addPresent();
         };
@@ -365,6 +372,8 @@ function showPresents() {
     }
     const addMButton = document.createElement('button');
     addMButton.textContent = 'Добави пари';
+    addMButton.className = 'buttons small'
+
     addMButton.onclick = function() {
         addMoney();
     };
@@ -380,9 +389,11 @@ function showPresents() {
         const section = document.createElement('section');
         section.id = present.id;
 
+        section.className = 'present-templ';
+
         const div1 = document.createElement('div');
 
-        const h3 = document.createElement('h3');
+        const h3 = document.createElement('h2');
         h3.textContent = present.title;
         const p = document.createElement('p');
         p.textContent = present.endDate;
@@ -393,7 +404,7 @@ function showPresents() {
         const div2 = document.createElement('div');
 
         const h4 = document.createElement('h4');
-        h4.textContent = present.price;
+        h4.textContent = present.price + ' лв.';
         
         div2.appendChild(h4);
 
@@ -403,13 +414,7 @@ function showPresents() {
         if(admin) {
             const div3 = document.createElement('div');
             
-            const editButton = document.createElement('button');
-            editButton.textContent = "Промени"
-            editButton.onclick = function() {
-                editPresent(present.id)
-            };
-
-            div3.appendChild(editButton);
+            
 
             section.appendChild(div3);
         }
@@ -793,6 +798,8 @@ function addCard(){
         textLabel.setAttribute('for', 'textInput');
         textLabel.textContent = 'Добавете текст:';
         const textInput = document.createElement('textarea');
+        textInput.setAttribute('class', 'inputs');
+        
         textInput.setAttribute('id', 'textInput');
         textInput.setAttribute('name', 'textInput');
         textInput.setAttribute('rows', '4'); 
@@ -804,6 +811,9 @@ function addCard(){
         const submitButton = document.createElement('button');
         submitButton.setAttribute('type', 'submit');
         submitButton.textContent = 'Качи';
+        submitButton.className = 'buttons small';
+        submitButton.style.alignSelf = 'center';
+
 
         form.appendChild(fileLabel);
         form.appendChild(fileInput);
@@ -850,13 +860,14 @@ function showCards() {
     
     const addButton = document.createElement('button');
     addButton.textContent = 'Добави картичка';
+    addButton.className = 'buttons medium';
     addButton.onclick = function() {
         addCard();
     };
 
     div.appendChild(addButton);
     
-    menu.appendChild(div);
+    menu.appendChild(addButton);
     
     
     let sectionForm = document.createElement('section');
@@ -866,6 +877,7 @@ function showCards() {
     personalizedData.cards.forEach(card => {
         const section = document.createElement('section');
         section.id = card.id;
+        section.className = 'card-background';
 
         const img = document.createElement('img');
 
@@ -941,7 +953,7 @@ function joinEvent() {
             // error
             // document.getElementById('msg').innerText = 'Грешка' + response.message;
         }
-    });
+    }).catch(err => console.log("Грешка в заявката: " + err.message ));
 }
 
 function makeHelper(userId){
@@ -970,21 +982,24 @@ function removeHelper(userId){
         if (response.success) {
             loadParticipants();
         } else {
-            // error
-            // document.getElementById('msg').innerText = 'Грешка' + response.message;
+            document.getElementById('joinbutton').style.visibility = 'hidden';
         }
     });
 }
 
 function showParticipants(userParticipants) {
     let participantsList = document.getElementById('participants-list');
+    if(eventData.isAnonnymus === "1"){
+        participantsList.innerHTML = 'Събитието е анонимно';
+        return;
+    }
     participantsList.innerHTML = '';
     let participantsCounter = document.getElementById('participants-counter');
     participantsCounter.innerHTML = userParticipants.length;
     userParticipants.forEach(user => {
         let li = document.createElement('li');
         li.textContent = user.name;
-        if(user.isHelper){
+        if(user.isHelper === '1'){
             const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             svg.setAttribute("class", "w-6 h-6 text-gray-800 dark:text-white");
             svg.setAttribute("aria-hidden", "true");
@@ -1009,7 +1024,7 @@ function showParticipants(userParticipants) {
             li.appendChild(svg); 
         }
 
-        if(admin && !user.isHelper){
+        if(admin && user.isHelper === '0' && user.isAdmin === '0'){
             const svgNS = "http://www.w3.org/2000/svg"; 
             
             const svg = document.createElementNS(svgNS, "svg");
@@ -1032,6 +1047,65 @@ function showParticipants(userParticipants) {
                 makeHelper(user.id)
             });
 
+            svg.appendChild(path);
+            li.appendChild(svg); 
+        }
+
+        if(eventData.isPersonalized === "1"){
+            if(personalizedData.celebrator === user.name){
+                const svgNS = "http://www.w3.org/2000/svg";
+
+                // Create SVG element
+                const svg = document.createElementNS(svgNS, "svg");
+                svg.setAttribute("class", "w-6 h-6 text-gray-800 dark:text-white");
+                svg.setAttribute("aria-hidden", "true");
+                svg.setAttribute("xmlns", svgNS);
+                svg.setAttribute("width", "24");
+                svg.setAttribute("height", "24");
+                svg.setAttribute("fill", "currentColor");
+                svg.setAttribute("viewBox", "0 0 24 24");
+
+                // Create first path element
+                const path1 = document.createElementNS(svgNS, "path");
+                path1.setAttribute("d", "M11 9a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z");
+
+                // Create second path element
+                const path2 = document.createElementNS(svgNS, "path");
+                path2.setAttribute("fill-rule", "evenodd");
+                path2.setAttribute("d", "M9.896 3.051a2.681 2.681 0 0 1 4.208 0c.147.186.38.282.615.255a2.681 2.681 0 0 1 2.976 2.975.681.681 0 0 0 .254.615 2.681 2.681 0 0 1 0 4.208.682.682 0 0 0-.254.615 2.681 2.681 0 0 1-2.976 2.976.681.681 0 0 0-.615.254 2.682 2.682 0 0 1-4.208 0 .681.681 0 0 0-.614-.255 2.681 2.681 0 0 1-2.976-2.975.681.681 0 0 0-.255-.615 2.681 2.681 0 0 1 0-4.208.681.681 0 0 0 .255-.615 2.681 2.681 0 0 1 2.976-2.975.681.681 0 0 0 .614-.255ZM12 6a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z");
+                path2.setAttribute("clip-rule", "evenodd");
+
+                // Create third path element
+                const path3 = document.createElementNS(svgNS, "path");
+                path3.setAttribute("d", "M5.395 15.055 4.07 19a1 1 0 0 0 1.264 1.267l1.95-.65 1.144 1.707A1 1 0 0 0 10.2 21.1l1.12-3.18a4.641 4.641 0 0 1-2.515-1.208 4.667 4.667 0 0 1-3.411-1.656Zm7.269 2.867 1.12 3.177a1 1 0 0 0 1.773.224l1.144-1.707 1.95.65A1 1 0 0 0 19.915 19l-1.32-3.93a4.667 4.667 0 0 1-3.4 1.642 4.643 4.643 0 0 1-2.53 1.21Z");
+
+                // Append paths to SVG
+                svg.appendChild(path1);
+                svg.appendChild(path2);
+                svg.appendChild(path3);
+
+                li.appendChild(svg); 
+            }
+        }
+
+        if(user.isAdmin === '1') {
+            const svgNS = "http://www.w3.org/2000/svg";
+
+            // Create SVG element
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("class", "w-6 h-6 text-gray-800 dark:text-white");
+            svg.setAttribute("aria-hidden", "true");
+            svg.setAttribute("xmlns", svgNS);
+            svg.setAttribute("width", "24");
+            svg.setAttribute("height", "24");
+            svg.setAttribute("fill", "currentColor");
+            svg.setAttribute("viewBox", "0 0 24 24");
+        
+            // Create path element
+            const path = document.createElementNS(svgNS, "path");
+            path.setAttribute("d", "M11 21V2.352A3.451 3.451 0 0 0 9.5 2a3.5 3.5 0 0 0-3.261 2.238A3.5 3.5 0 0 0 4.04 8.015a3.518 3.518 0 0 0-.766 1.128c-.042.1-.064.209-.1.313a3.34 3.34 0 0 0-.106.344 3.463 3.463 0 0 0 .02 1.468A4.017 4.017 0 0 0 2.3 12.5l-.015.036a3.861 3.861 0 0 0-.216.779A3.968 3.968 0 0 0 2 14c.003.24.027.48.072.716a4 4 0 0 0 .235.832c.006.014.015.027.021.041a3.85 3.85 0 0 0 .417.727c.105.146.219.285.342.415.072.076.148.146.225.216.1.091.205.179.315.26.11.081.2.14.308.2.02.013.039.028.059.04v.053a3.506 3.506 0 0 0 3.03 3.469 3.426 3.426 0 0 0 4.154.577A.972.972 0 0 1 11 21Zm10.934-7.68a3.956 3.956 0 0 0-.215-.779l-.017-.038a4.016 4.016 0 0 0-.79-1.235 3.417 3.417 0 0 0 .017-1.468 3.387 3.387 0 0 0-.1-.333c-.034-.108-.057-.22-.1-.324a3.517 3.517 0 0 0-.766-1.128 3.5 3.5 0 0 0-2.202-3.777A3.5 3.5 0 0 0 14.5 2a3.451 3.451 0 0 0-1.5.352V21a.972.972 0 0 1-.184.546 3.426 3.426 0 0 0 4.154-.577A3.506 3.506 0 0 0 20 17.5v-.049c.02-.012.039-.027.059-.04.106-.064.208-.13.308-.2s.214-.169.315-.26c.077-.07.153-.14.225-.216a4.007 4.007 0 0 0 .459-.588c.115-.176.215-.361.3-.554.006-.014.015-.027.021-.041.087-.213.156-.434.205-.659.013-.057.024-.115.035-.173.046-.237.07-.478.073-.72a3.948 3.948 0 0 0-.066-.68Z");
+        
+            // Append path to SVG
             svg.appendChild(path);
             li.appendChild(svg); 
         }
@@ -1062,7 +1136,6 @@ function loadParticipants(){
 
 function loadEvent() {
     let title = document.getElementById('title');
-    let creator = document.getElementById('creator');
     let stDate = document.getElementById('stDate');
     let enDate = document.getElementById('enDate');
     let location = document.getElementById('location');    
@@ -1070,20 +1143,18 @@ function loadEvent() {
     let mainSection = document.getElementById('main-section');
 
     title.innerHTML = eventData.title;
-    if(eventData.isAnonnymus){
-        creator.innerHTML = eventData.creator;
-    }
     let startDate = new Date(eventData.dateStart);
     let endDate = new Date(eventData.dateEnd);
-    stDate.innerHTML = "Започва на:" + formatDate(startDate);
-    enDate.innerHTML = "Приключва на:" + formatDate(endDate);
+    stDate.innerHTML = "Започва на: <span class='boldered'>" + formatDate(startDate) + '</span>';
+    enDate.innerHTML = "Приключва на: <span class='boldered'>" + formatDate(endDate) + '</span>';
 
-    location.innerHTML = eventData.location;
+    location.innerHTML = "Локация: <span class='boldered'>" + eventData.location + '</span>';
 
     loadParticipants();
 
-    if(eventData.isPersonalized){
+    if(eventData.isPersonalized === "1"){
         let p1 = document.createElement('p');
+        p1.className = 'header-user';
         let h3 = document.createElement('h3');
         h3.innerHTML = personalizedData.celebrator;
         p1.innerHTML = "Събитие за: ";
@@ -1097,19 +1168,19 @@ function loadEvent() {
 
     let ul = document.createElement('ul');
     ul.id = 'status-list';
-    if(eventData.isGlobal){
+    if(eventData.isGlobal === "1"){
         let li = document.createElement('li');
         li.innerHTML = 'Публично събитие';
         ul.appendChild(li);
     }
 
-    if(eventData.isAnonnymus) {
+    if(eventData.isAnonnymus === "1") {
         let li = document.createElement('li');
         li.innerHTML = 'Анонимно събитие';
         ul.appendChild(li);
     }
 
-    if(eventData.isPersonalized && personalizedData?.isVisible) {
+    if(eventData.isPersonalized === "1" && personalizedData?.isVisible === "1") {
         let li = document.createElement('li');
         li.innerHTML = 'Събитието е скрито за ' + personalizedData.celebrator;
         ul.appendChild(li);
@@ -1118,7 +1189,7 @@ function loadEvent() {
     mainSection.append(ul);
     
     let personalPresents = document.getElementById('personal-buttons');
-    if(eventData.isPersonalized){
+    if(eventData.isPersonalized === "1"){
         personalPresents.style.display = 'flex';
         
     }
@@ -1153,10 +1224,12 @@ fetch('../../../backend/api/get_User_Admin.php', {
     if (response.success) {
         admin = true;
     } else {
-        // error
-        // document.getElementById('msg').innerText = 'Грешка' + response.message;
+        admin - false;
     }
-});
+})
+.catch( err => {
+    console.error("Грешка със заявката за проверка за Админ: " + err.message);
+})
 
 fetch('../../../backend/api/get_Event_All_Info.php', {
     method: 'POST',
@@ -1165,8 +1238,9 @@ fetch('../../../backend/api/get_Event_All_Info.php', {
 .then(response=>response.json())
 .then(response => {
     if (response.success) {
-        eventData = new Event(response.data.id, response.data.title, response.data.description, response.data.dateStart, response.data.dateEnd, response.data.timeStart, response.data.timeEnd, response.data.location, response.data.comments, response.data.isAnonnymus, !!response.data.isPersonalized, response.data.isGlobal)
-        if(eventData.isPersonalized) {
+        eventData = new Event(response.data.id, response.data.title, response.data.description, response.data.dateStart, response.data.dateEnd, response.data.timeStart, response.data.timeEnd, response.data.location, response.data.comments, response.data.isAnonnymus, response.data.isPersonalized, response.data.isGlobal)
+        
+        if(eventData.isPersonalized === "1") {
             personalizedData = new Personalized(response.data.personalizedData.isVisible, response.data.personalizedData.celebrator, response.data.personalizedData.presents, response.data.personalizedData.cards, response.data.personalizedData.money, response.data.personalizedData.musics );
         }
         loadEvent();
@@ -1174,6 +1248,27 @@ fetch('../../../backend/api/get_Event_All_Info.php', {
         // error
         // document.getElementById('msg').innerText = 'Грешка' + response.message;
     }
+}).catch( err => {
+    console.error("Грешка със заявката за проверка за данни: " + err.message);
 });
 
+const isLogged = () => {
+    fetch('../../../backend/api/get_isJoined.php', {
+        method: 'POST',
+        body: JSON.stringify({eventId: eventID})
+    })
+    .then (response => response.json())
+    .then (response => {
+        if(response.success){
+            const isJoined = !!response.isJoined;
 
+            if(isJoined){
+                document.getElementById('joinbutton').style.display = 'none';
+            }
+        }
+    })
+    .catch(err => console.error("Грешка: " + err.message));
+}
+
+
+isLogged();

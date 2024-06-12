@@ -1,0 +1,229 @@
+body {
+    background-image: url('../../../files/bg.png');
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 5% 0;
+    min-height: 45vh;
+}
+
+.container aside{
+    width: 15%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    border-radius: 20px;
+    padding: 2% 4%;
+
+    background-image: url('../../../files/dots3.png');
+    background-size: cover;
+}
+
+.container main {
+    width: 55%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: rgba(255, 249, 249, 0.687);
+    border-radius: 20px;
+    padding: 4%;
+}
+
+#title {
+    font-family: "Shantell Sans", cursive;
+    font-size: 35px;
+}
+
+.boldered {
+    font-weight: bolder;
+    font-size: 20px;
+}
+.buttons{
+    width: 70%;
+    margin: 8% 0;
+    padding: 4% 1%;
+    border-radius: 30px;
+}
+
+.parts {
+    width: 100%;
+    margin-top: 5%;
+}
+
+#participants{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#participants-counter{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+#participants-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+
+}
+
+#participants-list li {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+aside section {
+    padding: 5%;
+    background-color: rgba(255, 255, 255, 0.05);
+    width: 100%;
+    border-radius: 20px;
+}
+
+
+#main-section h3 {
+    font-family: "Shantell Sans", cursive;
+    font-style: italic;
+    font-size: 35px;
+    text-align: center;
+}
+
+.header-user{
+    text-align: center;
+    font-size: 25px;
+}
+
+#status-list{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    list-style-type: none;
+
+    font-style: italic;
+}
+
+
+#personal-buttons {
+    justify-content: space-evenly;
+}
+
+.small{
+    padding: 1% 2%;
+    width: 20%;
+}
+
+.medium{
+    padding: 1% 2%;
+    width: 40%;
+}
+#event-menu{
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-background{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 4%;
+    background-color: rgba(0, 98, 159, 0.29);
+    margin-top: 5%;
+
+    border-radius: 20px;
+}
+
+.card-background img {
+    align-self: center;
+    width: 40%;
+    border-radius: 20px;
+}
+
+.card-background p {
+    width: 50%;
+    padding: 2%;
+    font-size: 24px;
+
+    
+}
+
+#uploadForm {
+    background-color: #27272E;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 4%;
+    width: 100%;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    height: 400px;
+    border-radius: 20px;
+}
+
+#uploadForm label {
+    margin-bottom: 2%;
+}
+
+#uploadForm input,textarea {
+    margin-bottom: 4%;
+}
+
+.presents-buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap ;
+    margin-bottom: 5%;
+}
+
+#presents-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 350px;
+    justify-content: space-evenly;
+}
+
+.inputs-wi{
+    width: 100%;
+}
+
+.present-templ{
+    padding: 4%;
+    border: 2px solid orange;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 5%;
+}
+
+
+#money-form{
+    padding: 10%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    background-color: #27272E;
+    border-radius: 20px;
+    margin-bottom: 5%;
+    color: white;
+    height: 250px;
+}
+
+.bigger {
+    width: 70%;
+    padding: 5% 3%;
+}
