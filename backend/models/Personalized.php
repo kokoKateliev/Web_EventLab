@@ -44,6 +44,32 @@ class Personalized {
         }
     }
 
+    public function updateAmountInDB(): void {
+        require_once "../db/DB.php";
+
+        try{
+            $db = new DB();
+            $connection = $db->getConnection();
+        }
+        catch(PDOException $e){
+            echo json_encode([
+                'success' => false,
+                'message' => "Неуспешно свързване с базата данни",
+            ]);
+        }
+
+        $uploadStatement = $connection->prepare("UPDATE `Personalized` SET `Amount` = :newAmount WHERE `EventID` = :eventID");
+
+        $resultIns = $uploadStatement->execute([
+            'newAmount' => $this->Amount,
+            'eventID' => $this->EventID,
+        ]);
+
+        if (!$resultIns) {
+            throw new Exception("Грешка при записването на информацията.");
+        }
+    }
+
     private function requiredFields($EventID, $isVisible, $celebratorID, $Amount): bool {
         return !empty($EventID) && !empty($isVisible) && !empty($celebratorID) && !empty($Amount);
     }
