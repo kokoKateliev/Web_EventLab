@@ -62,19 +62,30 @@ class Present {
     private function validEventID($eventID): bool {
         require_once "../db/DB.php";
 
+        try{
+            $db = new DB();
+            $connection = $db->getConnection();
+        }
+        catch(PDOException $e){
+            echo json_encode([
+                'success' => false,
+                'message' => "Неуспешно свързване с базата данни",
+            ]);
+        }
+
         $sql = "SELECT 
                     e.id
                 FROM 
                     Events e
                 WHERE 
-                    e.EventID = ?";
+                    e.id = ?";
 
-        $query = $connetction->prepare($sql);
+        $query = $connection->prepare($sql);
         $query->execute([$eventID]); 
 
         $evID = null;
         while($row = $query->fetch(PDO::FETCH_ASSOC)){
-            $evID = $row['id'] 
+            $evID = $row['id']; 
         }
 
         if ($evID === null) {
