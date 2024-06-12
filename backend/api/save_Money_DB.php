@@ -8,7 +8,7 @@ try{
     $amount = $phpInput['money']; 
     $personalized = new Personalized();
 
-    $personalized->Amount = $amount;
+    $personalized->Amount = (double)$amount;
     $personalized->EventID = $phpInput['eventId']; 
 
     $personalized->updateAmountInDB();
