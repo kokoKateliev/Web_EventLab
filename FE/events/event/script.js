@@ -563,6 +563,7 @@ function addMusic(){
             const submitButton = document.createElement('button');
             submitButton.setAttribute('type', 'submit');
             submitButton.textContent = 'Качи';
+            submitButton.className = 'buttons small';
 
             form.appendChild(fileLabel);
             form.appendChild(fileInput);
@@ -825,9 +826,9 @@ function addCard(){
 }
 
 function removeCard(cardId) {
-    fetch('../../backend/api/present.php', {
+    fetch('../../../backend/api/delete_Card.php', {
         method: 'POST',
-        body: JSON.stringify({id: cardId}),
+        body: JSON.stringify({cardId: cardId}),
     })
     .then(response=>response.json())
     .then(response => {
@@ -839,7 +840,7 @@ function removeCard(cardId) {
 
             setTimeout(() => {
                 section.innerHTML= '';
-                showCards();
+                window.location.replace('event.html?id=' + eventID);
             }, 2000);
         } else {
             document.getElementById('errors').innerText = "Грешка: " + response.message;
